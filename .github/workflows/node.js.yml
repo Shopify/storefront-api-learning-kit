@@ -5,8 +5,10 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ jb ]
-
+    branches: [ main ]
+    paths:
+      - './examples/**.graphql'
+      - './examples/**.json'
 jobs:
   build:
 
