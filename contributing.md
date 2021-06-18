@@ -12,11 +12,14 @@ Each query is contained in a folder. Queries are named `query.graphql`. If a que
 
 ## Making changes
 
-
+1. Clone the repo
+2. Make changes on a new branch
+3. Push changes and tag @Shopify/developer-support for review
 
 ## Adding new queries
 
-
+When adding new queries to the collection, create folders according to the structure mentioned above. New queries should be added to the bottom of the existing sort order, unless the function is something that should logically happen first (obtaining token, a get before an update, etc)
 
 ## Build process
 
+When changes are pushed to the main branch, a new Insomnia package will be built automatically and commited to the repo.
