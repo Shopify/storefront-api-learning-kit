@@ -1,0 +1,28 @@
+# This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront AP.
+
+# If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit  https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit?ref=minion-made
+
+# The Shopify Storefront API gives you full creative control to customize your customers buying experience.
+
+# With the Storefront API you can access several Shopify resource types with the following access scopes:
+# - Read products, variants, and collections.
+# - Read and modify customer details.
+# - Read and modify checkouts.
+# - Read store content like articles, blogs and comments.
+# - Read subscription selling plans
+# - Read and modify cart objects.
+
+# Unlike the Admin API, the Storefront API is an unauthenticated API. 
+# Any data exposed by the StoreFront API can be seen by any visitor to the store.
+# Only use the StoreFront API when you're comfortable with that risk and the data that is being exposed.
+# Risk can be mitigated by only providing access scopes required.
+# For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
+
+# Access to the Storefront API can be granted by a merchant via a public sales channel, or private app.
+# For simplicity of this tutorial, we'll use a private app to grant access to the Storefront API. 
+# The process to create a private app is documented in the next section titled "Creating a Private App".
+
+# Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-started#private-app
+
+# The home of Storefront API related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
+

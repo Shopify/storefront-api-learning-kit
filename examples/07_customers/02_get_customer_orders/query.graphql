@@ -1,0 +1,15 @@
+# To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+query getCustomerOrders($customerAccessToken: String!){
+  customer(customerAccessToken: $customerAccessToken) {
+    id
+    orders(first:3) {
+      edges {
+        node {
+          orderNumber
+        }
+      }
+    }
+  }
+}
+

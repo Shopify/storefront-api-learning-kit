@@ -1,0 +1,23 @@
+{
+  "name": "storefront-api-learning-kit",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-plugin-shopify": "^35.1.0"
+  },
+  "eslintConfig": {
+    "extends": "plugin:shopify/esnext",
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "babel/camelcase": "off",
+      "no-console": "off"
+    }
+  }
+}

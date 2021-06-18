@@ -1,0 +1,31 @@
+# https://github.com/Shopify/shopify-dev/pull/7829
+query getcustomerOrders @inContext(country: FR) {
+  customer(customerAccessToken: "token") {
+    orders(first:10) {
+      edges {
+        node {
+          totalPriceV2 {
+            amount
+            currencyCode # order's currency - USD (point in time)
+          }
+          lineItems(first:10) {
+            edges {
+              node {
+                originalTotalPrice {
+                  amount
+                  currencyCode # order's currency - USD (point in time)
+                }
+                variant {
+                  priceV2 {
+                    amount
+                    currencyCode # EUR variant's currency (past context)
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

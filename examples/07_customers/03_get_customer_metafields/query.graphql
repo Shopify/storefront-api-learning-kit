@@ -1,0 +1,23 @@
+# To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+# By default, the Storefront API can't read metafields. To expose specific metafields to the Storefront API, you need to use the GraphQL Admin API to allow them. For each metafield that you want to allow, you need to create a MetafieldStorefrontVisibility record.
+
+# https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
+
+query CustomerMetafields($customerAccessToken: String!){
+  customer(customerAccessToken: $customerAccessToken) {
+    id
+    email
+    metafields (first:3) {
+      edges {
+        node {
+          id
+          key
+          namespace
+          value
+        }
+      }
+    }
+  }
+}
+

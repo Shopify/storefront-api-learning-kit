@@ -1,0 +1,18 @@
+query NearestPickupAvailability @inContext(preferredLocationId: "Z2lkOi8vc2hvcGlmeS9Mb2NhdGlvbi8x") {
+  node(id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8z") {
+    ... on ProductVariant {
+      storeAvailability(first: 3) {
+        edges {
+          node {
+            location {
+              name
+              address {
+                formatted
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+# https://github.com/Shopify/shopify-dev/pull/7829
+query getProductPriceRanges @inContext(country: CA) {
+  products(first: 1) {
+    edges {
+      node {
+        title
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        compareAtPriceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+}

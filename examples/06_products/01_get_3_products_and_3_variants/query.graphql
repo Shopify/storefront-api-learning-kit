@@ -1,0 +1,32 @@
+
+# This query gets the products connection, which is available from the QueryRoot, and asks for the first 3 products. It selects edges, the node, and fields from each of the returned product objects.
+# Since products also have a variants connection, we repeat a similar process to get information on the first 3 variants on each of those products.
+
+
+{
+  products(first: 3) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        description
+        handle
+        variants(first: 3) {
+          edges {
+            cursor
+            node {
+              id
+              title
+              quantityAvailable
+              priceV2 {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

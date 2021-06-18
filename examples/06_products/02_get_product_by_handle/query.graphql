@@ -1,0 +1,25 @@
+
+# This query gets a single product connection, available from the QueryRoot, that matches the handle "my-test-product".
+# As only one product connection will be returned, we don't need to specify edges, node, or cursor.
+
+{
+  productByHandle(handle: "my-test-product") {
+    id
+    title
+    description
+    variants(first: 3) {
+      edges {
+        cursor
+        node {
+          id
+          title
+          quantityAvailable
+          priceV2 {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+}

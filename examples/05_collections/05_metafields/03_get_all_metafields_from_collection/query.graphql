@@ -1,0 +1,20 @@
+
+
+# Uses the `collectionByHandle` query to specify a collection by passing the handle, and returns a list of all metafields attached to that collection.
+# Since collections can have a large number of metafields, pagination is required on the `metafields` connection.
+
+
+{
+  collectionByHandle (handle:"all") {
+    id
+    metafields (first:10) {
+      edges {
+        node {
+          namespace
+          key
+          value
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+
+
+# This query is returning data from a single collection, specified by the handle.
+
+# The data being returned in the product connection can be used to display a page of products with multicurrency pricing.
+
+# Since products can contain multiple variants, we've asked the products connection to return price ranges.
+
+# The 'presentmentPriceRanges' object returns prices in all currencies offered by the shop.
+# Since shops can offer multiple different currencies, the `presentmentPriceRanges` object requires pagination
+
+
+{
+  collectionByHandle(handle: "all") {
+    id
+    title
+    products(first: 50, sortKey: BEST_SELLING) {
+      edges {
+        node {
+          id
+          title
+          vendor
+          availableForSale
+          images(first: 1) {
+            edges {
+              node {
+                id
+                transformedSrc
+                width
+                height
+                altText
+              }
+            }
+          }
+          presentmentPriceRanges(first: 10) {
+            edges {
+              node {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+                maxVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

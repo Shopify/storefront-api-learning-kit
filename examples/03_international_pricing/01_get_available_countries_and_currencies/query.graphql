@@ -1,0 +1,25 @@
+# https://github.com/Shopify/shopify-dev/pull/7829
+query getCountriesAndCurrencies @inContext(country: FR) {
+  localization {
+    availableCountries {
+      currency {
+        isoCode
+        name
+        symbol
+      }
+      isoCode
+      name
+      unitSystem
+    }
+    country {
+      currency {
+        isoCode
+        name
+        symbol
+      }
+      isoCode
+      name
+      unitSystem
+    }
+  }
+}

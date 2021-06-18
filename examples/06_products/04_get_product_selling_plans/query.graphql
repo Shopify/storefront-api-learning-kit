@@ -1,0 +1,56 @@
+{
+  products(first: 30) {
+    edges {
+      node {
+        id
+        title
+        sellingPlanGroups(first: 5) {
+          edges {
+            node {
+              appName
+              name
+              options {
+                name
+                values
+              }
+              sellingPlans(first: 5) {
+                edges {
+                  node {
+                    id
+                    description
+                    recurringDeliveries
+                    priceAdjustments {
+                      adjustmentValue {
+                   ... on SellingPlanPercentagePriceAdjustment {
+                     adjustmentPercentage
+                   }
+                   ... on SellingPlanFixedAmountPriceAdjustment {
+                     adjustmentAmount {
+                       amount
+                       currencyCode
+                     }
+                   }
+                   ... on SellingPlanFixedPriceAdjustment {
+                     price {
+                       amount
+                       currencyCode
+                     }
+                   }
+                 }
+
+                      orderCount
+                    }
+                    options {
+                      name
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

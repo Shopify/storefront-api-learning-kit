@@ -1,0 +1,12 @@
+# https://github.com/Shopify/shopify/issues/285099 - unmerged as of June 3rd
+query getVariantLocationAvailability{
+  productVariantStoreAvailabilities(first: 100, variant_id: "gid://shopify/ProductVariant/1") {
+    edges {
+      node {
+        available
+        location { name }
+        pick_up_time
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out everytime.
+
+# For the tutorial, three environment variables will be utilized.
+
+# 1. “base_url” will be the Shopify store being connected to.
+# - If your store is mydevstore.myshopify.com, enter “mydevstore.myshopify.com” here.
+# 2. “api_version” is the Storefront API version used for the API requests.
+# - This can be changed to an earlier version or unstable depending on your use case.
+# 3. "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header 
+# - This storefront access token generated from creating a private app.
+

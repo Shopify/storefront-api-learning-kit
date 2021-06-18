@@ -1,0 +1,10 @@
+
+
+# Simple query to return details from a collection object by passing the collection.handle as an argument
+
+{
+  collectionByHandle (handle:"all") {
+    id
+    handle
+  }
+}

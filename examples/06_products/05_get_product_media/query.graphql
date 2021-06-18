@@ -1,0 +1,56 @@
+
+# This query gets 3 products and their media; we use a fragment here to specify the fields that we want to return for each possible media type.
+# You cannot retrieve media for product variants with the Storefront API, only products. You cannot upload media, add media to a product, or delete media with the Storefront API, use the Admin API for these tasks.
+# https://shopify.dev/tutorials/manage-product-media-with-admin-api#retrieve-product-media-by-using-the-storefront-api
+
+{
+  products(first: 3) {
+    edges {
+      cursor
+      node {
+        id
+        title
+        description
+        media(first: 10) {
+        edges {
+          node {
+            mediaContentType
+            alt
+            ...mediaFieldsByType
+          }
+        }
+      }
+      }
+    }
+  }
+}
+
+fragment mediaFieldsByType on Media {
+  ...on ExternalVideo {
+    id
+    host
+    embeddedUrl
+  }
+  ...on MediaImage {
+    image {
+      originalSrc
+    }
+  }
+  ...on Model3d {
+    sources {
+      url
+      mimeType
+      format
+      filesize
+    }
+  }
+  ...on Video {
+    sources {
+      url
+      mimeType
+      format
+      height
+      width
+    }
+  }
+}
