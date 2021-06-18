@@ -27,7 +27,8 @@ jobs:
     - run: yarn build
     
     - name: Commit files # transfer the new html files back into the repository
-    - run: git config --local user.name "action-build"
-    - run: git add ./storefront-api-learning-kit-insomnia.json
-    - run: git commit -m "Update Insomnia package"
-    - run: git push
+      run: |
+        git config --local user.name "action-build"
+        git add ./storefront-api-learning-kit-insomnia.json
+        git commit -m "Update Insomnia package"
+        git push
