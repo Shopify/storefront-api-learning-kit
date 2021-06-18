@@ -71,8 +71,8 @@ const createNewResource = async ({_type, fileName, parentId, filePath, _id, meta
         ],
         authentication: {},
         isPrivate: false,
-        settingStoreCookies: true,
-        settingSendCookies: true,
+        settingStoreCookies: false,
+        settingSendCookies: false,
         settingDisableRenderRequestBody: false,
         settingEncodeUrl: true,
         settingRebuildPath: true,
@@ -108,8 +108,8 @@ const insomniaExportTemplate = {
       name: "Base Environment",
       data: {
         base_url: "shop.myshopify.com",
-        api_version: "unstable",
-        storefront_access_token: "41d38f60a353daba617c665c4f36d17a",
+        api_version: "2021-04",
+        storefront_access_token: "12a35b67c890defg123h456i7f89j01k",
       },
       dataPropertyOrder: {
         '&': [
