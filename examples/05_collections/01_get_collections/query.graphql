@@ -1,9 +1,9 @@
 
 
 
-# Simple query to return the first 10 collections in the shop
+# Simple query to return the first 10 collections in the shop.
 
-# Since a shop can contain multiple collections, pagination is required
+# Since a shop can contain multiple collections, pagination is required.
 
 {
   collections(first: 10) {
