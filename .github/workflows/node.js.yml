@@ -29,6 +29,6 @@ jobs:
     - name: Commit files # transfer the new html files back into the repository
       run: |
         git config --local user.name "action-build"
-        git add ./storefront-api-learning-kit-insomnia.json
+        git add .
         git commit -m "Update Insomnia package"
         git push
