@@ -1,7 +1,7 @@
 
 # Storefront API Learning Kit
 
-[About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/contributing.md) | [Getting Started](#getting-started) | [Example queries](#example-queries) 
+[About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md) | [Getting Started](#getting-started) | [Example queries](#example-queries) 
 
 ## About this repo
 
