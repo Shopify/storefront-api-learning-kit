@@ -19,11 +19,7 @@ If you don't want to download the Insomnia package, the query examples are liste
 <details><summary>Introduction</summary>
 <p>
 
-<<<<<<< HEAD
  This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
-=======
-This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront AP.
->>>>>>> 4dac3d0f987ac84534be27493dcf81872edd5909
 
 If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit?ref=minion-made
 
