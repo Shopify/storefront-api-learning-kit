@@ -6,7 +6,7 @@ const path = require('path');
 
 const {createNewResource, insomniaExportTemplate, directoryContainsQuery} = require('./build-helpers');
 
-const kitFilePath = `./builds/storefront-api-learning-kit-insomnia_${Date.now()}.json`;
+const kitFilePath = `./builds/storefront-api-learning-kit-insomnia.json`;
 
 const createResources = async (directory = './examples', depth = 0, parentId = 'wrk_1') => {
   let resources = [];
