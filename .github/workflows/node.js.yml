@@ -5,7 +5,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ jb ]
+    paths:
+      - 'examples/**'
 
 jobs:
   build:
