@@ -1,17 +1,16 @@
-
 # Storefront API Learning Kit
 
-[About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/contributing.md) | [Getting Started](#getting-started) | [Example queries](#example-queries) 
+[About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md) | [Getting Started](#getting-started) | [Example queries](#example-queries)
 
 ## About this repo
 
-This repo contains example queries and that demonstrate how to use Shopify's [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). We recommended downloading the package from the releases section so that you have access to all queries in the [Insmonia](https://insomnia.rest/) http client. Insomnia is a desktop app which allows you to make API calls using a graphical interface, and provides features such as automatic schema fetching and autocomplete which are valuable when learning a new API.
+This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the package from the releases section, gives you access to a complete set of sample queries for use in the [Insmonia](https://insomnia.rest/) http client. The Insomnia desktop app with rich GraphQL features including automatic schema fetching and autocomplete are extremely valuable in learning a new API.
 
 ## How to use this repo
 
 Head over to the [releases](https://github.com/Shopify/storefront-api-learning-kit/releases/) section to download the Insomnia package.
 
-Import the package by clicking the menu in the top left of the Insomnia window, then click "Import/Export"
+From the Insomnia Dashboard screen, click Create, followed by clicking `+ File` to load the Shopify GraphQL Storefront API Insomnia workspace.
 
 If you don't want to download the Insomnia package, the query examples are listed out below.
 
@@ -20,135 +19,132 @@ If you don't want to download the Insomnia package, the query examples are liste
 <details><summary>Introduction</summary>
 <p>
 
- This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront AP.
+ This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
 
- If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit  https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit?ref=minion-made
+If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit?ref=minion-made
 
- The Shopify Storefront API gives you full creative control to customize your customers buying experience.
+The Shopify Storefront API gives you full creative control to customize your customers buying experience.
 
- With the Storefront API you can access several Shopify resource types with the following access scopes:
- - Read products, variants, and collections.
- - Read and modify customer details.
- - Read and modify checkouts.
- - Read store content like articles, blogs and comments.
- - Read subscription selling plans
- - Read and modify cart objects.
+With the Storefront API you can access several Shopify resource types with the following access scopes:
 
- Unlike the Admin API, the Storefront API is an unauthenticated API. 
- Any data exposed by the StoreFront API can be seen by any visitor to the store.
- Only use the StoreFront API when you're comfortable with that risk and the data that is being exposed.
- Risk can be mitigated by only providing access scopes required.
- For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
+-   Read products, variants, and collections.
+-   Read and modify customer details.
+-   Read and modify checkouts.
+-   Read store content like articles, blogs and comments.
+-   Read subscription selling plans
+-   Read and modify cart objects.
 
- Access to the Storefront API can be granted by a merchant via a public sales channel, or private app.
- For simplicity of this tutorial, we'll use a private app to grant access to the Storefront API. 
- The process to create a private app is documented in the next section titled "Creating a Private App".
+Unlike the Admin API, the Storefront API is an unauthenticated API.
+Any data exposed by the StoreFront API can be seen by any visitor to the store.
+Only use the StoreFront API when you're comfortable with that risk and the data that is being exposed.
+Risk can be mitigated by only providing access scopes required.
+For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
 
- Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-startedprivate-app
+Access to the Storefront API can be granted by a merchant via a public sales channel, or private app.
+For simplicity of this tutorial, we'll use a private app to grant access to the Storefront API.
+The process to create a private app is documented in the next section titled "Creating a Private App".
 
- The home of Storefront API related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
+Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-startedprivate-app
 
+The home of Storefront API related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
 
 </p>
 </details>
-
-
 
 <details><summary>Creating a private app</summary>
 <p>
 
- To start using the StoreFront API we'll be need to create a private app.
+To start using the StoreFront API we'll be need to create a private app.
 
- 1. From your Shopify Admin, select Apps.
- 2. Click Mange Private Apps towards the bottom of the Apps page.
- 3. Click Create a New Private App
- 4. Fill out the details of the private app.
- 5. In the Storefront API section, select Allow this app to access your storefront data using the Storefront API.
- 6. In the Storefront API permissions section, select which types of data you want to expose to the app. https://screenshot.click/31-55-0qq0l-qvj8z.png
- 7. Click Save.
- 8. Once the private app has been saved, scroll to the Storefront API section and copy the access token. https://screenshot.click/31-58-hghxw-jzqp3.png
+1.  From your Shopify Admin, select Apps.
+2.  Click Mange Private Apps towards the bottom of the Apps page.
+3.  Click Create a New Private App
+4.  Fill out the details of the private app.
+5.  In the Storefront API section, select Allow this app to access your storefront data using the Storefront API.
+6.  In the Storefront API permissions section, select which types of data you want to expose to the app. https://screenshot.click/31-55-0qq0l-qvj8z.png
+7.  Click Save.
+8.  Once the private app has been saved, scroll to the Storefront API section and copy the access token. https://screenshot.click/31-58-hghxw-jzqp3.png
 
 </p>
 </details>
-
-
 
 <details><summary>Configure your environment variables</summary>
 <p>
 
- Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out everytime.
+Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out everytime.
 
- For the tutorial, three environment variables will be utilized.
+For the tutorial, three environment variables will be utilized.
 
- 1. “base_url” will be the Shopify store being connected to.
- - If your store is mydevstore.myshopify.com, enter “mydevstore.myshopify.com” here.
- 2. “api_version” is the Storefront API version used for the API requests.
- - This can be changed to an earlier version or unstable depending on your use case.
- 3. "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header 
- - This storefront access token generated from creating a private app.
+1.  “base_url” will be the Shopify store being connected to.
 
+-   If your store is mydevstore.myshopify.com, enter “mydevstore.myshopify.com” here.
+
+2.  “api_version” is the Storefront API version used for the API requests.
+
+-   This can be changed to an earlier version or unstable depending on your use case.
+
+3.  "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header
+
+-   This storefront access token generated from creating a private app.
 
 </p>
 </details>
-
-
 
 <details><summary>Making your first request</summary>
 <p>
 
- You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
- You can also click "Header" at the top to see the use of the "storefront_access_token"
- Hovering over either of these should show you the value that will be substituted into the request.
- If you don’t see your values, ensure you have the right environment selected.
+You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
+You can also click "Header" at the top to see the use of the "storefront_access_token"
+Hovering over either of these should show you the value that will be substituted into the request.
+If you don’t see your values, ensure you have the right environment selected.
 
- Once you've confirmed these three fields are set in your environment, try running the shop query below.
- If the Storefront API access token has been configured correctly, you should get your shop’s info back.
-
+Once you've confirmed these three fields are set in your environment, try running the shop query below.
+If the Storefront API access token has been configured correctly, you should get your shop’s info back.
 
 ```graphql
-query getShopDetails{
-  shop {
-			name
-      primaryDomain{
-        host
-        url
-      }
-      paymentSettings{
-        currencyCode
-        acceptedCardBrands
-        enabledPresentmentCurrencies
-      }
-		}
+query getShopDetails {
+    shop {
+        name
+        primaryDomain {
+            host
+            url
+        }
+        paymentSettings {
+            currencyCode
+            acceptedCardBrands
+            enabledPresentmentCurrencies
+        }
+    }
 }
 ```
+
 </p>
 </details>
 
-
-
 <details><summary>Base64 encoded</summary>
 <p>
- Unlike the Admin API, all resource ID's in the StoreFront API are base64 encoded. 
+ Unlike the Admin API, all resource ID's in the StoreFront API are base64 encoded.
 
- Storefront API GraphQL queries, or mutations requiring an id, need that id to be base-64 encoded.
+Storefront API GraphQL queries, or mutations requiring an id, need that id to be base-64 encoded.
 
- When using GraphQL to query a specific collection with the Admin API, your query would not use a base-64 encoded ID
+When using GraphQL to query a specific collection with the Admin API, your query would not use a base-64 encoded ID
 
- With the Storefront API to retrieve the same collection as illustrated with the Admin API, the id needs to be base-64 encoded.
- Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded
+With the Storefront API to retrieve the same collection as illustrated with the Admin API, the id needs to be base-64 encoded.
+Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded
 
- Modern program languages all support base-64 encoding and decoding of string.
+Modern program languages all support base-64 encoding and decoding of string.
 
 ```graphql
-query getCollection{
-   node (id:"Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE=") {
-    ... on Collection {
-      id
-      handle
+query getCollection {
+    node(id: "Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE=") {
+        ... on Collection {
+            id
+            handle
+        }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -159,50 +155,52 @@ query getCollection{
 <details><summary><strong> Requesting metafields</strong></summary>
 <p>
 
- Metafields allow merchants to store additional information for Shopify resources including:
- - Products 
- - Collections
- - Customers 
- - Blogs
- - Pages
- - Shop
+Metafields allow merchants to store additional information for Shopify resources including:
 
- Unlike the Admin API, metafields must first be made visibile to the Storefront API. 
- To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
- For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
+-   Products
+-   Collections
+-   Customers
+-   Blogs
+-   Pages
+-   Shop
 
- For a complete Storefront API metafield reference please consult the metafield tutorial at
- https://shopify.dev/tutorials/retrieve-metafields-with-storefront-apiexpose-metafields-to-the-storefront-api
+Unlike the Admin API, metafields must first be made visibile to the Storefront API.
+To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
+For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
 
- Once the metafield for the given resource has been made visible to the Storefront API, it can be queried from that resource.
+For a complete Storefront API metafield reference please consult the metafield tutorial at
+https://shopify.dev/tutorials/retrieve-metafields-with-storefront-apiexpose-metafields-to-the-storefront-api
 
- For the resource types listed above, both a single metafield, and paginated list can be queried.
+Once the metafield for the given resource has been made visible to the Storefront API, it can be queried from that resource.
 
- The following example queries the Shop resource for the first ten available metafields using the shop's MetaFieldConnection
+For the resource types listed above, both a single metafield, and paginated list can be queried.
+
+The following example queries the Shop resource for the first ten available metafields using the shop's MetaFieldConnection
 
 ```graphql
 query getShopMetafields {
     shop {
-			name
-      metafields(first:10){
-        pageInfo{
-          hasNextPage
-          hasPreviousPage
+        name
+        metafields(first: 10) {
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            edges {
+                cursor
+                node {
+                    id
+                    namespace
+                    key
+                    valueType
+                    value
+                }
+            }
         }
-        edges{
-          cursor
-          node{
-            id
-            namespace
-            key
-            valueType
-            value
-          }
-        }
-      }
-	}
+    }
 }
 ```
+
 </p>
 </details>
 <hr>
@@ -212,141 +210,137 @@ query getShopMetafields {
 <details><summary><strong>Get available countries and currencies</strong></summary>
 <p>
 
-https://github.com/Shopify/shopify-dev/pull/7829
-
 ```graphql
 query getCountriesAndCurrencies @inContext(country: FR) {
-  localization {
-    availableCountries {
-      currency {
-        isoCode
-        name
-        symbol
-      }
-      isoCode
-      name
-      unitSystem
+    localization {
+        availableCountries {
+            currency {
+                isoCode
+                name
+                symbol
+            }
+            isoCode
+            name
+            unitSystem
+        }
+        country {
+            currency {
+                isoCode
+                name
+                symbol
+            }
+            isoCode
+            name
+            unitSystem
+        }
     }
-    country {
-      currency {
-        isoCode
-        name
-        symbol
-      }
-      isoCode
-      name
-      unitSystem
-    }
-  }
 }
 ```
+
 </p>
 </details>
 
 <details><summary><strong>Get product prices</strong></summary>
 <p>
 
-https://github.com/Shopify/shopify-dev/pull/7829
-
 ```graphql
 query allProducts @inContext(country: CA) {
-  products(first: 1) {
-    edges {
-      node {
-        variants(first:1) {
-          edges {
+    products(first: 1) {
+        edges {
             node {
-              priceV2 {
-                amount
-                currencyCode
-              }
+                variants(first: 1) {
+                    edges {
+                        node {
+                            priceV2 {
+                                amount
+                                currencyCode
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
 <details><summary><strong>Get price ranges for products</strong></summary>
 <p>
 
-https://github.com/Shopify/shopify-dev/pull/7829
-
 ```graphql
 query getProductPriceRanges @inContext(country: CA) {
-  products(first: 1) {
-    edges {
-      node {
-        title
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
+    products(first: 1) {
+        edges {
+            node {
+                title
+                priceRange {
+                    minVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                    maxVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                }
+                compareAtPriceRange {
+                    minVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                    maxVariantPrice {
+                        amount
+                        currencyCode
+                    }
+                }
+            }
         }
-        compareAtPriceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
 <details><summary><strong>Get customer orders</strong></summary>
 <p>
 
-
-
 ```graphql
 query getcustomerOrders @inContext(country: FR) {
-  customer(customerAccessToken: "token") {
-    orders(first:10) {
-      edges {
-        node {
-          totalPriceV2 {
-            amount
-            currencyCode # order's currency - USD (point in time)
-          }
-          lineItems(first:10) {
+    customer(customerAccessToken: "token") {
+        orders(first: 10) {
             edges {
-              node {
-                originalTotalPrice {
-                  amount
-                  currencyCode # order's currency - USD (point in time)
+                node {
+                    totalPriceV2 {
+                        amount
+                        currencyCode # order's currency - USD (point in time)
+                    }
+                    lineItems(first: 10) {
+                        edges {
+                            node {
+                                originalTotalPrice {
+                                    amount
+                                    currencyCode # order's currency - USD (point in time)
+                                }
+                                variant {
+                                    priceV2 {
+                                        amount
+                                        currencyCode # EUR variant's currency (past context)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                variant {
-                  priceV2 {
-                    amount
-                    currencyCode # EUR variant's currency (past context)
-                  }
-                }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 <hr>
@@ -356,21 +350,25 @@ query getcustomerOrders @inContext(country: FR) {
 <details><summary><strong>Get pickup availability for variants</strong></summary>
 <p>
 
-https://github.com/Shopify/shopify/issues/285099 - unmerged as of June 3rd
-
 ```graphql
-query getVariantLocationAvailability{
-  productVariantStoreAvailabilities(first: 100, variant_id: "gid://shopify/ProductVariant/1") {
-    edges {
-      node {
-        available
-        location { name }
-        pick_up_time
-      }
+query getVariantLocationAvailability {
+    productVariantStoreAvailabilities(
+        first: 100
+        variant_id: "gid://shopify/ProductVariant/1"
+    ) {
+        edges {
+            node {
+                available
+                location {
+                    name
+                }
+                pick_up_time
+            }
+        }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -379,21 +377,22 @@ query getVariantLocationAvailability{
 
 ```graphql
 query LocationsByDistance($location: GeoCoordinateInput!) {
-  locations(near:$location, first: 5, sortKey: DISTANCE) {
-    edges {
-      node {
-        id
-        name
-        address {
-          formatted
+    locations(near: $location, first: 5, sortKey: DISTANCE) {
+        edges {
+            node {
+                id
+                name
+                address {
+                    formatted
+                }
+            }
         }
-      }
     }
-  }
 }
-
 ```
+
 _Variables_
+
 ```
 {
 	"location": {
@@ -402,6 +401,7 @@ _Variables_
 	}
 }
 ```
+
 </p>
 </details>
 
@@ -409,25 +409,27 @@ _Variables_
 <p>
 
 ```graphql
-query NearestPickupAvailability @inContext(preferredLocationId: "Z2lkOi8vc2hvcGlmeS9Mb2NhdGlvbi8x") {
-  node(id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8z") {
-    ... on ProductVariant {
-      storeAvailability(first: 3) {
-        edges {
-          node {
-            location {
-              name
-              address {
-                formatted
-              }
+query NearestPickupAvailability
+@inContext(preferredLocationId: "Z2lkOi8vc2hvcGlmeS9Mb2NhdGlvbi8x") {
+    node(id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8z") {
+        ... on ProductVariant {
+            storeAvailability(first: 3) {
+                edges {
+                    node {
+                        location {
+                            name
+                            address {
+                                formatted
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 <hr>
@@ -443,21 +445,22 @@ Since a shop can contain multiple collections, pagination is required
 
 ```graphql
 {
-  collections(first: 10) {
-    edges {
-      cursor
-      node {
-        id
-        handle
-      }
+    collections(first: 10) {
+        edges {
+            cursor
+            node {
+                id
+                handle
+            }
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
     }
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-    }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -468,12 +471,13 @@ Simple query to return details from a collection object by passing the collectio
 
 ```graphql
 {
-  collectionByHandle (handle:"all") {
-    id
-    handle
-  }
+    collectionByHandle(handle: "all") {
+        id
+        handle
+    }
 }
 ```
+
 </p>
 </details>
 
@@ -486,14 +490,15 @@ In this example, the "... on Collection" fragment allows us to return fields fro
 
 ```graphql
 {
-  node (id:"Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzIxMjIzNzgxMTczNA==") {
-    ... on Collection {
-      id
-      handle
+    node(id: "Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzIxMjIzNzgxMTczNA==") {
+        ... on Collection {
+            id
+            handle
+        }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -514,43 +519,44 @@ The 'priceRange' object returns prices in the shop's currency. Multicurrency wil
 
 ```graphql
 {
-  collectionByHandle (handle:"all") {
-    id
-    title
-    products (first:50 sortKey:BEST_SELLING) {
-      edges {
-        node {
-          id
-          title
-          vendor
-          availableForSale
-          images (first:1) {
+    collectionByHandle(handle: "all") {
+        id
+        title
+        products(first: 50, sortKey: BEST_SELLING) {
             edges {
-              node {
-                id
-                transformedSrc
-                width
-                height
-                altText
-              }
+                node {
+                    id
+                    title
+                    vendor
+                    availableForSale
+                    images(first: 1) {
+                        edges {
+                            node {
+                                id
+                                transformedSrc
+                                width
+                                height
+                                altText
+                            }
+                        }
+                    }
+                    priceRange {
+                        minVariantPrice {
+                            amount
+                            currencyCode
+                        }
+                        maxVariantPrice {
+                            amount
+                            currencyCode
+                        }
+                    }
+                }
             }
-          }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -567,47 +573,48 @@ The 'presentmentPriceRanges' object returns prices in all currencies offered by 
 
 ```graphql
 {
-  collectionByHandle(handle: "all") {
-    id
-    title
-    products(first: 50, sortKey: BEST_SELLING) {
-      edges {
-        node {
-          id
-          title
-          vendor
-          availableForSale
-          images(first: 1) {
+    collectionByHandle(handle: "all") {
+        id
+        title
+        products(first: 50, sortKey: BEST_SELLING) {
             edges {
-              node {
-                id
-                transformedSrc
-                width
-                height
-                altText
-              }
-            }
-          }
-          presentmentPriceRanges(first: 10) {
-            edges {
-              node {
-                minVariantPrice {
-                  amount
-                  currencyCode
+                node {
+                    id
+                    title
+                    vendor
+                    availableForSale
+                    images(first: 1) {
+                        edges {
+                            node {
+                                id
+                                transformedSrc
+                                width
+                                height
+                                altText
+                            }
+                        }
+                    }
+                    presentmentPriceRanges(first: 10) {
+                        edges {
+                            node {
+                                minVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                                maxVariantPrice {
+                                    amount
+                                    currencyCode
+                                }
+                            }
+                        }
+                    }
                 }
-                maxVariantPrice {
-                  amount
-                  currencyCode
-                }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -620,20 +627,21 @@ Since collections can have a large number of metafields in a given namespace, pa
 
 ```graphql
 {
-  collectionByHandle (handle:"all") {
-    id
-    metafields (first:10 namespace:"global") {
-      edges {
-        node {
-          namespace
-          key
-          value
+    collectionByHandle(handle: "all") {
+        id
+        metafields(first: 10, namespace: "global") {
+            edges {
+                node {
+                    namespace
+                    key
+                    value
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -648,16 +656,17 @@ Since only 1 metafield can exist in a given namespace with a given key, paginati
 
 ```graphql
 {
-  collectionByHandle(handle: "all") {
-    id
-    metafield(namespace: "global", key: "instructions") {
-      namespace
-      key
-      value
+    collectionByHandle(handle: "all") {
+        id
+        metafield(namespace: "global", key: "instructions") {
+            namespace
+            key
+            value
+        }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -670,20 +679,21 @@ Since collections can have a large number of metafields, pagination is required 
 
 ```graphql
 {
-  collectionByHandle (handle:"all") {
-    id
-    metafields (first:10) {
-      edges {
-        node {
-          namespace
-          key
-          value
+    collectionByHandle(handle: "all") {
+        id
+        metafields(first: 10) {
+            edges {
+                node {
+                    namespace
+                    key
+                    value
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 <hr>
@@ -699,33 +709,34 @@ Since products also have a variants connection, we repeat a similar process to g
 
 ```graphql
 {
-  products(first: 3) {
-    edges {
-      cursor
-      node {
-        id
-        title
-        description
-        handle
-        variants(first: 3) {
-          edges {
+    products(first: 3) {
+        edges {
             cursor
             node {
-              id
-              title
-              quantityAvailable
-              priceV2 {
-                amount
-                currencyCode
-              }
+                id
+                title
+                description
+                handle
+                variants(first: 3) {
+                    edges {
+                        cursor
+                        node {
+                            id
+                            title
+                            quantityAvailable
+                            priceV2 {
+                                amount
+                                currencyCode
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -738,27 +749,28 @@ As only one product connection will be returned, we don't need to specify edges,
 
 ```graphql
 {
-  productByHandle(handle: "my-test-product") {
-    id
-    title
-    description
-    variants(first: 3) {
-      edges {
-        cursor
-        node {
-          id
-          title
-          quantityAvailable
-          priceV2 {
-            amount
-            currencyCode
-          }
+    productByHandle(handle: "my-test-product") {
+        id
+        title
+        description
+        variants(first: 3) {
+            edges {
+                cursor
+                node {
+                    id
+                    title
+                    quantityAvailable
+                    priceV2 {
+                        amount
+                        currencyCode
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -771,27 +783,30 @@ As only one product connection will be returned, we don't need to specify edges,
 
 ```graphql
 {
-  productRecommendations(productId: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzEyMzQ1Njc4OQ==") {
-    id
-    title
-    description
-    variants(first: 3) {
-      edges {
-        cursor
-        node {
-          id
-          title
-          quantityAvailable
-          priceV2 {
-            amount
-            currencyCode
-          }
+    productRecommendations(
+        productId: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzEyMzQ1Njc4OQ=="
+    ) {
+        id
+        title
+        description
+        variants(first: 3) {
+            edges {
+                cursor
+                node {
+                    id
+                    title
+                    quantityAvailable
+                    priceV2 {
+                        amount
+                        currencyCode
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 </p>
 </details>
 
@@ -800,63 +815,63 @@ As only one product connection will be returned, we don't need to specify edges,
 
 ```graphql
 {
-  products(first: 30) {
-    edges {
-      node {
-        id
-        title
-        sellingPlanGroups(first: 5) {
-          edges {
+    products(first: 30) {
+        edges {
             node {
-              appName
-              name
-              options {
-                name
-                values
-              }
-              sellingPlans(first: 5) {
-                edges {
-                  node {
-                    id
-                    description
-                    recurringDeliveries
-                    priceAdjustments {
-                      adjustmentValue {
-                   ... on SellingPlanPercentagePriceAdjustment {
-                     adjustmentPercentage
-                   }
-                   ... on SellingPlanFixedAmountPriceAdjustment {
-                     adjustmentAmount {
-                       amount
-                       currencyCode
-                     }
-                   }
-                   ... on SellingPlanFixedPriceAdjustment {
-                     price {
-                       amount
-                       currencyCode
-                     }
-                   }
-                 }
+                id
+                title
+                sellingPlanGroups(first: 5) {
+                    edges {
+                        node {
+                            appName
+                            name
+                            options {
+                                name
+                                values
+                            }
+                            sellingPlans(first: 5) {
+                                edges {
+                                    node {
+                                        id
+                                        description
+                                        recurringDeliveries
+                                        priceAdjustments {
+                                            adjustmentValue {
+                                                ... on SellingPlanPercentagePriceAdjustment {
+                                                    adjustmentPercentage
+                                                }
+                                                ... on SellingPlanFixedAmountPriceAdjustment {
+                                                    adjustmentAmount {
+                                                        amount
+                                                        currencyCode
+                                                    }
+                                                }
+                                                ... on SellingPlanFixedPriceAdjustment {
+                                                    price {
+                                                        amount
+                                                        currencyCode
+                                                    }
+                                                }
+                                            }
 
-                      orderCount
+                                            orderCount
+                                        }
+                                        options {
+                                            name
+                                            value
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                    options {
-                      name
-                      value
-                    }
-                  }
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
-
 ```
+
 </p>
 </details>
 
@@ -871,57 +886,58 @@ https://shopify.dev/tutorials/manage-product-media-with-admin-api#retrieve-produ
 
 ```graphql
 {
-  products(first: 3) {
-    edges {
-      cursor
-      node {
-        id
-        title
-        description
-        media(first: 10) {
+    products(first: 3) {
         edges {
-          node {
-            mediaContentType
-            alt
-            ...mediaFieldsByType
-          }
+            cursor
+            node {
+                id
+                title
+                description
+                media(first: 10) {
+                    edges {
+                        node {
+                            mediaContentType
+                            alt
+                            ...mediaFieldsByType
+                        }
+                    }
+                }
+            }
         }
-      }
-      }
     }
-  }
 }
 
 fragment mediaFieldsByType on Media {
-  ...on ExternalVideo {
-    id
-    host
-    embeddedUrl
-  }
-  ...on MediaImage {
-    image {
-      originalSrc
+    ... on ExternalVideo {
+        id
+        host
+        embeddedUrl
     }
-  }
-  ...on Model3d {
-    sources {
-      url
-      mimeType
-      format
-      filesize
+    ... on MediaImage {
+        image {
+            originalSrc
+        }
     }
-  }
-  ...on Video {
-    sources {
-      url
-      mimeType
-      format
-      height
-      width
+    ... on Model3d {
+        sources {
+            url
+            mimeType
+            format
+            filesize
+        }
     }
-  }
+    ... on Video {
+        sources {
+            url
+            mimeType
+            format
+            height
+            width
+        }
+    }
 }
 ```
+
 </p>
 </details>
 <hr>
@@ -937,29 +953,31 @@ To query a customer, a customerAccessToken is required. This is obtained via the
 
 ```graphql
 mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
-  customerAccessTokenCreate(input: $input) {
-    customerAccessToken {
-      accessToken
-      expiresAt
+    customerAccessTokenCreate(input: $input) {
+        customerAccessToken {
+            accessToken
+            expiresAt
+        }
+        customerUserErrors {
+            code
+            field
+            message
+        }
     }
-    customerUserErrors {
-      code
-      field
-      message
-    }
-  }
 }
 ```
+
 _Variables_
 
 ```json
 {
-	"input": {
-		"email": "user@example.com",
-		"password": "HiZqFuDvDdQ7"
-	}
+    "input": {
+        "email": "user@example.com",
+        "password": "HiZqFuDvDdQ7"
+    }
 }
 ```
+
 </p>
 </details>
 
@@ -969,26 +987,28 @@ _Variables_
 To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
 
 ```graphql
-query getCustomerOrders($customerAccessToken: String!){
-  customer(customerAccessToken: $customerAccessToken) {
-    id
-    orders(first:3) {
-      edges {
-        node {
-          orderNumber
+query getCustomerOrders($customerAccessToken: String!) {
+    customer(customerAccessToken: $customerAccessToken) {
+        id
+        orders(first: 3) {
+            edges {
+                node {
+                    orderNumber
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 _Variables_
 
 ```json
 {
-	"customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
+    "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
 }
 ```
+
 </p>
 </details>
 
@@ -1002,30 +1022,32 @@ By default, the Storefront API can't read metafields. To expose specific metafie
 https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
 
 ```graphql
-query CustomerMetafields($customerAccessToken: String!){
-  customer(customerAccessToken: $customerAccessToken) {
-    id
-    email
-    metafields (first:3) {
-      edges {
-        node {
-          id
-          key
-          namespace
-          value
+query CustomerMetafields($customerAccessToken: String!) {
+    customer(customerAccessToken: $customerAccessToken) {
+        id
+        email
+        metafields(first: 3) {
+            edges {
+                node {
+                    id
+                    key
+                    namespace
+                    value
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
+
 _Variables_
 
 ```json
 {
-	"customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
+    "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
 }
 ```
+
 </p>
 </details>
 
@@ -1035,32 +1057,40 @@ _Variables_
 To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
 
 ```graphql
-mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
-  customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
-    customer {
-      id
+mutation customerUpdate(
+    $customerAccessToken: String!
+    $customer: CustomerUpdateInput!
+) {
+    customerUpdate(
+        customerAccessToken: $customerAccessToken
+        customer: $customer
+    ) {
+        customer {
+            id
+        }
+        customerAccessToken {
+            accessToken
+            expiresAt
+        }
+        customerUserErrors {
+            code
+            field
+            message
+        }
     }
-    customerAccessToken {
-      accessToken
-      expiresAt
-    }
-    customerUserErrors {
-      code
-      field
-      message
-    }
-  }
 }
 ```
+
 _Variables_
 
 ```json
 {
-	"customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862",
-	"customer": {
-		"phone": "+61401425227"
-	}
+    "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862",
+    "customer": {
+        "phone": "+61401425227"
+    }
 }
 ```
+
 </p>
 </details>
