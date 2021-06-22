@@ -9,7 +9,7 @@
 # - Read and modify customer details.
 # - Read and modify checkouts.
 # - Read store content like articles, blogs and comments.
-# - Read subscription selling plans
+# - Read subscription selling plans.
 # - Read and modify cart objects.
 
 # Unlike the Admin API, the Storefront API is an unauthenticated API. 
