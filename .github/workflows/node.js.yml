@@ -30,8 +30,6 @@ jobs:
     - name: Commit files # transfer the new html files back into the repository
       run: |
         git config --local user.name "action-build"
-        git pull
-        git rm --cached builds/*
         git add .
         git commit -m "Update Insomnia package"
         git push
