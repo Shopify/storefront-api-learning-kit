@@ -8,13 +8,9 @@ This repo provides example queries demonstrating how to use Shopify's GraphQL [S
 
 ## How to use this repo
 
-To import the Insomnia package, first copy this URL:
+To import the Insomnia package, first [download the latest collection](https://github.com/Shopify/storefront-api-learning-kit/blob/main/builds/storefront-api-learning-kit-insomnia.json) (you'll need to save the raw JSON file).
 
-```html
-https://github.com/Shopify/storefront-api-learning-kit/blob/main/builds/storefront-api-learning-kit-insomnia.json
-```
-
-From the Insomnia Dashboard screen, click Create, followed by clicking ` URL`. Paste the URL in the text field.
+From the Insomnia Dashboard screen, click `Create`, followed by clicking `File`. Select the file you downloaded.
 
 If you don't want to download the Insomnia package, the query examples are listed out below.
 
