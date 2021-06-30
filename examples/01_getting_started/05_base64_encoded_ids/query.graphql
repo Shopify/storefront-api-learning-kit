@@ -1,6 +1,6 @@
-# Unlike the Admin API, all resource ID's in the StoreFront API are base64 encoded. 
+# Unlike the Admin API, all resource ID's in the StoreFront API are base64 encoded.
 
-# Storefront API GraphQL queries, or mutations requiring an id, need that id to be base-64 encoded.
+# Storefront API GraphQL queries, or mutations requiring an ID, need that ID to be base-64 encoded.
 
 # When using GraphQL to query a specific collection with the Admin API, your query would not use a base-64 encoded ID
 # query getCollection{
@@ -11,10 +11,10 @@
 #      }
 #    }
 # }
-#    
+#
 
-# With the Storefront API to retrieve the same collection as illustrated with the Admin API, the id needs to be base-64 encoded.
-# Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded
+# With the Storefront API, to retrieve the same collection as illustrated with the Admin API, the id needs to be base-64 encoded.
+# Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded.
 
 # Modern program languages all support base-64 encoding and decoding of string.
 query getCollection{
@@ -25,4 +25,3 @@ query getCollection{
     }
   }
 }
- 

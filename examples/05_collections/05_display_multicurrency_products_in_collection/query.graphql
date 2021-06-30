@@ -1,5 +1,3 @@
-
-
 # This query is returning data from a single collection, specified by the handle.
 
 # The data being returned in the product connection can be used to display a page of products with multicurrency pricing.

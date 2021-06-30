@@ -1,5 +1,5 @@
 # You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
-# You can also click "Header" at the top to see the use of the "storefront_access_token"
+# You can also click "Header" at the top to see the use of the "storefront_access_token".
 # Hovering over either of these should show you the value that will be substituted into the request.
 # If you don’t see your values, ensure you have the right environment selected.
 

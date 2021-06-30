@@ -1,6 +1,4 @@
-
-
-# Query that return details from a collection object by passing the collection.id as an argument
+# Query that returns details from a collection object by passing the collection.id as an argument
 # Since the `node` connection can apply to a range of different objects, a fragment is required to specify the type being returned
 # In this example, the "... on Collection" fragment allows us to return fields from a collection object
 

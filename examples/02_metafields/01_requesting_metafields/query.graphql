@@ -1,12 +1,12 @@
 # Metafields allow merchants to store additional information for Shopify resources including:
-# - Products 
+# - Products
 # - Collections
-# - Customers 
+# - Customers
 # - Blogs
 # - Pages
 # - Shop
 
-# Unlike the Admin API, metafields must first be made visibile to the Storefront API. 
+# Unlike the Admin API, metafields must first be made visible to the Storefront API.
 # To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
 # For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
 
@@ -17,7 +17,7 @@
 
 # For the resource types listed above, both a single metafield, and paginated list can be queried.
 
-# The following example queries the Shop resource for the first ten available metafields using the shop's MetaFieldConnection
+# The following example queries the Shop resource for the first ten available metafields using the shop's MetafieldConnection
 query getShopMetafields{
     shop {
 			name
@@ -39,4 +39,3 @@ query getShopMetafields{
       }
 		}
 }
-
