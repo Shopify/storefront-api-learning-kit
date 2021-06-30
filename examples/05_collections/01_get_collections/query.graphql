@@ -1,6 +1,3 @@
-
-
-
 # Simple query to return the first 10 collections in the shop.
 
 # Since a shop can contain multiple collections, pagination is required.

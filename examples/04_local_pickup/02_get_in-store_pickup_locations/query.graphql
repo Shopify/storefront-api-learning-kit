@@ -1,4 +1,3 @@
-# 
 query LocationsByDistance($location: GeoCoordinateInput!) {
   locations(near:$location, first: 5, sortKey: DISTANCE) {
     edges {

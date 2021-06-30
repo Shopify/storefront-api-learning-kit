@@ -4,7 +4,7 @@
 
 ## About this repo
 
-This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the package from the releases section, gives you access to a complete set of sample queries for use in the [Insmonia](https://insomnia.rest/) http client. The Insomnia desktop app with rich GraphQL features including automatic schema fetching and autocomplete are extremely valuable in learning a new API.
+This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the package from the releases section, gives you access to a complete set of sample queries for use in the [Insomnia](https://insomnia.rest/) http client. The Insomnia desktop app comes with rich GraphQL features, including automatic schema fetching and autocomplete, which are extremely valuable in learning a new API.
 
 ## How to use this repo
 
@@ -21,9 +21,9 @@ If you don't want to download the Insomnia package, the query examples are liste
 
  This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
 
-If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit?ref=minion-made
+If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit
 
-The Shopify Storefront API gives you full creative control to customize your customers buying experience.
+The Shopify Storefront API gives you full creative control to customize your customers' buying experience.
 
 With the Storefront API you can access several Shopify resource types with the following access scopes:
 
@@ -35,8 +35,8 @@ With the Storefront API you can access several Shopify resource types with the f
 -   Read and modify cart objects.
 
 Unlike the Admin API, the Storefront API is an unauthenticated API.
-Any data exposed by the StoreFront API can be seen by any visitor to the store.
-Only use the StoreFront API when you're comfortable with that risk and the data that is being exposed.
+Any data exposed by the Storefront API can be seen by any visitor to the store.
+Only use the Storefront API when you're comfortable with that risk and the data that is being exposed.
 Risk can be mitigated by only providing access scopes required.
 For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
 
@@ -46,7 +46,7 @@ The process to create a private app is documented in the next section titled "Cr
 
 Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-startedprivate-app
 
-The home of Storefront API related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
+The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
 
 </p>
 </details>
@@ -54,10 +54,10 @@ The home of Storefront API related developer documents and tutorials can be foun
 <details><summary>Creating a private app</summary>
 <p>
 
-To start using the StoreFront API we'll be need to create a private app.
+To start using the Storefront API we'll be need to create a private app.
 
 1.  From your Shopify Admin, select Apps.
-2.  Click Mange Private Apps towards the bottom of the Apps page.
+2.  Click Manage Private Apps towards the bottom of the Apps page.
 3.  Click Create a New Private App
 4.  Fill out the details of the private app.
 5.  In the Storefront API section, select Allow this app to access your storefront data using the Storefront API.
@@ -71,7 +71,7 @@ To start using the StoreFront API we'll be need to create a private app.
 <details><summary>Configure your environment variables</summary>
 <p>
 
-Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out everytime.
+Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out every time.
 
 For the tutorial, three environment variables will be utilized.
 
@@ -94,7 +94,7 @@ For the tutorial, three environment variables will be utilized.
 <p>
 
 You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
-You can also click "Header" at the top to see the use of the "storefront_access_token"
+You can also click "Header" at the top to see the use of the "storefront_access_token".
 Hovering over either of these should show you the value that will be substituted into the request.
 If you don’t see your values, ensure you have the right environment selected.
 
@@ -123,14 +123,14 @@ query getShopDetails {
 
 <details><summary>Base64 encoded</summary>
 <p>
- Unlike the Admin API, all resource ID's in the StoreFront API are base64 encoded.
+Unlike the Admin API, all resource ID's in the Storefront API are base64 encoded.
 
-Storefront API GraphQL queries, or mutations requiring an id, need that id to be base-64 encoded.
+Storefront API GraphQL queries, or mutations requiring an ID, need that ID to be base-64 encoded.
 
 When using GraphQL to query a specific collection with the Admin API, your query would not use a base-64 encoded ID
 
-With the Storefront API to retrieve the same collection as illustrated with the Admin API, the id needs to be base-64 encoded.
-Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded
+With the Storefront API, to retrieve the same collection as illustrated with the Admin API, the ID needs to be base-64 encoded.
+Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzE= as seen below is gid://shopify/Collection/1 base-64 encoded.
 
 Modern program languages all support base-64 encoding and decoding of string.
 
@@ -164,7 +164,7 @@ Metafields allow merchants to store additional information for Shopify resources
 -   Pages
 -   Shop
 
-Unlike the Admin API, metafields must first be made visibile to the Storefront API.
+Unlike the Admin API, metafields must first be made visible to the Storefront API.
 To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
 For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
 
@@ -175,7 +175,7 @@ Once the metafield for the given resource has been made visible to the Storefron
 
 For the resource types listed above, both a single metafield, and paginated list can be queried.
 
-The following example queries the Shop resource for the first ten available metafields using the shop's MetaFieldConnection
+The following example queries the Shop resource for the first ten available metafields using the shop's MetafieldConnection.
 
 ```graphql
 query getShopMetafields {
@@ -351,21 +351,30 @@ query getcustomerOrders @inContext(country: FR) {
 <p>
 
 ```graphql
-query getVariantLocationAvailability {
-    productVariantStoreAvailabilities(
-        first: 100
-        variant_id: "gid://shopify/ProductVariant/1"
-    ) {
-        edges {
+query GetPickUpAvailability {
+  product(first: 1) {
+    edges {
+      node {
+        variants(first: 1) {
+          edges {
             node {
-                available
-                location {
-                    name
+              storeAvailability(first: 1) {
+                edges {
+                  node {
+                    available
+                    pickUpTime
+                    location {
+                      name
+                    }
+                  }
                 }
-                pick_up_time
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 ```
 
@@ -484,7 +493,7 @@ Simple query to return details from a collection object by passing the collectio
 <details><summary><strong>Get collection by id</strong></summary>
 <p>
 
-Query that return details from a collection object by passing the collection.id as an argument
+Query that returns details from a collection object by passing the collection.id as an argument
 Since the `node` connection can apply to a range of different objects, a fragment is required to specify the type being returned
 In this example, the "... on Collection" fragment allows us to return fields from a collection object
 
@@ -505,11 +514,11 @@ In this example, the "... on Collection" fragment allows us to return fields fro
 <details><summary><strong>Display products in collection</strong></summary>
 <p>
 
-This query is returning data from a single collection, specified by the handle.
+This query returns data from a single collection, specified by the handle.
 
-The data being returned in the product connection can be used to display a page of products.
+The data returned in the product connection can be used to display a page of products.
 
-The `products` connection requires pagination in this query, since collections can contain a large number of products. This query includes the `sortKey` argument on the products connection, this return products in the order specified by the sortKey
+The `products` connection requires pagination in this query, since collections can contain a large number of products. This query includes the `sortKey` argument on the products connection, this returns products in the order specified by the sortKey
 
 Products can contain multiple images, so the `images` connection requires pagination. In this example we only want to display 1 image per product, so we're only asking for first:1
 
@@ -703,8 +712,8 @@ Since collections can have a large number of metafields, pagination is required 
 <details><summary><strong>Get 3 products and 3 variants</strong></summary>
 <p>
 
-This query gets the products connection, which is available from the QueryRoot, and asks for the first 3 products. It selects edges, the node, and fields from each of the returned product objects.
-
+This query gets the products connection, which is available from the QueryRoot, and asks for the first 3 products.
+It selects edges, the node, and fields from each of the returned product objects.
 Since products also have a variants connection, we repeat a similar process to get information on the first 3 variants on each of those products.
 
 ```graphql
@@ -813,6 +822,10 @@ As only one product connection will be returned, we don't need to specify edges,
 <details><summary><strong>Get product selling plans</strong></summary>
 <p>
 
+This query gets the first 30 products, the first 5 selling plan groups associated with them, and the first 5 selling plans within the groups.
+
+We use fragments to return the price adjustments for each selling plan.
+
 ```graphql
 {
     products(first: 30) {
@@ -853,7 +866,6 @@ As only one product connection will be returned, we don't need to specify edges,
                                                     }
                                                 }
                                             }
-
                                             orderCount
                                         }
                                         options {

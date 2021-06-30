@@ -1,11 +1,24 @@
+# This query gets the first 30 products, the first 5 selling plan groups associated with them, and the first 5 selling plans within the groups.
+# We use fragments to return the price adjustments for each selling plan.
+
 {
   products(first: 30) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
     edges {
+      cursor
       node {
         id
         title
         sellingPlanGroups(first: 5) {
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+          }
           edges {
+            cursor
             node {
               appName
               name
@@ -14,30 +27,34 @@
                 values
               }
               sellingPlans(first: 5) {
+                pageInfo {
+                  hasNextPage
+                  hasPreviousPage
+                }
                 edges {
+                  cursor
                   node {
                     id
                     description
                     recurringDeliveries
                     priceAdjustments {
                       adjustmentValue {
-                   ... on SellingPlanPercentagePriceAdjustment {
-                     adjustmentPercentage
-                   }
-                   ... on SellingPlanFixedAmountPriceAdjustment {
-                     adjustmentAmount {
-                       amount
-                       currencyCode
-                     }
-                   }
-                   ... on SellingPlanFixedPriceAdjustment {
-                     price {
-                       amount
-                       currencyCode
-                     }
-                   }
-                 }
-
+                        ... on SellingPlanPercentagePriceAdjustment {
+                          adjustmentPercentage
+                        }
+                        ... on SellingPlanFixedAmountPriceAdjustment {
+                          adjustmentAmount {
+                            amount
+                            currencyCode
+                          }
+                        }
+                        ... on SellingPlanFixedPriceAdjustment {
+                          price {
+                            amount
+                            currencyCode
+                          }
+                        }
+                      }
                       orderCount
                     }
                     options {

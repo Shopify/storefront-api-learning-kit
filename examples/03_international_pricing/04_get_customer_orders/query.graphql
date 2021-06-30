@@ -1,4 +1,3 @@
-# https://github.com/Shopify/shopify-dev/pull/7829
 query getcustomerOrders @inContext(country: FR) {
   customer(customerAccessToken: "token") {
     orders(first:10) {

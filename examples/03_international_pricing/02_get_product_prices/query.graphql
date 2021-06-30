@@ -1,4 +1,3 @@
-# https://github.com/Shopify/shopify-dev/pull/7829
 query allProducts @inContext(country: CA) {
   products(first: 1) {
     edges {
