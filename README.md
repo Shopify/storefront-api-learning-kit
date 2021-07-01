@@ -1106,3 +1106,235 @@ _Variables_
 
 </p>
 </details>
+<hr>
+
+### Managing a cart
+
+<details><summary><strong>Create a cart with one line item</strong></summary>
+<p>
+
+```graphql
+mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+    customerAccessTokenCreate(input: $input) {
+        customerAccessToken {
+            accessToken
+            expiresAt
+        }
+        customerUserErrors {
+            code
+            field
+            message
+        }
+    }
+}
+```
+
+_Variables_
+
+```json
+{
+	"cartInput": {
+		"lines": [
+			{
+				"quantity": 1,
+				"merchandiseId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTg1Mzk2NzM0MzY3Mg=="
+			}
+		],
+		"attributes": {
+			"key": "cart_attribute_key",
+			"value": "This is a cart attribute value"
+		}
+	}
+}
+```
+
+</p>
+</details>
+
+<details><summary><strong>Query a cart</strong></summary>
+<p>
+
+```graphql
+query cartQuery($cartId: ID!) {
+  cart(id: $cartId) {
+    id
+    createdAt
+    updatedAt
+
+    lines(first: 10) {
+      edges {
+        node {
+          id
+          quantity
+          merchandise {
+            ... on ProductVariant {
+              id
+            }
+          }
+          attributes {
+            key
+            value
+          }
+        }
+      }
+    }
+    attributes {
+      key
+      value
+    }
+    estimatedCost {
+      totalAmount {
+        amount
+        currencyCode
+      }
+      subtotalAmount {
+        amount
+        currencyCode
+      }
+      totalTaxAmount {
+        amount
+        currencyCode
+      }
+      totalDutyAmount {
+        amount
+        currencyCode
+      }
+    }
+    buyerIdentity {
+      email
+      phone
+      customer {
+        id
+      }
+      countryCode
+    }
+  }
+}
+
+```
+
+_Variables_
+
+```json
+{
+	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}"
+}
+```
+
+</p>
+</details>
+
+<details><summary><strong>Update line items</strong></summary>
+<p>
+
+
+```graphql
+mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+      lines(first: 10) {
+        edges {
+          node {
+            id
+            quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
+        }
+      }
+      estimatedCost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }
+    }
+  }
+}
+```
+
+_Variables_
+
+```json
+{
+	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}",
+	"lines": {
+		"id": "Z2lkOi8vc2hvcGlmeS9DYXJ0TGluZS9mZjJjZjBmYjM1YjIxZTkzN2IxMGE3ZGE4YjQyMDI0ND9jYXJ0PWU0YzhkYzQ2MTRlYWEyNjgyMTE0NDIxMmY0NzNkMmYy",
+		"quantity": 3
+	}
+}
+```
+
+</p>
+</details>
+
+<details><summary><strong>Update buyer identity</strong></summary>
+<p>
+
+
+```graphql
+mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentityInput: CartBuyerIdentityInput!) {
+  cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentityInput) {
+    cart {
+      id
+      buyerIdentity {
+        email
+        phone
+        countryCode
+      }
+    }
+  }
+}
+```
+
+_Variables_
+
+```json
+{
+	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}",
+	"buyerIdentityInput": {
+		"email": "test@shopify.com",
+		"phone": "555-555-5555",
+		"countryCode": "CA"
+	}
+}
+```
+
+</p>
+</details>
+
+<details><summary><strong>Retrieve a checkout</strong></summary>
+<p>
+
+
+```graphql
+query checkoutURL($cartId: ID!) {
+  cart(id: $cartId) {
+    checkoutUrl
+  }
+}
+```
+
+_Variables_
+
+```json
+{
+	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}"
+}
+```

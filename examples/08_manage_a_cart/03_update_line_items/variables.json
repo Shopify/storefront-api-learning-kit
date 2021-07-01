@@ -1,0 +1,7 @@
+{
+	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}",
+	"lines": {
+		"id": "Z2lkOi8vc2hvcGlmeS9DYXJ0TGluZS9mZjJjZjBmYjM1YjIxZTkzN2IxMGE3ZGE4YjQyMDI0ND9jYXJ0PWU0YzhkYzQ2MTRlYWEyNjgyMTE0NDIxMmY0NzNkMmYy",
+		"quantity": 3
+	}
+}

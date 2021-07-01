@@ -1,0 +1,14 @@
+{
+	"cartInput": {
+		"lines": [
+			{
+				"quantity": 1,
+				"merchandiseId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTg1Mzk2NzM0MzY3Mg=="
+			}
+		],
+		"attributes": {
+			"key": "cart_attribute_key",
+			"value": "This is a cart attribute value"
+		}
+	}
+}
