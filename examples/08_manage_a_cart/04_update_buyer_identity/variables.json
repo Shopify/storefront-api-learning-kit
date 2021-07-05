@@ -1,8 +1,8 @@
 {
-	"cartId": "{% response 'body', 'req_28d5c4dc622e42e5b14b58dbc19e9a8a', 'b64::JC5kYXRhLmNhcnRDcmVhdGUuY2FydC5pZA==::46b', 'never', 60 %}",
-	"buyerIdentityInput": {
-		"email": "test@shopify.com",
-		"phone": "555-555-5555",
-		"countryCode": "CA"
-	}
+  "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh",
+  "buyerIdentityInput": {
+    "email": "test@shopify.com",
+    "phone": "555-555-5555",
+    "countryCode": "CA"
+  }
 }
