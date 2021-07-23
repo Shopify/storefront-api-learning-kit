@@ -54,7 +54,7 @@ The home of Storefront API-related developer documents and tutorials can be foun
 <details><summary>Creating a private app</summary>
 <p>
 
-To start using the Storefront API we'll be need to create a private app.
+To start using the Storefront API we'll need to create a private app.
 
 1.  From your Shopify Admin, select Apps.
 2.  Click Manage Private Apps towards the bottom of the Apps page.
