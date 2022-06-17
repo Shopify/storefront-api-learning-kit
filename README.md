@@ -21,7 +21,7 @@ If you don't want to download the Insomnia package, the query examples are liste
 
  This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
 
-If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit
+If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://www.shopify.com/partners/blog/shopify-graphql-learning-kit
 
 The Shopify Storefront API gives you full creative control to customize your customers' buying experience.
 
