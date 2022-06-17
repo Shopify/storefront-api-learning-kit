@@ -63,7 +63,7 @@ To start using the Storefront API we'll be need to create a custom app.
 5.  Click "Configure Storefront API scopes" within your App Overview.
 6.  Under Configurations, add the Storefront API access scopes you require. https://screenshot.click/17-25-me6zp-j5iav.png
 7.  Click Save.
-8.  Under "API credentials", click Install app to get your scredentials. https://screenshot.click/17-26-vjpmi-6y2u1.png
+8.  Under "API credentials", click Install app to get your credentials. https://screenshot.click/17-26-vjpmi-6y2u1.png
 
 </p>
 </details>
