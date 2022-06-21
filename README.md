@@ -21,7 +21,7 @@ If you don't want to download the Insomnia package, the query examples are liste
 
  This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
 
-If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://shopifypartnerblog.myshopify.com/blogs/blog/shopify-graphql-learning-kit
+If not already familiar with GraphQL, or Shopify APIs, please consult the Shopify GraphQL learning kit https://www.shopify.com/partners/blog/shopify-graphql-learning-kit (NOTE: As of January 2022, private apps have been deprecated and custom apps are to be used instead: https://help.shopify.com/en/manual/apps/app-types#custom-apps)
 
 The Shopify Storefront API gives you full creative control to customize your customers' buying experience.
 
@@ -40,30 +40,30 @@ Only use the Storefront API when you're comfortable with that risk and the data 
 Risk can be mitigated by only providing access scopes required.
 For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
 
-Access to the Storefront API can be granted by a merchant via a public sales channel, or private app.
-For simplicity of this tutorial, we'll use a private app to grant access to the Storefront API.
-The process to create a private app is documented in the next section titled "Creating a Private App".
+Access to the Storefront API can be granted by a merchant via a public sales channel, or custom app.
+For simplicity of this tutorial, we'll use a custom app to grant access to the Storefront API.
+The process to create a custom app is documented in the next section titled "Creating a custom app".
 
-Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-startedprivate-app
+Documentation for accessing the Storefront API via a public sales channel and custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
 
 The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
 
 </p>
 </details>
 
-<details><summary>Creating a private app</summary>
+<details><summary>Creating a custom app</summary>
 <p>
 
-To start using the Storefront API we'll be need to create a private app.
+To start using the Storefront API we'll be need to create a custom app.
 
 1.  From your Shopify Admin, select Apps.
-2.  Click Manage Private Apps towards the bottom of the Apps page.
-3.  Click Create a New Private App
-4.  Fill out the details of the private app.
-5.  In the Storefront API section, select Allow this app to access your storefront data using the Storefront API.
-6.  In the Storefront API permissions section, select which types of data you want to expose to the app. https://screenshot.click/31-55-0qq0l-qvj8z.png
+2.  Click "Develop apps" on the top right.
+3.  Click "Create an app" on  the top right.
+4.  Fill out the details in the "Create an app" modal.
+5.  Click "Configure Storefront API scopes" within your App Overview.
+6.  Under Configurations, add the Storefront API access scopes you require. https://screenshot.click/17-25-me6zp-j5iav.png
 7.  Click Save.
-8.  Once the private app has been saved, scroll to the Storefront API section and copy the access token. https://screenshot.click/31-58-hghxw-jzqp3.png
+8.  Under "API credentials", click Install app to get your credentials. https://screenshot.click/17-26-vjpmi-6y2u1.png
 
 </p>
 </details>
@@ -85,7 +85,7 @@ For the tutorial, three environment variables will be utilized.
 
 3.  "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header
 
--   This storefront access token generated from creating a private app.
+-   This storefront access token generated from creating a custom app.
 
 </p>
 </details>
