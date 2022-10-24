@@ -1114,18 +1114,48 @@ _Variables_
 <p>
 
 ```graphql
-mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
-    customerAccessTokenCreate(input: $input) {
-        customerAccessToken {
-            accessToken
-            expiresAt
+mutation createCart($cartInput: CartInput) {
+  cartCreate(input: $cartInput) {
+    cart {
+      id
+      createdAt
+      updatedAt
+      lines(first: 10) {
+        edges {
+          node {
+            id
+            merchandise {
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
         }
-        customerUserErrors {
-            code
-            field
-            message
+      }
+      attributes {
+        key
+        value
+      }
+      estimatedCost {
+        totalAmount {
+          amount
+          currencyCode
         }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }
     }
+  }
 }
 ```
 
