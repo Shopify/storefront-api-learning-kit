@@ -3,7 +3,7 @@
 # In this example, the "... on Collection" fragment allows us to return fields from a collection object
 
 {
-  node (id:"Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzIxMjIzNzgxMTczNA==") {
+  node (id:"gid://shopify/Collection/1") {
     ... on Collection {
       id
       handle
