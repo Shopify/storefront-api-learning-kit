@@ -5,7 +5,7 @@ query allProducts @inContext(country: CA) {
         variants(first:1) {
           edges {
             node {
-              priceV2 {
+              price {
                 amount
                 currencyCode
               }

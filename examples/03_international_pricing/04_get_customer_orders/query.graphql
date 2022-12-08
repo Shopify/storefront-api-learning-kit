@@ -1,23 +1,23 @@
-query getcustomerOrders @inContext(country: FR) {
-  customer(customerAccessToken: "token") {
+query getcustomerOrders ($customerAccessToken: String!) @inContext(country: FR) {
+  customer(customerAccessToken: $customerAccessToken) {
     orders(first:10) {
       edges {
         node {
-          totalPriceV2 {
+          totalPrice {
             amount
-            currencyCode # order's currency - USD (point in time)
+            currencyCode # store's currency - CAD in this case
           }
           lineItems(first:10) {
             edges {
               node {
                 originalTotalPrice {
                   amount
-                  currencyCode # order's currency - USD (point in time)
+                  currencyCode # store's currency - CAD in this case
                 }
                 variant {
-                  priceV2 {
+                  price {
                     amount
-                    currencyCode # EUR variant's currency (past context)
+                    currencyCode # EUR currency (if French market enabled for store)
                   }
                 }
               }

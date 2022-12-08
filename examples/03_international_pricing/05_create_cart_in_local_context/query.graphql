@@ -1,0 +1,39 @@
+mutation cartCreate($cartInput: CartInput!)@inContext(country:US, language:ES) {
+	cartCreate(input: $cartInput) {
+		userErrors {
+			code
+			message
+		}
+		cart {
+			id
+			checkoutUrl #url for cart in currency for country and language passed into inContext if
+			lines(first: 50) {
+				edges {
+					node {
+						id
+						merchandise {
+							... on ProductVariant {
+								title
+								product {
+									title #in language passed into inContext if translation is available
+								}
+								id
+								quantityAvailable
+							}
+						}
+					}
+				}
+			}
+			cost {
+				subtotalAmount {
+					amount #in currency for country passed into inContext
+					currencyCode
+				}
+				totalAmount {
+					amount #in currency for country passed into inContext
+					currencyCode
+				}
+			}
+		}
+	}
+}

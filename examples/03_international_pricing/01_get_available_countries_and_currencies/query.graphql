@@ -1,5 +1,9 @@
 query getCountriesAndCurrencies @inContext(country: FR) {
   localization {
+		language{ #The language of the active localized experience.
+			isoCode
+			name
+		}
     availableCountries {
       currency {
         isoCode
@@ -10,12 +14,17 @@ query getCountriesAndCurrencies @inContext(country: FR) {
       name
       unitSystem
     }
-    country {
+    country { #The currency of the active localized experience.
       currency {
         isoCode
         name
         symbol
       }
+			availableLanguages { #The languages available for the country.
+				isoCode
+				name
+				endonymName
+			}
       isoCode
       name
       unitSystem
