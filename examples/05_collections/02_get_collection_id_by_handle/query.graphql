@@ -1,6 +1,6 @@
 # Simple query to return details from a collection object by passing the collection.handle as an argument.
 
-query getCollectionByHandle($handle: String!) {
+query getCollectionIdByHandle($handle: String!) {
   collection(handle: $handle) {
     id
   }
