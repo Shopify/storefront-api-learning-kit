@@ -2,11 +2,11 @@
 # Since the `node` connection can apply to a range of different objects, a fragment is required to specify the type being returned
 # In this example, the "... on Collection" fragment allows us to return fields from a collection object
 
-{
-  node (id:"gid://shopify/Collection/1") {
-    ... on Collection {
-      id
-      handle
-    }
-  }
+query getCollectionById($id: ID!) {
+	node(id: $id) {
+		... on Collection {
+			id
+			handle
+		}
+	}
 }
