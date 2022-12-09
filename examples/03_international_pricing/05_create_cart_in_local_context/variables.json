@@ -1,0 +1,14 @@
+{
+	"cartInput": {
+		"lines": [
+			{
+				"quantity": 3,
+				"merchandiseId": "gid://shopify/ProductVariant/42485059584162"
+			},
+			{
+				"quantity": 1,
+				"merchandiseId": "gid://shopify/ProductVariant/42790980223138"
+			}
+		]
+	}
+}

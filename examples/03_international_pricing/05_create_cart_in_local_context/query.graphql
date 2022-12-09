@@ -2,7 +2,7 @@
 #The link to the cart below will be presented in the default currency of the country passed in and in the language passed in if a matching translated resource is available.
 #If no language is passed in the localized cart will be presented in the default language of country context and in that market's currency setup in Admin.
 
-mutation cartCreate($cartInput: CartInput!)@inContext(country:US, language:ES) {
+mutation createCart($cartInput: CartInput!)@inContext(country:US, language:ES) {
 	cartCreate(input: $cartInput) {
 		userErrors {
 			code
