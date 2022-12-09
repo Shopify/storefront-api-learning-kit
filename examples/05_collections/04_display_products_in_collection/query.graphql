@@ -16,40 +16,40 @@
 
 
 
-{
-  collectionByHandle (handle:"all") {
-    id
-    title
-    products (first:50 sortKey:BEST_SELLING) {
-      edges {
-        node {
-          id
-          title
-          vendor
-          availableForSale
-          images (first:1) {
-            edges {
-              node {
-                id
-                transformedSrc
-                width
-                height
-                altText
-              }
-            }
-          }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-        }
-      }
-    }
-  }
+query displayProductsInCollection($handle: String!) {
+	collection(handle: $handle) {
+		id
+		title
+		products(first: 50, sortKey: BEST_SELLING) {
+			edges {
+				node {
+					id
+					title
+					vendor
+					availableForSale
+					images(first: 1) {
+						edges {
+							node {
+								id
+								url
+								width
+								height
+								altText
+							}
+						}
+					}
+					priceRange {
+						minVariantPrice {
+							amount
+							currencyCode
+						}
+						maxVariantPrice {
+							amount
+							currencyCode
+						}
+					}
+				}
+			}
+		}
+	}
 }
