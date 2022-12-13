@@ -1,4 +1,4 @@
-query getCountriesAndCurrencies @inContext(country: FR) {
+query getCountriesAndCurrencies($country: CountryCode) @inContext(country: $country) {
   localization {
 		language{ #The language of the active localized experience.
 			isoCode
@@ -20,11 +20,6 @@ query getCountriesAndCurrencies @inContext(country: FR) {
         name
         symbol
       }
-			availableLanguages { #The languages available for the country.
-				isoCode
-				name
-				endonymName
-			}
       isoCode
       name
       unitSystem

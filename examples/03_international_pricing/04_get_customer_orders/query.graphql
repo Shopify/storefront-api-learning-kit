@@ -1,4 +1,4 @@
-query getcustomerOrders ($customerAccessToken: String!) @inContext(country: FR) {
+query getcustomerOrders($customerAccessToken: String!, $country: CountryCode)@inContext(country: $country) {
   customer(customerAccessToken: $customerAccessToken) {
     orders(first:10) {
       edges {
@@ -17,7 +17,7 @@ query getcustomerOrders ($customerAccessToken: String!) @inContext(country: FR) 
                 variant {
                   price {
                     amount
-                    currencyCode # EUR currency (if French market enabled for store)
+                    currencyCode # EUR currency (if French market is enabled for store)
                   }
                 }
               }

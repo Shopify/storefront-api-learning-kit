@@ -1,4 +1,4 @@
-query getProductPriceRanges @inContext(country: CA) {
+query getProductPriceRanges($country: CountryCode) @inContext(country: $country) {
   products(first: 1) {
     edges {
       node {

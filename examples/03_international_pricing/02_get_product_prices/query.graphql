@@ -1,4 +1,4 @@
-query allProducts @inContext(country: CA) {
+query allProducts($country: CountryCode) @inContext(country: $country) {
   products(first: 1) {
     edges {
       node {

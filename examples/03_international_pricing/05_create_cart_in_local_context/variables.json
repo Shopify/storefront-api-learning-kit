@@ -10,5 +10,8 @@
 				"merchandiseId": "gid://shopify/ProductVariant/42790980223138"
 			}
 		]
-	}
+
+	},
+	"country": "US",
+	"language": "ES"
 }
