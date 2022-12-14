@@ -1,3 +1,5 @@
+# Generates a cart in the currency and language of the context passed in.
+# Requires that the country passed be enabled in Markets and that the language passed in is enabled for that market.
 
 mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: LanguageCode)@inContext(country: $country, language: $language){
 	cartCreate(input: $cartInput) {
@@ -7,7 +9,7 @@ mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: La
 		}
 		cart {
 			id
-			checkoutUrl #url for cart in currency for country and language passed into inContext if
+			checkoutUrl #URL for cart in local currency and language passed in
 			lines(first: 50) {
 				edges {
 					node {
@@ -16,7 +18,7 @@ mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: La
 							... on ProductVariant {
 								title
 								product {
-									title #in language passed into inContext if translation is available
+									title
 								}
 								id
 								quantityAvailable
@@ -27,11 +29,11 @@ mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: La
 			}
 			cost {
 				subtotalAmount {
-					amount #in currency for country passed into inContext
+					amount #active local currency
 					currencyCode
 				}
 				totalAmount {
-					amount #in currency for country passed into inContext
+					amount #active local currency
 					currencyCode
 				}
 			}

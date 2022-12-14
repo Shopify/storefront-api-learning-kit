@@ -1,3 +1,9 @@
+# To present pricing in local currency enable the market of the passed in country context within Markets.
+# If the country is not enabled in Markets the currency of the active localized experience will be the store's default currency.
+
+# To present a localized language experience enable it from Markets.
+# If an alternate language is not enabled for the passed in country context, the active language will be the store's default.
+
 query getCountriesAndCurrencies($country: CountryCode) @inContext(country: $country) {
   localization {
 		language{ #The language of the active localized experience.

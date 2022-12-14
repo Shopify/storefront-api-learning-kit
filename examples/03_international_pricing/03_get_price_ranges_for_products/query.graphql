@@ -6,7 +6,7 @@ query getProductPriceRanges($country: CountryCode) @inContext(country: $country)
         priceRange {
           minVariantPrice {
             amount
-            currencyCode
+            currencyCode  #active local currency
           }
           maxVariantPrice {
             amount
@@ -16,7 +16,7 @@ query getProductPriceRanges($country: CountryCode) @inContext(country: $country)
         compareAtPriceRange {
           minVariantPrice {
             amount
-            currencyCode
+            currencyCode  #active local currency
           }
           maxVariantPrice {
             amount

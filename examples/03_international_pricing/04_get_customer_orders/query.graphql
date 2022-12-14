@@ -5,19 +5,19 @@ query getcustomerOrders($customerAccessToken: String!, $country: CountryCode)@in
         node {
           totalPrice {
             amount
-            currencyCode # store's currency - CAD in this case
+            currencyCode # store's currency
           }
           lineItems(first:10) {
             edges {
               node {
                 originalTotalPrice {
                   amount
-                  currencyCode # store's currency - CAD in this case
+                  currencyCode # store's currency
                 }
                 variant {
                   price {
                     amount
-                    currencyCode # EUR currency (if French market is enabled for store)
+                    currencyCode # active local currency
                   }
                 }
               }
