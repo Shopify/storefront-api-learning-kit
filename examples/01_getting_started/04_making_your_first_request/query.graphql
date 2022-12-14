@@ -1,10 +1,10 @@
 # You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
-# You can also click "Header" at the top to see the use of the "storefront_access_token".
-# Hovering over either of these should show you the value that will be substituted into the request.
+# You can also click the "Headers" tab at the top to see the "storefront_access_token" being used.
+# Hovering over environment variables should show you the value that will be substituted into the request.
 # If you don’t see your values, ensure you have the right environment selected.
 
 # Once you've confirmed these three fields are set in your environment, try running the shop query below.
-# If the Storefront API access token has been configured correctly, you should get your shop’s info back.
+# If the Storefront API access token has been configured correctly, you should get your shop’s info returned.
 
 query getShopDetails{
   shop {
