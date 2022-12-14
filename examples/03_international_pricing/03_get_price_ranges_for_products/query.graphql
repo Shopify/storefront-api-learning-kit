@@ -1,4 +1,4 @@
-query getProductPriceRanges @inContext(country: CA) {
+query getProductPriceRanges($country: CountryCode) @inContext(country: $country) {
   products(first: 1) {
     edges {
       node {
@@ -6,7 +6,7 @@ query getProductPriceRanges @inContext(country: CA) {
         priceRange {
           minVariantPrice {
             amount
-            currencyCode
+            currencyCode  #active local currency
           }
           maxVariantPrice {
             amount
@@ -16,7 +16,7 @@ query getProductPriceRanges @inContext(country: CA) {
         compareAtPriceRange {
           minVariantPrice {
             amount
-            currencyCode
+            currencyCode  #active local currency
           }
           maxVariantPrice {
             amount

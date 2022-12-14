@@ -1,13 +1,15 @@
-query allProducts @inContext(country: CA) {
+query allProducts($country: CountryCode) @inContext(country: $country) {
   products(first: 1) {
     edges {
       node {
+				title
         variants(first:1) {
           edges {
             node {
-              priceV2 {
+							title
+              price {
                 amount
-                currencyCode
+                currencyCode #active local currency
               }
             }
           }
