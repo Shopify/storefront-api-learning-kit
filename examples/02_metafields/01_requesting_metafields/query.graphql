@@ -17,9 +17,9 @@
 
 # For the resource types listed above, both a single metafield, and paginated list can be queried.
 
-# The following example queries a product given an id filtering for a metafield and also for a list of metafields available on the product.
+# The following example queries a product given an id filtering for a specific metafield and also for a list of metafields available on the product.
 
-query getProductMetaField($id: ID!) {
+query getProductMetaField($id: ID!, $namespace: String!, $key: String!) {
 	product(id: $id) {
 		metafields(first: 1) {
 			edges {
@@ -29,7 +29,7 @@ query getProductMetaField($id: ID!) {
 			}
 		}
 
-		metafield(namespace: "colors", key: "color_swatch") {
+		metafield(namespace: $namespace, key: $key) {
 			key
 			value
 			id
