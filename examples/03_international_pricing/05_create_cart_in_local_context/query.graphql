@@ -1,0 +1,42 @@
+# Generates a cart in the currency and language of the context passed in.
+# Requires that the country passed be enabled in Markets and that the language passed in is enabled for that market.
+
+mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: LanguageCode)@inContext(country: $country, language: $language){
+	cartCreate(input: $cartInput) {
+		userErrors {
+			code
+			message
+		}
+		cart {
+			id
+			checkoutUrl #URL for cart in local currency and language passed in
+			lines(first: 50) {
+				edges {
+					node {
+						id
+						merchandise {
+							... on ProductVariant {
+								title
+								product {
+									title
+								}
+								id
+								quantityAvailable
+							}
+						}
+					}
+				}
+			}
+			cost {
+				subtotalAmount {
+					amount #active local currency
+					currencyCode
+				}
+				totalAmount {
+					amount #active local currency
+					currencyCode
+				}
+			}
+		}
+	}
+}
