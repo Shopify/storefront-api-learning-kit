@@ -1,0 +1,19 @@
+# To start using the Storefront API we'll need to create a custom app. Before we can create the app, 
+# we'll need to ensure we've enabled custom app development within the Shopify admin.
+
+# Enable custom app development
+# 1. From your Shopify admin, click "Settings" > "Apps and sales channels".
+# 2. Click "Develop apps".
+# 3. Click "Allow custom app development".
+# 4. Read the warning and information provided, and then click "Allow custom app development".
+
+# Create and install a custom app
+# 1. From your Shopify admin, click "Settings" > "Apps and sales channels".
+# 2. Click "Develop apps".
+# 3. Click "Create an app".
+# 4. Fill out the details in the "Create an app" modal and click "Create app".
+# 5. Click "Configure Storefront API scopes".
+# 6. Under Configurations, add the Storefront API access scopes you require.
+# 7. Click "Save".
+# 8. Under "API credentials", click "Install app".
+# 9. In the modal window, click "Install app" to get your access token.

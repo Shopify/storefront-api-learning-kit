@@ -16,12 +16,12 @@
 # Any data exposed by the Storefront API can be seen by any visitor to the store.
 # Only use the Storefront API when you're comfortable with that risk and the data that is being exposed.
 # Risk can be mitigated by only providing access scopes required.
-# For a complete list of access scopes consult Shopify documentation at https://shopify.dev/docs/storefront-api/access-scopes
+# For a complete list of access scopes consult Shopify documentation at https://shopify.dev/api/usage/access-scopes#unauthenticated-access-scopes
 
-# Access to the Storefront API can be granted by a merchant via a public sales channel, or private app.
-# For simplicity of this tutorial, we'll use a private app to grant access to the Storefront API.
-# The process to create a private app is documented in the next section titled "Creating a Private App".
+# Access to the Storefront API can be granted by a merchant via a public sales channel, or admin custom app.
+# For simplicity of this tutorial, we'll use an admin custom app to grant access to the Storefront API.
+# The process to create an admin custom app is documented in the next section titled "Creating a Custom App".
 
-# Documentation for accessing the Storefront API via a public sales channel and private app can be found at https://shopify.dev/docs/storefront-api/getting-started#private-app
+# Documentation for accessing the Storefront API via a custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
 
-# The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/docs/storefront-api
+# The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront
