@@ -13,7 +13,7 @@
 
 # The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
 
-query displayProductsInCollection($handle: String!) {
+query getProductsInCollection($handle: String!) {
 	collection(handle: $handle) {
 		id
 		title
