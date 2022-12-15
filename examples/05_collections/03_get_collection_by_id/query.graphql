@@ -4,6 +4,6 @@ query getCollectionById($id: ID!) {
 	collection(id: $id) {
 		title
 		description
-    handle
+                handle
 	}
 }
