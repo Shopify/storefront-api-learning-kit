@@ -1,5 +1,4 @@
 
-
 # This query returns data from a single collection, specified by the handle.
 
 # The data returned in the product connection can be used to display a page of products.
@@ -12,9 +11,7 @@
 
 # Since products can contain multiple variants, we've asked the products connection to return price ranges.
 
-# The 'priceRange' object returns prices in the shop's currency. International Pricing will be demonstrated in the next example.
-
-
+# The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
 
 query displayProductsInCollection($handle: String!) {
 	collection(handle: $handle) {
