@@ -12,8 +12,6 @@ const directoryContainsQuery = async (directory) => {
 
 const convertForMarkdown = (text, file) => {
     const toArray = text.split('\n')
-    // if(file === '04_get_customer_orders')
-    //     console.log(toArray)
     let transformedText = []
     let brackets = []
     let foundCode = false
