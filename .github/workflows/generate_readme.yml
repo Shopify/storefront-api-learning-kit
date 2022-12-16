@@ -6,7 +6,7 @@ name: README CI
 on:
   push:
     branches:
-      - local-test
+      - 'local-test'
     paths:
       - 'examples/**'
 jobs:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [19.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
