@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node build.js",
+    "readme": "node test.js",
     "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
