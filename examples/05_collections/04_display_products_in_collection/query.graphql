@@ -1,5 +1,4 @@
 
-
 # This query returns data from a single collection, specified by the handle.
 
 # The data returned in the product connection can be used to display a page of products.
@@ -12,44 +11,42 @@
 
 # Since products can contain multiple variants, we've asked the products connection to return price ranges.
 
-# The 'priceRange' object returns prices in the shop's currency. Multicurrency will be demonstrated in the next example
+# The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
 
-
-
-{
-  collectionByHandle (handle:"all") {
-    id
-    title
-    products (first:50 sortKey:BEST_SELLING) {
-      edges {
-        node {
-          id
-          title
-          vendor
-          availableForSale
-          images (first:1) {
-            edges {
-              node {
-                id
-                transformedSrc
-                width
-                height
-                altText
-              }
-            }
-          }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-        }
-      }
-    }
-  }
+query getProductsInCollection($handle: String!) {
+	collection(handle: $handle) {
+		id
+		title
+		products(first: 50, sortKey: BEST_SELLING) {
+			edges {
+				node {
+					id
+					title
+					vendor
+					availableForSale
+					images(first: 1) {
+						edges {
+							node {
+								id
+								url
+								width
+								height
+								altText
+							}
+						}
+					}
+					priceRange {
+						minVariantPrice {
+							amount
+							currencyCode
+						}
+						maxVariantPrice {
+							amount
+							currencyCode
+						}
+					}
+				}
+			}
+		}
+	}
 }
