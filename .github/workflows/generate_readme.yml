@@ -30,7 +30,8 @@ jobs:
     
     - name: Commit files # copy the new generated README
       run: |
-        git config --local user.name "action-build"
+        git config --local user.name "generate-readme"
+        git pull
         git add .
         git commit -m "Generate README"
         git push
