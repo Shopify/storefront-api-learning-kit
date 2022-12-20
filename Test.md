@@ -52,6 +52,8 @@ The process to create an admin custom app is documented in the next section titl
 Documentation for accessing the Storefront API via a custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
 
 The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront
+
+Testing new actions
 </p></details>
 <details><summary>Creating a custom app</summary>
 <p>
