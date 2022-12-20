@@ -1,0 +1,15 @@
+# To retrieve a list of MetafieldStorefrontVisibility records use the metafieldStorefrontVisibilities query which returns a list of exposed metafield records.
+# For a complete reference please consult https://shopify.dev/api/admin-graphql/2022-10/queries/metafieldStorefrontVisibilities#top
+
+query getMetafieldStorefrontVisibilities($first: Int!, $namespace: String!) {
+	metafieldStorefrontVisibilities(first: $first, namespace: $namespace) {
+		edges {
+			node {
+				id # Metafield visibility record id
+				namespace
+				key
+				createdAt
+			}
+		}
+	}
+}
