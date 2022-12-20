@@ -1,0 +1,24 @@
+# Unlike the Admin API, metafields must first be made visible to the Storefront API.
+# To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
+# For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
+
+# For a complete Storefront API metafield reference please consult the metafield tutorial at
+# https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
+
+mutation createMetafieldStorefrontVisibility(
+	$input: MetafieldStorefrontVisibilityInput!
+) {
+	metafieldStorefrontVisibilityCreate(input: $input) {
+		metafieldStorefrontVisibility {
+			id # MetafieldStorefrontVisibility record id
+			key # Key must be unique within this namespace on this resource
+			ownerType
+			namespace
+			updatedAt
+		}
+		userErrors {
+			field
+			message
+		}
+	}
+}

@@ -1,0 +1,15 @@
+# If you no longer need to access a metafield with the Storefront API, you can hide it again by using the GraphQL Admin API to delete the MetafieldStorefrontVisibility record that you created.
+# The  metafieldStorefrontVisibilityDelete mutation requires the visibility record of the metafield you wish to hide from the Storefront API.
+# The metafield will no longer be accessible through the Storefront API.
+# For a complete reference please consult https://shopify.dev/api/admin-graphql/2022-10/mutations/metafieldStorefrontVisibilityDelete
+
+mutation deleteMetafieldStorefrontVisibilities($id: ID!) {
+	metafieldStorefrontVisibilityDelete(id: $id) {
+		deletedMetafieldStorefrontVisibilityId # The visibility record of the metafield hidden from Storefront API
+
+		userErrors {
+			field
+			message
+		}
+	}
+}
