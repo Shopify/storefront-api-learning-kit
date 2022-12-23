@@ -3,6 +3,7 @@
 # For more information please consult https://shopify.dev/custom-storefronts/products-collections/metafields#step-2-retrieve-metafields
 
 # The following example retrieves a specific metafield and a list of metafields that match the supplied namespace and key and collection id.
+# Ensure that you've added a value to any metafields you wish to query back by updating it using Admin API https://shopify.dev/apps/metafields/manage-metafields#step-3-update-a-metafield
 
 query getCollectionMetaField(
 	$id: ID!
