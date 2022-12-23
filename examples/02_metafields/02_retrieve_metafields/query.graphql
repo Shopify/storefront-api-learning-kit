@@ -1,39 +1,36 @@
-# Metafields allow merchants to store additional information for Shopify resources including:
-# - Products
-# - Collections
-# - Customers
-# - Blogs
-# - Pages
-# - Shop
-# - Discounts
-# - Draft Orders
-# - Locations
-# - Orders
-# - Product Images
-# - Product Variants
-
-# For a complete list please consult https://shopify.dev/api/admin-graphql/2022-10/enums/MetafieldOwnerType
-
 # Once a metafield has been exposed it can be retrieved using the Storefront API. In order to retrieve a single metafield, specify the namespace and key arguments.
 # To query for a list of metafields pass the identifiers argument again specifying namespace and key
 # For more information please consult https://shopify.dev/custom-storefronts/products-collections/metafields#step-2-retrieve-metafields
 
-# The following example retrieves a collection given an id filtering for a specific metafield and for a list of metafields that match the supplied namespace and key.
+# The following example retrieves a specific metafield and a list of metafields that match the supplied namespace and key and collection id.
 
-query getCollectionMetaField($id: ID!, $namespace: String!, $key: String!) {
+query getCollectionMetaField(
+	$id: ID!
+	$namespace: String!
+	$key: String!
+	$another_namespace: String!
+	$another_key: String!
+) {
 	collection(id: $id) {
 		metafield(namespace: $namespace, key: $key) {
 			key
 			namespace
 			value
-			id # Metafield id
+			id # metafield id
 		}
+	}
 
-		metafields(identifiers: [{namespace: $namespace, key: $key}]){
+	collection(id: $id) {
+		metafields(
+			identifiers: [
+				{ namespace: $namespace, key: $key },
+				{ namespace: $another_namespace, key: $another_key }
+			]
+		) {
 			key
 			namespace
 			value
-			id # Metafield id
+			id # metafield id
 		}
 	}
 }

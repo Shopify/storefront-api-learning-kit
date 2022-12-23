@@ -1,5 +1,7 @@
 {
 	"id": "gid://shopify/Collection/288378781858",
 	"namespace": "garment_care",
-	"key": "wash_temperature"
+	"key": "wash_temperature",
+	"another_namespace": "bakery",
+	"another_key": "ingredients-new"
 }
