@@ -60,19 +60,40 @@ const convertForMarkdown = (text, file) => {
 }
 
 const myFun = async () =>{
+    const head = '# Storefront API Learning Kit\n\n'
     let fullTest = ''
+    let links = []
     const directory = './examples'
     const files = await readdir(directory);
     for (const [index, fileName] of files.entries()) {
-        const header = `## ${capitalize(fileName.split('_').slice(1).join(' '))}`
-        fullTest += `${header}\n\n`
+        const splitText = fileName.split('_')
+        const sortKey = Number(splitText[0])
+        let header = ``
+        
+        // header = Number(sortKey) > 1 ?`### ${capitalize(splitText.slice(1).join(' '))}`:`## ${capitalize(splitText.slice(1).join(' '))}`
+        console.log(header)
+        if(sortKey === 1)
+        {
+            links.push('[Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md)')
+            links.push(`[${capitalize(splitText.slice(1).join(' '))}](#${splitText.slice(1).join('-')})`)
+            links.push('[Example queries](#example-queries)')
+            header = `## ${capitalize(splitText.slice(1).join(' '))}`
+        }
+        if(sortKey > 1){
+            header = `### ${capitalize(splitText.slice(1).join(' '))}`
+        }
+        // console.log(header)
+        fullTest += `${header}\n`
         const filePath = path.join(directory, fileName);
         const stats = await stat(filePath);
         if (stats.isDirectory()) {
             const subfolder = await readdir(filePath);
             for (const [index, fileName] of subfolder.entries()) {
                 
-                const summary = `<details><summary>${capitalize(fileName.split('_').slice(1).join(' '))}</summary>`
+                const summary = sortKey === 0 ? `## ${capitalize(fileName.split('_').slice(1).join(' '))}`:`<details><summary>${capitalize(fileName.split('_').slice(1).join(' '))}</summary>`
+                if(sortKey === 0){
+                    links.push(`[${capitalize(fileName.split('_').slice(1).join(' '))}](#${fileName.split('_').slice(1).join('-')})`)
+                }
                 fullTest += `${summary}\n`
                 const fileP = path.join(filePath, fileName);
                 
@@ -88,19 +109,23 @@ const myFun = async () =>{
 
                         // if(fileName === '04_get_customer_orders')
                         // console.log(convertForMarkdown(queryT, fileName).join('\n'))
-                        fullTest += `<p>\n\n${convertForMarkdown(queryT, fileName).join('\n')}</p>`
+                        fullTest += sortKey === 0 ?`${convertForMarkdown(queryT, fileName).join('\n')}`:`<p>\n\n${convertForMarkdown(queryT, fileName).join('\n')}</p>`
                       } catch (error) {
                         // No query or variable exists
                         console.log(error)
                       }
                 // }
-                fullTest += `</details>\n`
+                fullTest += sortKey === 0 ?``:`</details>\n`
             }
             fullTest += `\n`
+            if(sortKey === 1)
+                fullTest += '## Example queries\n'
         }
 
         
     }
+
+    fullTest = `${head}${links.join(' | ')}` + fullTest
 
     const done = files.map(file => `## ${capitalize(file.split('_').slice(1).join(' '))}`
     )
