@@ -10,7 +10,7 @@ const directoryContainsQuery = async (directory) => {
   return files.includes('query.graphql');
 };
 
-const convertForMarkdown = (text, file) => {
+const convertForMarkdown = (text, variables) => {
     const toArray = text.split('\n')
     let transformedText = []
     let brackets = []
@@ -46,6 +46,10 @@ const convertForMarkdown = (text, file) => {
         // console.log(spaces, line.trim())
         // transformedText.push(`${spaces >= 0 ?' '.repeat(spaces): ''}${line.trim()}`)
         if(foundCode && brackets.length === 0){
+            if(variables.length === 0){
+                transformedText.push('\nvariables\n')
+                transformedText.push(variables)
+            }
             transformedText.push('```\n')
             foundCode = false
         }
@@ -71,7 +75,7 @@ const myFun = async () =>{
         let header = ``
         
         // header = Number(sortKey) > 1 ?`### ${capitalize(splitText.slice(1).join(' '))}`:`## ${capitalize(splitText.slice(1).join(' '))}`
-        console.log(header)
+        // console.log(header)
         if(sortKey === 1)
         {
             links.push('[Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md)')
@@ -104,15 +108,15 @@ const myFun = async () =>{
                         
                         const queryT = query.toString();
                         // convertForMarkdown(queryT)
-                        // const variables = await readFile(path.join(fileP, 'variables.json'));
-                        // const variablesT = variables.toString();
+                        const variables = await readFile(path.join(fileP, 'variables.json'));
+                        const variablesT = null ? '' : variables.toString();
 
                         // if(fileName === '04_get_customer_orders')
                         // console.log(convertForMarkdown(queryT, fileName).join('\n'))
-                        fullTest += sortKey === 0 ?`${convertForMarkdown(queryT, fileName).join('\n')}`:`<p>\n\n${convertForMarkdown(queryT, fileName).join('\n')}</p>`
+                        fullTest += sortKey === 0 ?`${convertForMarkdown(queryT, variablesT).join('\n')}`:`<p>\n\n${convertForMarkdown(queryT, variablesT).join('\n')}</p>`
                       } catch (error) {
                         // No query or variable exists
-                        console.log(error)
+                        // console.log(error)
                       }
                 // }
                 fullTest += sortKey === 0 ?``:`</details>\n`
