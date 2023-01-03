@@ -1,4 +1,4 @@
-const {promises: {readFile, readdir, writeFile, stat}} = require('fs');
+const {promises: {readFile, readdir, writeFile, stat}, existsSync} = require('fs');
 const path = require('path');
 
 const capitalize = (string) => {
@@ -46,8 +46,9 @@ const convertForMarkdown = (text, variables) => {
         // console.log(spaces, line.trim())
         // transformedText.push(`${spaces >= 0 ?' '.repeat(spaces): ''}${line.trim()}`)
         if(foundCode && brackets.length === 0){
-            if(variables.length === 0){
+            if(variables.trim() !== ''){
                 transformedText.push('\nvariables\n')
+                // console.log(variables)
                 transformedText.push(variables)
             }
             transformedText.push('```\n')
@@ -108,8 +109,12 @@ const myFun = async () =>{
                         
                         const queryT = query.toString();
                         // convertForMarkdown(queryT)
+                        let variablesT = ''
+                        if(existsSync(path.join(fileP, 'variables.json'))){
                         const variables = await readFile(path.join(fileP, 'variables.json'));
-                        const variablesT = null ? '' : variables.toString();
+                        // console.log(variables)
+                            variablesT = variables.toString();
+                        }
 
                         // if(fileName === '04_get_customer_orders')
                         // console.log(convertForMarkdown(queryT, fileName).join('\n'))
