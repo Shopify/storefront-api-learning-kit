@@ -1,0 +1,43 @@
+# Metafields allow merchants to store additional information for Shopify resources including:
+# - Products
+# - Collections
+# - Customers
+# - Blogs
+# - Pages
+# - Shop
+# - Discounts
+# - Draft Orders
+# - Locations
+# - Orders
+# - Product Images
+# - Product Variants
+
+# For a complete list please consult https://shopify.dev/api/admin-graphql/2022-10/enums/MetafieldOwnerType
+
+# Unlike the Admin API, metafields must first be made visible to the Storefront API.
+# To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
+
+# Ensure you are calling the Admin API https://shopify.dev/api/admin-graphql#endpoints with valid Admin API credentials https://shopify.dev/api/admin-graphql#authentication when exposing metafields to the Storefront API.
+
+# For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
+
+# For a complete Storefront API metafield reference please consult the metafield tutorial at
+# https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
+
+mutation createMetafieldStorefrontVisibility(
+	$input: MetafieldStorefrontVisibilityInput!
+) {
+	metafieldStorefrontVisibilityCreate(input: $input) {
+		metafieldStorefrontVisibility {
+			id # MetafieldStorefrontVisibility record id
+			key # Key must be unique within this namespace on this resource
+			ownerType
+			namespace
+			updatedAt
+		}
+		userErrors {
+			field
+			message
+		}
+	}
+}

@@ -1,0 +1,37 @@
+# Once a metafield has been exposed it can be retrieved using the Storefront API. In order to retrieve a single metafield, specify the namespace and key arguments.
+# To query for a list of metafields pass the identifiers argument again specifying namespace and key
+# For more information please consult https://shopify.dev/custom-storefronts/products-collections/metafields#step-2-retrieve-metafields
+
+# The following example retrieves a specific metafield and a list of metafields that match the supplied namespace and key and collection id.
+# Ensure that you've added a value to any metafields you wish to query back by updating it using Admin API https://shopify.dev/apps/metafields/manage-metafields#step-3-update-a-metafield
+
+query getCollectionMetaField(
+	$id: ID!
+	$namespace: String!
+	$key: String!
+	$another_namespace: String!
+	$another_key: String!
+) {
+	collection(id: $id) {
+		metafield(namespace: $namespace, key: $key) {
+			key
+			namespace
+			value
+			id # metafield id
+		}
+	}
+
+	collection(id: $id) {
+		metafields(
+			identifiers: [
+				{ namespace: $namespace, key: $key },
+				{ namespace: $another_namespace, key: $another_key }
+			]
+		) {
+			key
+			namespace
+			value
+			id # metafield id
+		}
+	}
+}
