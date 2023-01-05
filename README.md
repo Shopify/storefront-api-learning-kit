@@ -1079,6 +1079,180 @@ _Variables_
 
 </p>
 </details>
+<details><summary><strong>Create customer</strong></summary>
+<p>
+
+To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+This mutation will create a customer with password for the customer to login.
+
+```graphql
+mutation customerCreate($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+```
+
+_Variables_
+
+```json
+{
+    "input": {
+      "acceptsMarketing": true,
+      "email": "example@example.com",
+      "firstName": "John",
+      "lastName": "Smith",
+      "password": "qwerty12345",
+      "phone": "1234567890"
+    }
+  }
+```
+
+</p>
+</details>
+
+<details><summary><strong>Activate customer</strong></summary>
+<p>
+
+To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+Once a customer is created, an email will be sent to the customer with the account activiation url. This mutation will use the activationToken from the activation url to active the customer account. 
+
+You can also use the url directly to activate the customer account. See customerActiveByUrl mutation https://shopify.dev/api/storefront/2022-10/mutations/customerActivateByUrl
+
+```graphql
+
+mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+  customerActivate(id: $id, input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+
+```
+
+_Variables_
+
+```json
+{
+	"id": "gid://shopify/Customer/5820694691862",
+	"input": {
+		"activationToken": "da48cbd301e7c31a9d5dca03fcf5cdb6-1671054502",
+		"password": "qwerty12345"
+	}
+}
+```
+
+</p>
+</details>
+
+
+<details><summary><strong>Recover customer</strong></summary>
+<p>
+
+This mutation will send a email  to customer for reset password of the customer account.
+Note that this mutation is throttled by IP.
+
+```graphql
+
+mutation customerRecover($email: String!) {
+  customerRecover(email: $email) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+
+```
+
+_Variables_
+
+```json
+{
+	"email":"example@example.com"
+}
+```
+
+</p>
+</details>
+
+<details><summary><strong>Reset customer</strong></summary>
+<p>
+This mutation is for reset the customer account password. After sending customerRecover mutation, the customer will receive an email with recovery url for reset customer. The url will contain the customer id and resetToken.
+
+You can also use the url directly to reset the customer account. See customerResetByUrl mutation https://shopify.dev/api/storefront/2022-10/mutations/customerResetByUrl
+
+```graphql
+
+mutation customerReset($id: ID!, $input: CustomerResetInput!) {
+  customerReset(id: $id, input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+
+```
+
+_Variables_
+
+```json
+{
+	"id": "gid://shopify/Customer/5820694691862",
+	"input": {
+		"password": "12345qwerty",
+		"resetToken": "2279f05aebbb8319553e46f2b71c88c7-1671131136"
+	}
+}
+```
+
+</p>
+</details>
+
 <hr>
 
 ### Managing a cart
