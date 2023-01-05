@@ -1,0 +1,22 @@
+
+mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+  customerActivate(id: $id, input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
