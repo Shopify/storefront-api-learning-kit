@@ -1,16 +1,15 @@
 # Storefront API Learning Kit
-
 [About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md) | [Getting started](#getting-started) | [Example queries](#example-queries)
 ## About this repo
-This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the package from the releases section, gives you access to a complete set of sample queries for use in the [Insomnia](https://insomnia.rest/) http client. The Insomnia desktop app comes with rich GraphQL features, including automatic schema fetching and autocomplete, which are extremely valuable in learning a new API.
-## How to use this repo
+This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the package from the releases section, gives you access to a complete set of sample queries for use in the [Insomnia](https://insomnia.rest/) http client. The Insomnia desktop app comes with rich GraphQL features, including automatic schema fetching and autocomplete, which are extremely valuable in learning a new API.## How to use this repo
 To import the Insomnia package, first [download the latest collection](https://github.com/Shopify/storefront-api-learning-kit/blob/main/builds/storefront-api-learning-kit-insomnia.json) (you'll need to save the raw JSON file).
 
 From the Insomnia Dashboard screen, click `Create`, followed by clicking `File`. Select the file you downloaded.
 
 If you don't want to download the Insomnia package, the query examples are listed out below.
 ## Getting started
-<details><summary>Introduction</summary>
+
+<details><summary><strong>Introduction</strong></summary>
 <p>
 
 This learning kit provides a set of common GraphQL queries and mutations used with the Shopify Storefront API.
@@ -40,9 +39,10 @@ The process to create an admin custom app is documented in the next section titl
 
 Documentation for accessing the Storefront API via a custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
 
-The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront
-</p></details>
-<details><summary>Creating a custom app</summary>
+The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront</p>
+</details>
+
+<details><summary><strong>Creating a custom app</strong></summary>
 <p>
 
 To start using the Storefront API we'll need to create a custom app. Before we can create the app,
@@ -63,9 +63,10 @@ Create and install a custom app
 6. Under Configurations, add the Storefront API access scopes you require.
 7. Click "Save".
 8. Under "API credentials", click "Install app".
-9. In the modal window, click "Install app" to get your access token.
-</p></details>
-<details><summary>Configure your environment variables</summary>
+9. In the modal window, click "Install app" to get your access token.</p>
+</details>
+
+<details><summary><strong>Configure your environment variables</strong></summary>
 <p>
 
 Environment variables are JSON key-value pairs that allow you to refer to values without having to write them out every time.
@@ -77,9 +78,10 @@ For the tutorial, three environment variables will be utilized.
 2. “api_version” is the Storefront API version used for the API requests.
 - This can be changed to an earlier version or unstable depending on your use case.
 3. "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header
-- This is the storefront access token generated from the "Creating a Custom App" section.
-</p></details>
-<details><summary>Making your first request</summary>
+- This is the storefront access token generated from the "Creating a Custom App" section.</p>
+</details>
+
+<details><summary><strong>Making your first request</strong></summary>
 <p>
 
 You should see at the top of the frame that we're using the "base_url" and "api_version" to build out the address for the endpoint.
@@ -106,12 +108,13 @@ query getShopDetails{
   }
 }
 ```
-
-</p></details>
+</p>
+</details>
 
 ## Example queries
 ### Metafields
-<details><summary>Requesting metafields</summary>
+
+<details><summary><strong>Expose metafield to SFAPI</strong></summary>
 <p>
 
 Metafields allow merchants to store additional information for Shopify resources including:
@@ -121,47 +124,174 @@ Metafields allow merchants to store additional information for Shopify resources
 - Blogs
 - Pages
 - Shop
+- Discounts
+- Draft Orders
+- Locations
+- Orders
+- Product Images
+- Product Variants
+
+For a complete list please consult https://shopify.dev/api/admin-graphql/2022-10/enums/MetafieldOwnerType
 
 Unlike the Admin API, metafields must first be made visible to the Storefront API.
 To make metafields visible to the Storefront API use the Shopify Admin API mutation metafieldStorefrontVisibilityCreate.
+
+Ensure you are calling the Admin API https://shopify.dev/api/admin-graphql#endpoints with valid Admin API credentials https://shopify.dev/api/admin-graphql#authentication when exposing metafields to the Storefront API.
+
 For more information on the metafieldStorefrontVisibilityCreate mutation consult the Shopify Admin API doc https://shopify.dev/docs/admin-api/graphql/reference/metafields/metafieldstorefrontvisibilitycreate
 
 For a complete Storefront API metafield reference please consult the metafield tutorial at
 https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
 
-Once the metafield for the given resource has been made visible to the Storefront API, it can be queried from that resource.
-
-For the resource types listed above, both a single metafield, and paginated list can be queried.
-
-The following example queries the Shop resource for the first ten available metafields using the shop's MetafieldConnection
 ```gql
-query getShopMetafields{
-  shop {
-    name
-    metafields(first:10){
-      pageInfo{
-        hasNextPage
-        hasPreviousPage
-      }
-      edges{
-        cursor
-        node{
-          id
-          namespace
-          key
-          valueType
-          value
-        }
+mutation createMetafieldStorefrontVisibility(
+$input: MetafieldStorefrontVisibilityInput!
+) {
+  metafieldStorefrontVisibilityCreate(input: $input) {
+    metafieldStorefrontVisibility {
+      id # MetafieldStorefrontVisibility record id
+      key # Key must be unique within this namespace on this resource
+      ownerType
+      namespace
+      updatedAt
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "input": {
+    "key": "drying_instructions",
+    "namespace": "garment_care",
+    "ownerType": "COLLECTION"
+  }
+}
+```
+</p>
+</details>
+
+<details><summary><strong>Retrieve metafields</strong></summary>
+<p>
+
+Once a metafield has been exposed it can be retrieved using the Storefront API. In order to retrieve a single metafield, specify the namespace and key arguments.
+To query for a list of metafields pass the identifiers argument again specifying namespace and key
+For more information please consult https://shopify.dev/custom-storefronts/products-collections/metafields#step-2-retrieve-metafields
+
+The following example retrieves a specific metafield and a list of metafields that match the supplied namespace and key and collection id.
+Ensure that you've added a value to any metafields you wish to query back by updating it using Admin API https://shopify.dev/apps/metafields/manage-metafields#step-3-update-a-metafield
+
+```gql
+query getCollectionMetaField(
+$id: ID!
+$namespace: String!
+$key: String!
+$another_namespace: String!
+$another_key: String!
+) {
+  collection(id: $id) {
+    metafield(namespace: $namespace, key: $key) {
+      key
+      namespace
+      value
+      id # metafield id
+    }
+  }
+  
+  collection(id: $id) {
+    metafields(
+    identifiers: [
+    { namespace: $namespace, key: $key },
+    { namespace: $another_namespace, key: $another_key }
+    ]
+    ) {
+      key
+      namespace
+      value
+      id # metafield id
+    }
+  }
+}
+
+variables
+{
+  "id": "gid://shopify/Collection/288378781858",
+  "namespace": "garment_care",
+  "key": "wash_temperature",
+  "another_namespace": "bakery",
+  "another_key": "ingredients-new"
+}
+```
+</p>
+</details>
+
+<details><summary><strong>Retrieve storefront visibilities</strong></summary>
+<p>
+
+To retrieve a list of MetafieldStorefrontVisibility records use the metafieldStorefrontVisibilities query available on the Admin API and return a list of exposed metafield records.
+
+Ensure you are calling the Admin API https://shopify.dev/api/admin-graphql#endpoints with valid Admin API credentials https://shopify.dev/api/admin-graphql#authentication when retrieving a list of MetafieldStorefrontVisibility records.
+For a complete reference please consult https://shopify.dev/api/admin-graphql/2022-10/queries/metafieldStorefrontVisibilities#top
+
+```gql
+query getMetafieldStorefrontVisibilities($first: Int!, $namespace: String!) {
+  metafieldStorefrontVisibilities(first: $first, namespace: $namespace) {
+    edges {
+      node {
+        id # Metafield visibility record id
+        namespace
+        key
+        createdAt
       }
     }
   }
 }
-```
 
-</p></details>
+variables
+{
+  "first": 5,
+  "namespace": "garment_care"
+}
+```
+</p>
+</details>
+
+<details><summary><strong>Delete storefront visibilities</strong></summary>
+<p>
+
+If you no longer need to access a metafield with the Storefront API, you can hide it again by using the GraphQL Admin API to delete the MetafieldStorefrontVisibility record that you created.
+The  metafieldStorefrontVisibilityDelete mutation requires the visibility record of the metafield you wish to hide from the Storefront API.
+The metafield will no longer be accessible through the Storefront API.
+
+Ensure you are calling the Admin API https://shopify.dev/api/admin-graphql#endpoints with valid Admin API credentials https://shopify.dev/api/admin-graphql#authentication when deleting a MetafieldStorefrontVisibility record.
+For a complete reference please consult https://shopify.dev/api/admin-graphql/2022-10/mutations/metafieldStorefrontVisibilityDelete
+
+```gql
+mutation deleteMetafieldStorefrontVisibilities($id: ID!) {
+  metafieldStorefrontVisibilityDelete(id: $id) {
+    deletedMetafieldStorefrontVisibilityId # The visibility record of the metafield hidden from Storefront API
+    
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "id": "gid://shopify/MetafieldStorefrontVisibility/1684242594"
+}
+```
+</p>
+</details>
 
 ### International pricing
-<details><summary>Get available countries and currencies</summary>
+
+<details><summary><strong>Get available countries and currencies</strong></summary>
 <p>
 
 To present pricing in local currency enable the market of the passed in country context within Markets.
@@ -201,15 +331,14 @@ query getCountriesAndCurrencies($country: CountryCode) @inContext(country: $coun
 }
 
 variables
-
 {
-	"country": "FR"
+  "country": "FR"
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get product prices</summary>
+<details><summary><strong>Get product prices</strong></summary>
 <p>
 
 ```gql
@@ -235,15 +364,14 @@ query allProducts($country: CountryCode) @inContext(country: $country) {
 }
 
 variables
-
 {
-	"country": "CA"
+  "country": "CA"
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get price ranges for products</summary>
+<details><summary><strong>Get price ranges for products</strong></summary>
 <p>
 
 ```gql
@@ -278,15 +406,14 @@ query getProductPriceRanges($country: CountryCode) @inContext(country: $country)
 }
 
 variables
-
 {
-	"country": "CA"
+  "country": "CA"
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get customer orders</summary>
+<details><summary><strong>Get customer orders</strong></summary>
 <p>
 
 ```gql
@@ -322,16 +449,15 @@ query getcustomerOrders($customerAccessToken: String!, $country: CountryCode)@in
 }
 
 variables
-
 {
-	"customerAccessToken": "customerAccessToken",
-	"country": "FR"
+  "customerAccessToken": "customerAccessToken",
+  "country": "FR"
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Create cart in local context</summary>
+<details><summary><strong>Create cart in local context</strong></summary>
 <p>
 
 Generates a cart in the currency and language of the context passed in.
@@ -379,31 +505,30 @@ mutation cartCreate($cartInput: CartInput!, $country: CountryCode, $language: La
 }
 
 variables
-
 {
-	"cartInput": {
-		"lines": [
-			{
-				"quantity": 3,
-				"merchandiseId": "gid://shopify/ProductVariant/42485059584162"
-			},
-			{
-				"quantity": 1,
-				"merchandiseId": "gid://shopify/ProductVariant/42790980223138"
-			}
-		]
-
-	},
-	"country": "US",
-	"language": "ES"
+  "cartInput": {
+    "lines": [
+      {
+        "quantity": 3,
+        "merchandiseId": "gid://shopify/ProductVariant/42485059584162"
+      },
+      {
+        "quantity": 1,
+        "merchandiseId": "gid://shopify/ProductVariant/42790980223138"
+      }
+    ]
+    
+  },
+  "country": "US",
+  "language": "ES"
 }
-
 ```
-
-</p></details>
+</p>
+</details>
 
 ### Local pickup
-<details><summary>Get pickup availability for variants</summary>
+
+<details><summary><strong>Get pickup availability for variants</strong></summary>
 <p>
 
 ```gql
@@ -433,9 +558,10 @@ query GetPickUpAvailability {
   }
 }
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get in-store pickup locations</summary>
+<details><summary><strong>Get in-store pickup locations</strong></summary>
 <p>
 
 ```gql
@@ -454,7 +580,6 @@ query LocationsByDistance($location: GeoCoordinateInput!) {
 }
 
 variables
-
 {
   "location": {
     "latitude": 45.4553,
@@ -462,9 +587,10 @@ variables
   }
 }
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get closest pickup location</summary>
+<details><summary><strong>Get closest pickup location</strong></summary>
 <p>
 
 ```gql
@@ -487,10 +613,12 @@ query NearestPickupAvailability @inContext(preferredLocationId: "Z2lkOi8vc2hvcGl
   }
 }
 ```
-</p></details>
+</p>
+</details>
 
 ### Collections
-<details><summary>Get collections</summary>
+
+<details><summary><strong>Get collections</strong></summary>
 <p>
 
 Simple query to return the first 10 collections in the shop.
@@ -511,40 +639,55 @@ hasNextPage
 hasPreviousPage
 }
 }
-}
-</p></details>
-<details><summary>Get collection by handle</summary>
+}</p>
+</details>
+
+<details><summary><strong>Get collection by handle</strong></summary>
 <p>
 
 Simple query to return details from a collection object by passing the collection.handle as an argument.
 
+```gql
+query getCollectionByHandle($handle: String!) {
+  collection(handle: $handle) {
+    id
+    title
+    description
+  }
+}
+
+variables
 {
-collectionByHandle (handle:"all") {
-id
-handle
+  "handle": "all"
 }
-}
-</p></details>
-<details><summary>Get collection by id</summary>
+```
+</p>
+</details>
+
+<details><summary><strong>Get collection by id</strong></summary>
 <p>
 
-Query that returns details from a collection object by passing the collection.id as an argument
-Since the `node` connection can apply to a range of different objects, a fragment is required to specify the type being returned
-In this example, the "... on Collection" fragment allows us to return fields from a collection object
+Query that returns details from a collection object by passing the collection.id as an argument.
 
+```gql
+query getCollectionById($id: ID!) {
+  collection(id: $id) {
+    title
+    description
+    handle
+  }
+}
+
+variables
 {
-node (id:"Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzIxMjIzNzgxMTczNA==") {
-... on Collection {
-id
-handle
+  "id": "gid://shopify/Collection/1"
 }
-}
-}
-</p></details>
-<details><summary>Display products in collection</summary>
+```
+</p>
+</details>
+
+<details><summary><strong>Display products in collection</strong></summary>
 <p>
-
-
 
 This query returns data from a single collection, specified by the handle.
 
@@ -558,49 +701,56 @@ In this example we only want to display 1 image per product, so we're only askin
 
 Since products can contain multiple variants, we've asked the products connection to return price ranges.
 
-The 'priceRange' object returns prices in the shop's currency. Multicurrency will be demonstrated in the next example
+The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
 
+```gql
+query getProductsInCollection($handle: String!) {
+  collection(handle: $handle) {
+    id
+    title
+    products(first: 50, sortKey: BEST_SELLING) {
+      edges {
+        node {
+          id
+          title
+          vendor
+          availableForSale
+          images(first: 1) {
+            edges {
+              node {
+                id
+                url
+                width
+                height
+                altText
+              }
+            }
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
-
+variables
 {
-collectionByHandle (handle:"all") {
-id
-title
-products (first:50 sortKey:BEST_SELLING) {
-edges {
-node {
-id
-title
-vendor
-availableForSale
-images (first:1) {
-edges {
-node {
-id
-transformedSrc
-width
-height
-altText
+  "handle": "all"
 }
-}
-}
-priceRange {
-minVariantPrice {
-amount
-currencyCode
-}
-maxVariantPrice {
-amount
-currencyCode
-}
-}
-}
-}
-}
-}
-}
-</p></details>
-<details><summary>Display multicurrency products in collection</summary>
+```
+</p>
+</details>
+
+<details><summary><strong>Display multicurrency products in collection</strong></summary>
 <p>
 
 This query is returning data from a single collection, specified by the handle.
@@ -653,12 +803,11 @@ currencyCode
 }
 }
 }
-}
-</p></details>
-<details><summary>Get all metafields in namespace from collection</summary>
+}</p>
+</details>
+
+<details><summary><strong>Get all metafields in namespace from collection</strong></summary>
 <p>
-
-
 
 Uses the `collectionByHandle` query to specify a collection by passing the handle.
 The `metafields` connection is using the `namespace` argument to return only metafields in a specific namespace.
@@ -680,11 +829,11 @@ value
 }
 }
 }
-}</p></details>
-<details><summary>Get specific metafield from collection</summary>
+}</p>
+</details>
+
+<details><summary><strong>Get specific metafield from collection</strong></summary>
 <p>
-
-
 
 Uses the `collectionByHandle` query to specify a collection by passing the handle.
 
@@ -701,12 +850,11 @@ key
 value
 }
 }
-}
-</p></details>
-<details><summary>Get all metafields from collection</summary>
+}</p>
+</details>
+
+<details><summary><strong>Get all metafields from collection</strong></summary>
 <p>
-
-
 
 Uses the `collectionByHandle` query to specify a collection by passing the handle, and returns a list of all metafields attached to that collection.
 Since collections can have a large number of metafields, pagination is required on the `metafields` connection.
@@ -725,12 +873,13 @@ value
 }
 }
 }
-}</p></details>
+}</p>
+</details>
 
 ### Products
-<details><summary>Get 3 products and 3 variants</summary>
-<p>
 
+<details><summary><strong>Get 3 products and 3 variants</strong></summary>
+<p>
 
 This query gets the products connection, which is available from the QueryRoot, and asks for the first 3 products.
 It selects edges, the node, and fields from each of the returned product objects.
@@ -763,11 +912,11 @@ currencyCode
 }
 }
 }
-}
-</p></details>
-<details><summary>Get product by handle</summary>
-<p>
+}</p>
+</details>
 
+<details><summary><strong>Get product by handle</strong></summary>
+<p>
 
 This query gets a single product connection, available from the QueryRoot, that matches the handle "my-test-product".
 As only one product connection will be returned, we don't need to specify edges, node, or cursor.
@@ -792,11 +941,11 @@ currencyCode
 }
 }
 }
-}
-</p></details>
-<details><summary>Get product recommendations</summary>
-<p>
+}</p>
+</details>
 
+<details><summary><strong>Get product recommendations</strong></summary>
+<p>
 
 This query gets a single product connection, available from the QueryRoot, that matches the base64-encoded id of the product.
 As only one product connection will be returned, we don't need to specify edges, node, or cursor.
@@ -821,9 +970,10 @@ currencyCode
 }
 }
 }
-}
-</p></details>
-<details><summary>Get product selling plans</summary>
+}</p>
+</details>
+
+<details><summary><strong>Get product selling plans</strong></summary>
 <p>
 
 This query gets the first 30 products, the first 5 selling plan groups associated with them, and the first 5 selling plans within the groups.
@@ -898,11 +1048,11 @@ value
 }
 }
 }
-}
-</p></details>
-<details><summary>Get product media</summary>
-<p>
+}</p>
+</details>
 
+<details><summary><strong>Get product media</strong></summary>
+<p>
 
 This query gets 3 products and their media; we use a fragment here to specify the fields that we want to return for each possible media type.
 You cannot retrieve media for product variants with the Storefront API, only products. You cannot upload media, add media to a product, or delete media with the Storefront API, use the Admin API for these tasks.
@@ -958,11 +1108,12 @@ height
 width
 }
 }
-}
-</p></details>
+}</p>
+</details>
 
 ### Customers
-<details><summary>Create an access token</summary>
+
+<details><summary><strong>Create an access token</strong></summary>
 <p>
 
 The Storefront API allows access to a customer’s addresses, orders and metafields. To access customers, an app must have unauthenticated_read_customers access scope.
@@ -985,7 +1136,6 @@ mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
 }
 
 variables
-
 {
   "input": {
     "email": "user@example.com",
@@ -993,9 +1143,10 @@ variables
   }
 }
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Get customer orders</summary>
+<details><summary><strong>Get customer orders</strong></summary>
 <p>
 
 To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
@@ -1015,15 +1166,14 @@ query getCustomerOrders($customerAccessToken: String!){
 }
 
 variables
-
 {
   "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
 }
 ```
+</p>
+</details>
 
-
-</p></details>
-<details><summary>Get customer metafields</summary>
+<details><summary><strong>Get customer metafields</strong></summary>
 <p>
 
 To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
@@ -1051,15 +1201,14 @@ query CustomerMetafields($customerAccessToken: String!){
 }
 
 variables
-
 {
   "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
 }
 ```
+</p>
+</details>
 
-
-</p></details>
-<details><summary>Update customer</summary>
+<details><summary><strong>Update customer</strong></summary>
 <p>
 
 To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
@@ -1083,7 +1232,6 @@ mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdate
 }
 
 variables
-
 {
   "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862",
   "customer": {
@@ -1091,12 +1239,12 @@ variables
   }
 }
 ```
-
-
-</p></details>
+</p>
+</details>
 
 ### Manage a cart
-<details><summary>Create a cart with one line item</summary>
+
+<details><summary><strong>Create a cart with one line item</strong></summary>
 <p>
 
 ```gql
@@ -1145,26 +1293,25 @@ mutation createCart($cartInput: CartInput) {
 }
 
 variables
-
 {
   "cartInput": {
     "lines": [
       {
         "quantity": 1,
         "merchandiseId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTg1Mzk2NzM0MzY3Mg=="
-		  }
-		],
-		"attributes": {
-		  "key": "cart_attribute_key",
-		  "value": "This is a cart attribute value"
+      }
+    ],
+    "attributes": {
+      "key": "cart_attribute_key",
+      "value": "This is a cart attribute value"
     }
   }
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Query a cart</summary>
+<details><summary><strong>Query a cart</strong></summary>
 <p>
 
 ```gql
@@ -1225,15 +1372,14 @@ query cartQuery($cartId: ID!) {
 }
 
 variables
-
 {
   "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh"
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Update line items</summary>
+<details><summary><strong>Update line items</strong></summary>
 <p>
 
 ```gql
@@ -1277,7 +1423,6 @@ mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
 }
 
 variables
-
 {
   "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh",
   "lines": {
@@ -1285,11 +1430,11 @@ variables
     "quantity": 3
   }
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Update buyer identity</summary>
+<details><summary><strong>Update buyer identity</strong></summary>
 <p>
 
 ```gql
@@ -1307,18 +1452,17 @@ mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentityInput: CartBuyerIde
 }
 
 variables
-
 {
   "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh",
   "buyerIdentityInput": {
     "email": "example-email@shopify.com"
   }
 }
-
 ```
+</p>
+</details>
 
-</p></details>
-<details><summary>Retrieve a checkout</summary>
+<details><summary><strong>Retrieve a checkout</strong></summary>
 <p>
 
 ```gql
@@ -1329,12 +1473,10 @@ query checkoutURL($cartId: ID!) {
 }
 
 variables
-
 {
   "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh"
 }
-
 ```
-
-</p></details>
+</p>
+</details>
 
