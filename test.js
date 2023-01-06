@@ -5,167 +5,111 @@ const capitalize = (string) => {
   return string[0].toUpperCase() + string.slice(1);
 };
 
-const directoryContainsQuery = async (directory) => {
-  const files = await readdir(directory);
-  return files.includes('query.graphql');
-};
-
-const convertForMarkdown = (text, variables) => {
+const convertForMarkdown = (text) => {
     const toArray = text.split('\n')
     let transformedText = []
     let brackets = []
     let foundCode = false
-    let spaces = 0
+    let spaces = 0 
     
     for(line of toArray){
         if(line.startsWith('#')){
             transformedText.push(line.slice(1).trim())
             continue
         }
+        // Beginning of code block if line starts with mutation or query
+        // format as markdown graphql code block
         if(line.startsWith('mutation') || line.startsWith('query')){
             transformedText.push('```gql')
             foundCode = true
         }
-        if(foundCode && line.includes('}')){
+
+        // Hnadle code indentations
+        if(foundCode && (line.includes('}') || (line.includes(']') && !line.includes('[')))){
             brackets.pop()
             spaces -= 2
-            // line = `${' '.repeat(spaces)}${line.trim()}`
         }
-        // console.log(spaces, line.trim())
         transformedText.push(`${spaces > 0 ?' '.repeat(spaces): ''}${line.trim()}`)
-        if(foundCode && line.includes('{')){
+        if(foundCode && (line.includes('{') || (line.includes('[') && !line.includes(']')))){
             brackets.push(1)
             spaces += 2
             
         }
-        // if(foundCode && line.includes('}')){
-        //     brackets.pop()
-        //     spaces -= 2
-        //     // line = `${' '.repeat(spaces)}${line.trim()}`
-        // }
-        // console.log(spaces, line.trim())
-        // transformedText.push(`${spaces >= 0 ?' '.repeat(spaces): ''}${line.trim()}`)
-        if(foundCode && brackets.length === 0){
-            if(variables.trim() !== ''){
-                transformedText.push('\nvariables\n')
-                // console.log(variables)
-                transformedText.push(variables)
-            }
-            transformedText.push('```\n')
-            foundCode = false
-        }
-
     }
-    // await writeFile(`${file}.txt`, transformedText);
-    // if(file === '04_making_your_first_request')
-    //     console.log(transformedText)
-    // if(file === '04_get_customer_orders')
-    //     console.log(transformedText)
+    // Assumption is once a code block is found, that block finishes at the end of the file
+    // close markdown code block if code was encountered in file
+    if(foundCode && brackets.length === 0)
+        transformedText.push('```\n')
     return transformedText
 }
 
-const myFun = async () =>{
-    const head = '# Storefront API Learning Kit\n\n'
-    let fullTest = ''
-    let links = []
+const generateReadme = async () =>{
+    const title = '# Storefront API Learning Kit'
+    let readmeText = ''
+    let navigation = []
     const directory = './examples'
     const files = await readdir(directory);
     for (const [index, fileName] of files.entries()) {
-        const splitText = fileName.split('_')
-        const sortKey = Number(splitText[0])
-        let header = ``
-        
-        // header = Number(sortKey) > 1 ?`### ${capitalize(splitText.slice(1).join(' '))}`:`## ${capitalize(splitText.slice(1).join(' '))}`
-        // console.log(header)
+        const splitFileName = fileName.split('_')
+        const sortKey = Number(splitFileName[0])
+        const sectionTitle = capitalize(splitFileName.slice(1).join(' '))
+        let sectionHeader = ``
+
         if(sortKey === 1)
         {
-            links.push('[Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md)')
-            links.push(`[${capitalize(splitText.slice(1).join(' '))}](#${splitText.slice(1).join('-')})`)
-            links.push('[Example queries](#example-queries)')
-            header = `## ${capitalize(splitText.slice(1).join(' '))}`
+            navigation.push('[Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md)')
+            navigation.push(`[${sectionTitle}](#${splitFileName.slice(1).join('-')})`)
+            navigation.push('[Example queries](#example-queries)')
+            sectionHeader = `## ${sectionTitle}`
         }
         if(sortKey > 1){
-            header = `### ${capitalize(splitText.slice(1).join(' '))}`
+            sectionHeader = `### ${sectionTitle}`
         }
-        // console.log(header)
-        fullTest += `${header}\n`
+        readmeText += `${sectionHeader}\n`
         const filePath = path.join(directory, fileName);
         const stats = await stat(filePath);
         if (stats.isDirectory()) {
             const subfolder = await readdir(filePath);
             for (const [index, fileName] of subfolder.entries()) {
-                
-                const summary = sortKey === 0 ? `## ${capitalize(fileName.split('_').slice(1).join(' '))}`:`<details><summary>${capitalize(fileName.split('_').slice(1).join(' '))}</summary>`
+                const subsectionHeader = capitalize(fileName.split('_').slice(1).join(' '))
+                const summaryMd = sortKey === 0 ? `## ${subsectionHeader}`:`\n<details><summary><strong>${subsectionHeader}</strong></summary>`
                 if(sortKey === 0){
-                    links.push(`[${capitalize(fileName.split('_').slice(1).join(' '))}](#${fileName.split('_').slice(1).join('-')})`)
+                    navigation.push(`[${subsectionHeader}](#${fileName.split('_').slice(1).join('-')})`)
                 }
-                fullTest += `${summary}\n`
-                const fileP = path.join(filePath, fileName);
+                readmeText += `${summaryMd}\n`
+                const innerfilePath = path.join(filePath, fileName);
                 
                 // const statsFile = await stat(fileP);
                 // if(!statsFile.isDirectory()){
                     try {
-                        const query = await readFile(path.join(fileP, 'query.graphql'));
-                        
-                        const queryT = query.toString();
-                        // convertForMarkdown(queryT)
-                        let variablesT = ''
-                        if(existsSync(path.join(fileP, 'variables.json'))){
-                        const variables = await readFile(path.join(fileP, 'variables.json'));
-                        // console.log(variables)
-                            variablesT = variables.toString();
+                        const query = await readFile(path.join(innerfilePath, 'query.graphql'));
+                        let fullQuery = query.toString().trim();
+                        if(existsSync(path.join(innerfilePath, 'variables.json'))){
+                        const variables = await readFile(path.join(innerfilePath, 'variables.json'));
+                            fullQuery += '\n\nvariables\n' + variables.toString().trim();
                         }
 
-                        // if(fileName === '04_get_customer_orders')
-                        // console.log(convertForMarkdown(queryT, fileName).join('\n'))
-                        fullTest += sortKey === 0 ?`${convertForMarkdown(queryT, variablesT).join('\n')}`:`<p>\n\n${convertForMarkdown(queryT, variablesT).join('\n')}</p>`
+                        const convertedToMd = convertForMarkdown(fullQuery).join('\n')
+                        readmeText += sortKey === 0 ?`${convertedToMd}`:`<p>\n\n${convertedToMd}</p>\n`
                       } catch (error) {
-                        // No query or variable exists
-                        // console.log(error)
+                        console.log(error)
                       }
                 // }
-                fullTest += sortKey === 0 ?``:`</details>\n`
+                readmeText += sortKey === 0 ?``:`</details>\n`
             }
-            fullTest += `\n`
+            readmeText += `\n`
             if(sortKey === 1)
-                fullTest += '## Example queries\n'
+                readmeText += '## Example queries\n'
         }
 
         
     }
 
-    fullTest = `${head}${links.join(' | ')}` + fullTest
+    readmeText = `${title}\n${navigation.join(' | ')}` + readmeText
 
     const done = files.map(file => `## ${capitalize(file.split('_').slice(1).join(' '))}`
     )
-
-    // const name = capitalize(fileName.split('_').slice(1).join(' '));
-
-
-    // console.log(done)
-    await writeFile('Test.md', fullTest);
+    await writeFile('Test.md', readmeText);
 }
 
-const sample = [
-    '# The Storefront API allows access to a customer’s addresses, orders and metafields. To access customers, an app must have unauthenticated_read_customers access scope.',
-    '',
-    '# To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.',
-    '',
-    'mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {',
-    '  customerAccessTokenCreate(input: $input) {',
-    '    customerAccessToken {',
-    '      accessToken',
-    '      expiresAt',
-    '    }',
-    '    customerUserErrors {',
-    '      code',
-    '      field',
-    '      message',
-    '    }',
-    '  }',
-    '}',
-    ''
-  ]
-
-//   convertForMarkdown(sample)
-myFun()
+generateReadme()
