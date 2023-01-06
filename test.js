@@ -25,12 +25,12 @@ const convertForMarkdown = (text) => {
         }
 
         // Hnadle code indentations
-        if(foundCode && (line.includes('}') || (line.includes(']') && !line.includes('[')))){
+        if(foundCode && ((line.includes('}') && !line.includes('{')) || (line.includes(']') && !line.includes('[')))){
             brackets.pop()
             spaces -= 2
         }
         transformedText.push(`${spaces > 0 ?' '.repeat(spaces): ''}${line.trim()}`)
-        if(foundCode && (line.includes('{') || (line.includes('[') && !line.includes(']')))){
+        if(foundCode && ((line.includes('{') && !line.includes('}'))|| (line.includes('[') && !line.includes(']')))){
             brackets.push(1)
             spaces += 2
             
@@ -72,11 +72,12 @@ const generateReadme = async () =>{
             const subfolder = await readdir(filePath);
             for (const [index, fileName] of subfolder.entries()) {
                 const subsectionHeader = capitalize(fileName.split('_').slice(1).join(' '))
-                const summaryMd = sortKey === 0 ? `## ${subsectionHeader}`:`\n<details><summary><strong>${subsectionHeader}</strong></summary>`
+                const summaryMd = sortKey === 0 ? `\n## ${subsectionHeader}`:`<details><summary><strong>${subsectionHeader}</strong></summary>`
                 if(sortKey === 0){
                     navigation.push(`[${subsectionHeader}](#${fileName.split('_').slice(1).join('-')})`)
                 }
                 readmeText += `${summaryMd}\n`
+                
                 const innerfilePath = path.join(filePath, fileName);
                 
                 // const statsFile = await stat(fileP);
@@ -98,8 +99,9 @@ const generateReadme = async () =>{
                 readmeText += sortKey === 0 ?``:`</details>\n`
             }
             readmeText += `\n`
-            if(sortKey === 1)
+            if(sortKey === 1){
                 readmeText += '## Example queries\n'
+            }
         }
 
         
@@ -109,7 +111,7 @@ const generateReadme = async () =>{
 
     const done = files.map(file => `## ${capitalize(file.split('_').slice(1).join(' '))}`
     )
-    await writeFile('Test.md', readmeText);
+    await writeFile('README.md', readmeText);
 }
 
 generateReadme()
