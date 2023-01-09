@@ -1,4 +1,4 @@
-mutation customerReset($id: ID!, $input: CustomerResetInput!) {
+mutation resetCustomerAccount($id: ID!, $input: CustomerResetInput!) {
   customerReset(id: $id, input: $input) {
     customer {
       id
