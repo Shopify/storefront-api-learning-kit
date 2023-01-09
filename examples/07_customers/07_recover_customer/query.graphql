@@ -1,5 +1,5 @@
 
-mutation customerRecover($email: String!) {
+mutation recoverCustomerAccount($email: String!) {
   customerRecover(email: $email) {
     customerUserErrors {
       code
