@@ -1,5 +1,5 @@
 
-mutation customerActivate($id: ID!, $input: CustomerActivateInput!) {
+mutation activateCustomerAccount($id: ID!, $input: CustomerActivateInput!) {
   customerActivate(id: $id, input: $input) {
     customer {
       id
