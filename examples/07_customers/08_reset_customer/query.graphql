@@ -1,3 +1,7 @@
+# This mutation is for reset the customer account password. After sending customerRecover mutation, the customer will receive an email with recovery url for reset customer. The url will contain the customer id and resetToken.
+
+# You can also use the url directly to reset the customer account. See customerResetByUrl mutation https://shopify.dev/api/storefront/2022-10/mutations/customerResetByUrl
+
 mutation resetCustomerAccount($id: ID!, $input: CustomerResetInput!) {
   customerReset(id: $id, input: $input) {
     customer {

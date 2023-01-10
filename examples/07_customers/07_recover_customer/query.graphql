@@ -1,3 +1,5 @@
+# This mutation will send a email  to customer for reset password of the customer account.
+# Note that this mutation is throttled by IP.
 
 mutation recoverCustomerAccount($email: String!) {
   customerRecover(email: $email) {
