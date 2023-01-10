@@ -1,3 +1,7 @@
+# To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+# This mutation will create a customer with password for the customer to login.
+
 mutation createCustomerAccount($input: CustomerCreateInput!) {
   customerCreate(input: $input) {
     customer {
