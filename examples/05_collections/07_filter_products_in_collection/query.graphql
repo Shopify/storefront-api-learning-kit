@@ -1,0 +1,33 @@
+# You can use the Storefront API to filter products in a collection using Product Filters.
+
+# This functionality lets you build a desired customer experience on a storefront, such as the ability to narrow down the search results that you display to customers.
+
+# For example, a variant option's name might be color, and the variant option's value might be red.
+
+# This query returns products in a collection by with the passsed in `variant option name` and `variantOptionValue`.
+
+# For more examples of product filtering please consult https://shopify.dev/custom-storefronts/products-collections/filter-products
+
+query getProductVariantOptions($handle: String! $name: String! $value:String!) {
+  	collection(handle: $handle) {
+        handle
+        products(first: 10, filters: { variantOption: { name: $name, value: $value } }
+        ) {
+          edges {
+            node {
+             handle
+             variants(first: 10) {
+               edges {
+                 node {
+                   selectedOptions {
+                     name
+                     value
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
