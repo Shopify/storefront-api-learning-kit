@@ -1,8 +1,5 @@
-#To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
-
-#Once a customer is created, an email will be sent to the customer with the account activiation url. This mutation will use the activationToken from the activation url to active the customer account. 
-
-#You can also use the url directly to activate the customer account. See customerActiveByUrl mutation https://shopify.dev/api/storefront/2022-10/mutations/customerActivateByUrl
+# Once a customer account is created, an email will be sent to the customer with the account activiation url. This mutation will use the activationToken from the activation url to active the customer account. 
+# You can also use the activiation url directly to activate the customer account. See customerActiveByUrl mutation https://shopify.dev/api/storefront/2022-10/mutations/customerActivateByUrl
 
 mutation activateCustomerAccount($id: ID!, $input: CustomerActivateInput!) {
   customerActivate(id: $id, input: $input) {
