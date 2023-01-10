@@ -1,5 +1,6 @@
-
 # Uses the `collectionByHandle` query to specify a collection by passing the handle.
+
+# Identifiers are used to identify the metafields associated with the resource matching the supplied list of namespaces and keys.
 
 # The `metafields` connection is using the `namespace` argument to return only metafields in a specific namespace.
 
