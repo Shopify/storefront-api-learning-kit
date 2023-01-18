@@ -20,7 +20,7 @@ mutation createCart($cartInput: CartInput) {
         key
         value
       }
-      estimatedCost {
+      cost {
         totalAmount {
           amount
           currencyCode

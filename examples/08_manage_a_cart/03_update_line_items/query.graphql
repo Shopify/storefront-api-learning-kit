@@ -1,4 +1,4 @@
-mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+mutation updateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
   cartLinesUpdate(cartId: $cartId, lines: $lines) {
     cart {
       id
@@ -15,7 +15,7 @@ mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
           }
         }
       }
-      estimatedCost {
+      cost {
         totalAmount {
           amount
           currencyCode
