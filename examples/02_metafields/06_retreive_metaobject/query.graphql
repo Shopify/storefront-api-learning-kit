@@ -1,0 +1,29 @@
+# The following example retreives a single metaobject by a given metaobject id.
+# For more information consult Storefront API documentation at https://shopify.dev/api/storefront/2023-01/queries/metaobject
+
+
+query getMetafield($id: ID!) {
+	metaobject(id: $id) {
+		id
+		updatedAt
+		displayName
+		definition {
+			access {
+				admin
+				storefront
+			}
+			name
+			type
+		}
+		fields {
+			key
+			value
+			type
+		}
+		capabilities {
+			publishable {
+				status #The visibility status of this metaobject across all channels.
+			}
+		}
+	}
+}
