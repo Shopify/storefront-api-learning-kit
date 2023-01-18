@@ -10,7 +10,7 @@
 
 # For more information please consult #https://shopify.dev/custom-storefronts/products-collections/metafields
 
-query get_all_metafields_in_collection_by_namespace($handle: String! $namespace: String!) {
+query getCollectionMetafieldsByNamespace($handle: String! $namespace: String!) {
   	collection(handle: $handle) {
 		id
 		metafields(identifiers: [{ namespace: $namespace, key: $key }]) {
