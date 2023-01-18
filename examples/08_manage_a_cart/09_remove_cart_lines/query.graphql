@@ -1,0 +1,25 @@
+# Remove lines from existing cart
+mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+    cart {
+      id
+        lines(first: 10){
+            edges
+            {
+                node{
+                    quantity
+                    merchandise{
+                        ... on ProductVariant {   
+                            id
+                        }
+                    }
+                }
+            }
+        }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

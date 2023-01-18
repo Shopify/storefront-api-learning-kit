@@ -25,7 +25,7 @@ query cartQuery($cartId: ID!) {
       key
       value
     }
-    estimatedCost {
+    cost {
       totalAmount {
         amount
         currencyCode
