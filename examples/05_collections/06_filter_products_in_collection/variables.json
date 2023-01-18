@@ -1,5 +1,4 @@
 {
-  "handle": "all",
-  "name": "color",
-  "value:": "red"
+  "handle": "filterable-collection",
+	"value": "shoes"
 }
