@@ -110,7 +110,7 @@ query getShopDetails{
 </details>
 
 ## Example queries
-### Metafields
+### Metafields metaobjects
 <details><summary><strong>Expose metafield to SFAPI</strong></summary>
 <p>
 
@@ -278,6 +278,105 @@ mutation deleteMetafieldStorefrontVisibilities($id: ID!) {
 variables
 {
   "id": "gid://shopify/MetafieldStorefrontVisibility/1684242594"
+}
+```
+</p>
+</details>
+<details><summary><strong>Retreive metaobjects</strong></summary>
+<p>
+
+Metaobjects are custom data structures introduced with version 2023-01 that your app can define and create to store your app's information.
+Similar to metafields, they can be associated with a Shopify resource such as a product or a collection.
+However, they can also exist on their own. Metaobjects provide you with a way to create resources that Shopify doesn't offer out of the box.
+
+In order to query metaobjects with the Storefront API you must first create a metaobject definition using the Admin API with the metaobjectDefinitionCreate mutation
+and create a corresponding metaobject using the Admin API mutation metaobjectCreate.
+For more information consult Shopify Admin API docs at https://shopify.dev/api/admin-graphql/2023-01/mutations/metaobjectDefinitionCreate
+and https://shopify.dev/api/admin-graphql/2023-01/mutations/metaobjectCreate
+
+When creating a new metaobject definition to create new associated metaobjects that you want to access using Storefront API, be sure to set "access" for the "storefront" property to "PUBLIC_READ".
+For more information about the MetaObjectDefinitionCreateInput please see https://shopify.dev/api/admin-graphql/2023-01/mutations/metaobjectDefinitionCreate#field-metaobjectdefinitioncreateinput-access
+Ensure you are calling the Admin API https://shopify.dev/api/admin-graphql#endpoints with valid Admin API credentials https://shopify.dev/api/admin-graphql#authentication
+
+The following example returns a list of the first ten metaobjects for a given type from the Storefront API. As well as type, which is a required argument, either first or last must be passed.
+Other optional arguments include reverse and sortKey which determines whether to sort the returned list by "id", "type", "updated_at", or "display_name".
+For more information consult Storefront API documentation at https://shopify.dev/api/storefront/2023-01/queries/metaobjects
+
+```gql
+query getMetaObjects(
+$type: String!,
+$sortKey: String,
+$first: Int,
+$reverse: Boolean
+){
+  metaobjects(
+  type: $type,
+  sortKey: $sortKey,
+  first: $first,
+  reverse: $reverse
+  ) {
+    edges {
+      node {
+        id
+        fields {
+          key
+          value
+        }
+        handle
+        updatedAt
+        type
+      }
+    }
+  }
+}
+
+variables
+{
+  "type": "Product_Highlights",
+  "sortKey": "id",
+  "first": 10,
+  "reverse": true
+}
+```
+</p>
+</details>
+<details><summary><strong>Retreive metaobject</strong></summary>
+<p>
+
+The following example retreives a single metaobject by a given metaobject id.
+For more information consult Storefront API documentation at https://shopify.dev/api/storefront/2023-01/queries/metaobject
+
+
+```gql
+query getMetafield($id: ID!) {
+  metaobject(id: $id) {
+    id
+    updatedAt
+    displayName
+    definition {
+      access {
+        admin
+        storefront
+      }
+      name
+      type
+    }
+    fields {
+      key
+      value
+      type
+    }
+    capabilities {
+      publishable {
+        status #The visibility status of this metaobject across all channels.
+      }
+    }
+  }
+}
+
+variables
+{
+  "id": "gid://shopify/Metaobject/819214"
 }
 ```
 </p>
