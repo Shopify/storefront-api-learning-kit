@@ -709,21 +709,24 @@ Simple query to return the first 10 collections in the shop.
 
 Since a shop can contain multiple collections, pagination is required.
 
-{
-collections(first: 10) {
-edges {
-cursor
-node {
-id
-handle
+```gql
+query getCollections {
+  collections(first: 10) {
+    edges {
+      cursor
+      node {
+        id
+        handle
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+  }
 }
-}
-pageInfo {
-hasNextPage
-hasPreviousPage
-}
-}
-}</p>
+```
+</p>
 </details>
 <details><summary><strong>Get collection by handle</strong></summary>
 <p>
@@ -767,7 +770,7 @@ variables
 ```
 </p>
 </details>
-<details><summary><strong>Display products in collection</strong></summary>
+<details><summary><strong>Get products in collection</strong></summary>
 <p>
 
 This query returns data from a single collection, specified by the handle.
@@ -778,11 +781,10 @@ The `products` connection requires pagination in this query, since collections c
 This query includes the `sortKey` argument on the products connection, this returns products in the order specified by the sortKey
 
 Products can contain multiple images, so the `images` connection requires pagination.
-In this example we only want to display 1 image per product, so we're only asking for first:1
 
 Since products can contain multiple variants, we've asked the products connection to return price ranges.
 
-The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
+In this example we only want to display 1 image per product, so we're only asking for first:1
 
 ```gql
 query getProductsInCollection($handle: String!) {
@@ -807,7 +809,7 @@ query getProductsInCollection($handle: String!) {
               }
             }
           }
-          priceRange {
+          priceRange { # Returns prices in the shop's currency.
             minVariantPrice {
               amount
               currencyCode
@@ -830,127 +832,79 @@ variables
 ```
 </p>
 </details>
-<details><summary><strong>Display multicurrency products in collection</strong></summary>
-<p>
-
-This query is returning data from a single collection, specified by the handle.
-
-The data being returned in the product connection can be used to display a page of products with multicurrency pricing.
-
-Since products can contain multiple variants, we've asked the products connection to return price ranges.
-
-The 'presentmentPriceRanges' object returns prices in all currencies offered by the shop.
-Since shops can offer multiple different currencies, the `presentmentPriceRanges` object requires pagination
-
-
-{
-collectionByHandle(handle: "all") {
-id
-title
-products(first: 50, sortKey: BEST_SELLING) {
-edges {
-node {
-id
-title
-vendor
-availableForSale
-images(first: 1) {
-edges {
-node {
-id
-transformedSrc
-width
-height
-altText
-}
-}
-}
-presentmentPriceRanges(first: 10) {
-edges {
-node {
-minVariantPrice {
-amount
-currencyCode
-}
-maxVariantPrice {
-amount
-currencyCode
-}
-}
-}
-}
-}
-}
-}
-}
-}</p>
-</details>
-<details><summary><strong>Get all metafields in namespace from collection</strong></summary>
+<details><summary><strong>Get all metafields for namespace in collection</strong></summary>
 <p>
 
 Uses the `collectionByHandle` query to specify a collection by passing the handle.
+
+Identifiers are used to identify the metafields associated with the resource matching the supplied list of namespaces and keys.
+
 The `metafields` connection is using the `namespace` argument to return only metafields in a specific namespace.
 
 Since collections can have a large number of metafields in a given namespace, pagination is required on the `metafields` connection.
 
+By default, the Storefront API can't read metafields. To make specific metafields visible in the Storefront API, you need to create a MetafieldStorefrontVisibility record.
 
+For more information please consult #https://shopify.dev/custom-storefronts/products-collections/metafields
 
+```gql
+query getCollectionMetafieldsByNamespace($handle: String! $namespace: String!) {
+  collection(handle: $handle) {
+    id
+    metafields(identifiers: [{ namespace: $namespace, key: $key }]) {
+    key
+    namespace
+    value
+    id
+  }
+}
+}
+
+variables
 {
-collectionByHandle (handle:"all") {
-id
-metafields (first:10 namespace:"global") {
-edges {
-node {
-namespace
-key
-value
+"handle": "all",
+"namespace": "global"
 }
-}
-}
-}
-}</p>
+```
+</p>
 </details>
-<details><summary><strong>Get specific metafield from collection</strong></summary>
+<details><summary><strong>Filter products in collection</strong></summary>
 <p>
 
-Uses the `collectionByHandle` query to specify a collection by passing the handle.
+You can use the Storefront API to filter products in a collection using product filters.
 
-The `metafield` connection is using the `namespace` and 'key' arguments to return a specific metafield.
+This functionality lets you build a desired customer experience on a storefront, such as the ability to narrow down the search results that you display to customers.
 
-Since only 1 metafield can exist in a given namespace with a given key, pagination is not required on the `metafield` connection.
+Products in collections can be filtered by type, vendor, variant options, price, stock and metafield value.
 
+Please note there are requirements to using product filters in collections here - https://shopify.dev/custom-storefronts/products-collections/filter-products#requirements
+
+In the following example, products in the collection that have the "shoes" product type are returned.
+
+Further examples of product filters can be found in the above documentation.
+
+```gql
+query GetProductTypeInCollection($handle: String!, $value: String!) {
+  collection(handle: $handle) {
+    handle
+    products(first: 10, filters: { productType: $value }) {
+    edges {
+      node {
+        handle
+        productType
+      }
+    }
+  }
+}
+}
+
+variables
 {
-collectionByHandle(handle: "all") {
-id
-metafield(namespace: "global", key: "instructions") {
-namespace
-key
-value
+"handle": "filterable-collection",
+"value": "shoes"
 }
-}
-}</p>
-</details>
-<details><summary><strong>Get all metafields from collection</strong></summary>
-<p>
-
-Uses the `collectionByHandle` query to specify a collection by passing the handle, and returns a list of all metafields attached to that collection.
-Since collections can have a large number of metafields, pagination is required on the `metafields` connection.
-
-
-{
-collectionByHandle (handle:"all") {
-id
-metafields (first:10) {
-edges {
-node {
-namespace
-key
-value
-}
-}
-}
-}
-}</p>
+```
+</p>
 </details>
 
 ### Products
