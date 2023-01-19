@@ -1337,7 +1337,7 @@ mutation createCart($cartInput: CartInput) {
         key
         value
       }
-      estimatedCost {
+      cost {
         totalAmount {
           amount
           currencyCode
@@ -1365,7 +1365,7 @@ variables
     "lines": [
       {
         "quantity": 1,
-        "merchandiseId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zOTg1Mzk2NzM0MzY3Mg=="
+        "merchandiseId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51"
       }
     ],
     "attributes": {
@@ -1408,7 +1408,7 @@ query cartQuery($cartId: ID!) {
       key
       value
     }
-    estimatedCost {
+    cost {
       totalAmount {
         amount
         currencyCode
@@ -1439,7 +1439,7 @@ query cartQuery($cartId: ID!) {
 
 variables
 {
-  "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh"
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51"
 }
 ```
 </p>
@@ -1448,7 +1448,7 @@ variables
 <p>
 
 ```gql
-mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+mutation updateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
   cartLinesUpdate(cartId: $cartId, lines: $lines) {
     cart {
       id
@@ -1465,7 +1465,7 @@ mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
           }
         }
       }
-      estimatedCost {
+      cost {
         totalAmount {
           amount
           currencyCode
@@ -1489,9 +1489,9 @@ mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
 
 variables
 {
-  "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh",
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
   "lines": {
-    "id": "Z2lkOi8vc2hvcGlmeS9DYXJ0TGluZS9mZjJjZjBmYjM1YjIxZTkzN2IxMGE3ZGE4YjQyMDI0ND9jYXJ0PWU0YzhkYzQ2MTRlYWEyNjgyMTE0NDIxMmY0NzNkMmYy",
+    "id": "gid://shopify/CartLine/7b9ed49f-830e-4142-9c81-e7f8249863ad?cart=50b74bf9dc2bc7a410053b5ffb31ba51",
     "quantity": 3
   }
 }
@@ -1502,7 +1502,7 @@ variables
 <p>
 
 ```gql
-mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentityInput: CartBuyerIdentityInput!) {
+mutation updateCartBuyerIdentity($cartId: ID!, $buyerIdentityInput: CartBuyerIdentityInput!) {
   cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentityInput) {
     cart {
       id
@@ -1517,7 +1517,7 @@ mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentityInput: CartBuyerIde
 
 variables
 {
-  "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh",
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
   "buyerIdentityInput": {
     "email": "example-email@shopify.com"
   }
@@ -1537,7 +1537,181 @@ query checkoutURL($cartId: ID!) {
 
 variables
 {
-  "cartId": "Z2lkOi8vc2hvcGlmeS9DYXJ0L2QzNTNhODQxYjQ1Y2VmYjY3ZTQ1NjdiZGUzMzU4MjFh"
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51"
+}
+```
+</p>
+</details>
+<details><summary><strong>Update cart discount codes</strong></summary>
+<p>
+
+This mutation updates the discount codes applied to a given cart and returns the cart id and discountCodes' 'code' and 'applicable' fields
+```gql
+mutation updateCartDiscountCodes($cartId: ID!, $discountCodes: [String!] ) {
+  cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+    cart {
+      id
+      discountCodes{
+        code
+        applicable
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
+  "discountCodes": [
+    "10_OFF"
+  ]
+}
+```
+</p>
+</details>
+<details><summary><strong>Update cart attributes</strong></summary>
+<p>
+
+Updates the attributes of a given cart. Cart attributes are used to store info that isn't included in the existing cart fields. The variables for this mutation provide an example of such a use case i.e.  "attributes": {
+"key": "gift_wrap",
+"value": "true"
+}
+```gql
+mutation updateCartAttributes($attributes: [AttributeInput!]!, $cartId: ID!) {
+  cartAttributesUpdate(attributes: $attributes, cartId: $cartId) {
+    cart {
+      id
+      attributes{
+        key
+        value
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "attributes": {
+    "key": "gift_wrap",
+    "value": "true"
+  },
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51"
+}
+```
+</p>
+</details>
+<details><summary><strong>Update cart note</strong></summary>
+<p>
+
+Updates cart note, returns cart id and note. Notes are similiar to cart attributes in that they contain additional info about an order. However, notes can be a string whereas attributes require key/value pairs.
+```gql
+mutation updateCartNote($cartId: ID!) {
+  cartNoteUpdate(cartId: $cartId) {
+    cart {
+      id
+      note
+      
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
+  "note": "This is a test note"
+}
+```
+</p>
+</details>
+<details><summary><strong>Remove cart lines</strong></summary>
+<p>
+
+Remove lines from existing cart
+```gql
+mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+    cart {
+      id
+      lines(first: 10){
+        edges
+        {
+          node{
+            quantity
+            merchandise{
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
+  "lineIds": [
+    "gid://shopify/CartLine/7b9ed49f-830e-4142-9c81-e7f8249863ad?cart=50b74bf9dc2bc7a410053b5ffb31ba51"
+  ]
+}
+```
+</p>
+</details>
+<details><summary><strong>Add cart lines</strong></summary>
+<p>
+
+This mutation adds lines to existing cart, returns the quantity and product id. This mutation also accepts sellingPlanId
+```gql
+mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+  cartLinesAdd(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+      lines(first: 10){
+        edges
+        {
+          node{
+            quantity
+            merchandise{
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/e623277ec9e65c98f583268f06900ce7",
+  "lines": {
+    "merchandiseId": "gid://shopify/ProductVariant/40993523892280",
+    "quantity": 3
+  }
 }
 ```
 </p>
