@@ -29,11 +29,11 @@ fragment mediaFieldsByType on Media {
   ...on ExternalVideo {
     id
     host
-    embeddedUrl
+    originUrl
   }
   ...on MediaImage {
     image {
-      originalSrc
+      url
     }
   }
   ...on Model3d {

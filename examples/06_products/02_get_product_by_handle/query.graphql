@@ -1,9 +1,9 @@
 
 # This query gets a single product connection, available from the QueryRoot, that matches the handle "my-test-product".
-# As only one product connection will be returned, we don't need to specify edges, node, or cursor.
+# As only one product connection will be returned, we don't need to specify edges, node, or cursor. This query can also be used to get a product by id by replacing (handle: $handle) with (id: $id)
 
 {
-  productByHandle(handle: "my-test-product") {
+  product(handle: "my-test-product") {
     id
     title
     description
@@ -14,7 +14,7 @@
           id
           title
           quantityAvailable
-          priceV2 {
+          price {
             amount
             currencyCode
           }

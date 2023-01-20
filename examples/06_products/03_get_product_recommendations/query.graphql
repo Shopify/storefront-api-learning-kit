@@ -3,7 +3,7 @@
 # As only one product connection will be returned, we don't need to specify edges, node, or cursor.
 
 {
-  productRecommendations(productId: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzEyMzQ1Njc4OQ==") {
+  productRecommendations(productId: "gid://shopify/Product/123456789") {
     id
     title
     description
@@ -14,7 +14,7 @@
           id
           title
           quantityAvailable
-          priceV2 {
+          price {
             amount
             currencyCode
           }
