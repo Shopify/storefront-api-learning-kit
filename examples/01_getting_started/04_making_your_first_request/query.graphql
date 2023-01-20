@@ -6,6 +6,8 @@
 # Once you've confirmed these three fields are set in your environment, try running the shop query below.
 # If the Storefront API access token has been configured correctly, you should get your shop’s info returned.
 
+# Would be throwing this away
+
 query getShopDetails{
   shop {
 			name
