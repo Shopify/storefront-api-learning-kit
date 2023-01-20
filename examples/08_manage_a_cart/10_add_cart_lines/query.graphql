@@ -1,5 +1,5 @@
 # This mutation adds lines to existing cart, returns the quantity and product id. This mutation also accepts sellingPlanId 
-mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+mutation addCartLines($cartId: ID!, $lines: [CartLineInput!]!) {
   cartLinesAdd(cartId: $cartId, lines: $lines) {
     cart {
     id
