@@ -2,28 +2,23 @@
 # For more information consult Storefront API documentation at https://shopify.dev/api/storefront/2023-01/queries/metaobject
 
 
-query getMetafield($id: ID!) {
+query getMetafield($id: ID!) { # A metaobject can be retrieved by handle or id
 	metaobject(id: $id) {
 		id
+		type
 		updatedAt
-		displayName
-		definition {
-			access {
-				admin
-				storefront
-			}
-			name
-			type
-		}
+		handle
+
 		fields {
 			key
 			value
 			type
 		}
-		capabilities {
-			publishable {
-				status #The visibility status of this metaobject across all channels.
-			}
+
+		fields {
+			key
+			value
+			type
 		}
 	}
 }
