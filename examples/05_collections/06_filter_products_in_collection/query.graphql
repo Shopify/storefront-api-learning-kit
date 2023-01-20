@@ -10,7 +10,7 @@
 
 # Further examples of product filters can be found in the above documentation.
 
-query GetProductTypeInCollection($handle: String!, $value: String!) {
+query getProductsOfProductTypeInCollection($handle: String!, $value: String!) {
 	collection(handle: $handle) {
 		handle
 		products(first: 10, filters: { productType: $value }) {
