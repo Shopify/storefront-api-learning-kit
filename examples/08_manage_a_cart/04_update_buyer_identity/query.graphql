@@ -1,3 +1,4 @@
+# cartBuyerIdentityUpdate is used to associate customer info with a cart. The below example is updating the buyerIdentity and returning the info (email, phone, countryCode) to ensure that it updated correctly
 mutation updateCartBuyerIdentity($cartId: ID!, $buyerIdentityInput: CartBuyerIdentityInput!) {
   cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentityInput) {
     cart {

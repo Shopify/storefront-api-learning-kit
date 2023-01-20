@@ -1,3 +1,4 @@
+# This mutation is used to add a product variant of the same type to the cart. In the below example, the quantity of the variant (in variables.json) is increased and the id and quantity are returned to confirm they are correct.
 mutation updateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
   cartLinesUpdate(cartId: $cartId, lines: $lines) {
     cart {

@@ -1,3 +1,4 @@
+# This mutation creates a cart and returns information about the cart to ensure it's correct (id, lines, product variant id, etc) as well as some information about the cart you may want (e.g. cost, subtotalAmount, totalTaxAmount, totalDutyAmount)
 mutation createCart($cartInput: CartInput) {
   cartCreate(input: $cartInput) {
     cart {

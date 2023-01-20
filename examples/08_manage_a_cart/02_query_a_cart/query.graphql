@@ -1,3 +1,4 @@
+# Query a cart by id and return some of the cart's objects. See documentation here for comprehensive list: https://shopify.dev/api/storefront/latest/queries/cart 
 query cartQuery($cartId: ID!) {
   cart(id: $cartId) {
     id
