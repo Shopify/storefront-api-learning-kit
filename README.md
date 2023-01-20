@@ -92,6 +92,8 @@ If you don’t see your values, ensure you have the right environment selected.
 Once you've confirmed these three fields are set in your environment, try running the shop query below.
 If the Storefront API access token has been configured correctly, you should get your shop’s info returned.
 
+Would be throwing this away
+
 ```gql
 query getShopDetails{
   shop {
@@ -144,7 +146,7 @@ https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-met
 
 ```gql
 mutation createMetafieldStorefrontVisibility(
-$input: MetafieldStorefrontVisibilityInput!
+  $input: MetafieldStorefrontVisibilityInput!
 ) {
   metafieldStorefrontVisibilityCreate(input: $input) {
     metafieldStorefrontVisibility {
@@ -184,11 +186,11 @@ Ensure that you've added a value to any metafields you wish to query back by upd
 
 ```gql
 query getCollectionMetaField(
-$id: ID!
-$namespace: String!
-$key: String!
-$another_namespace: String!
-$another_key: String!
+  $id: ID!
+  $namespace: String!
+  $key: String!
+  $another_namespace: String!
+  $another_key: String!
 ) {
   collection(id: $id) {
     metafield(namespace: $namespace, key: $key) {
@@ -201,10 +203,10 @@ $another_key: String!
   
   collection(id: $id) {
     metafields(
-    identifiers: [
-      { namespace: $namespace, key: $key },
-      { namespace: $another_namespace, key: $another_key }
-    ]
+      identifiers: [
+        { namespace: $namespace, key: $key },
+        { namespace: $another_namespace, key: $another_key }
+      ]
     ) {
       key
       namespace
@@ -306,16 +308,16 @@ For more information consult Storefront API documentation at https://shopify.dev
 
 ```gql
 query getMetaObjects(
-$type: String!,
-$sortKey: String,
-$first: Int,
-$reverse: Boolean
+  $type: String!,
+  $sortKey: String,
+  $first: Int,
+  $reverse: Boolean
 ){
   metaobjects(
-  type: $type,
-  sortKey: $sortKey,
-  first: $first,
-  reverse: $reverse
+    type: $type,
+    sortKey: $sortKey,
+    first: $first,
+    reverse: $reverse
   ) {
     edges {
       node {
