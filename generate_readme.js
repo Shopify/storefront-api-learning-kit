@@ -14,6 +14,8 @@ const {
   const path = require("path");
   
   const README_FILE = 'README.md'
+  const TITLE = "# Storefront API Learning Kit";
+
   const capitalize = (word) => {
     return word[0].toUpperCase() + word.slice(1);
   };
@@ -71,7 +73,6 @@ const {
   };
   
   const generateReadme = async () => {
-    const title = "# Storefront API Learning Kit";
     let readmeText = "";
     let navigation = [];
     const directory = "./examples";
@@ -146,7 +147,7 @@ const {
       }
     }
   
-    readmeText = `${title}\n${navigation.join(" | ")}` + readmeText;
+    readmeText = `${TITLE}\n${navigation.join(" | ")}` + readmeText;
     await writeFile(README_FILE, readmeText);
   };
   
