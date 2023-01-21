@@ -2,7 +2,7 @@
 # For more information consult Storefront API documentation at https://shopify.dev/api/storefront/2023-01/queries/metaobject
 
 
-query getMetafield($id: ID!) { # A metaobject can be retrieved by handle or id
+query getMetaObject($id: ID!) { # A metaobject can be retrieved by handle or id
 	metaobject(id: $id) {
 		id
 		type
