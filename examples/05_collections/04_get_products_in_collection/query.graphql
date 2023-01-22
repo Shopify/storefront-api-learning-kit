@@ -34,7 +34,7 @@ query getProductsInCollection($handle: String!) {
 							}
 						}
 					}
-					priceRange { # Returns prices in the shop's currency.
+					priceRange { # Returns range of prices for a product in the shop's currency.
 						minVariantPrice {
 							amount
 							currencyCode
