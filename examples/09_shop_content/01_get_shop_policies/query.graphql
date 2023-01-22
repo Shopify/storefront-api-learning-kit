@@ -5,22 +5,27 @@
 query getShopPolicies {
     shop {
       privacyPolicy {
-        body
+        id
+        body # Policy text, maximum size of 64kb.
 		title
       }
       refundPolicy {
+        id
         body
 		title
       }
       shippingPolicy {
+        id
         body
 		title
       }
       termsOfService {
+        id
         body
 		title
       }
 	  subscriptionPolicy {
+        id
 	    body
 	    title
 	  }
