@@ -1,0 +1,31 @@
+# This query gets a product by handle and displays the Shop Policies.
+
+# A store may wish to show store policies on the product page, as the poilcies could affect a buyer's decision to purchase from one shop over another.
+
+query getShopProductbyProductHandle($productHandle: String!) {
+  product(handle: $productHandle) {
+    id
+  }
+  shop {
+    privacyPolicy {
+      body
+      title
+    }
+    refundPolicy {
+      body
+      title
+    }
+    shippingPolicy {
+      body
+      title
+    }
+    termsOfService {
+      body
+      title
+    }
+    subscriptionPolicy {
+      body
+      title
+    }
+  }
+}
