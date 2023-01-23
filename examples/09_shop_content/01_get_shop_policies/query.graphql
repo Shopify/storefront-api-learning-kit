@@ -1,33 +1,35 @@
-# This query gets a Shop's policies.
 
-# The ShopPolicy is a policy that a merchant has configured for their store, such as their refund or privacy policy.
+# The ShopPolicy object represents a policy that a merchant has configured for their store, such as their refund or privacy policy.
+
+# This query displays the different shop policies that can be returned using the Storefront API.
 
 query getShopPolicies {
-    shop {
-      privacyPolicy {
-        id
-        body # Policy text, maximum size of 64kb.
-		title
-      }
-      refundPolicy {
-        id
-        body
-		title
-      }
-      shippingPolicy {
-        id
-        body
-		title
-      }
-      termsOfService {
-        id
-        body
-		title
-      }
-	  subscriptionPolicy {
-        id
-	    body
-	    title
-	  }
-    }
-  }
+	shop {
+		privacyPolicy {
+			id
+			body # Policy text, maximum size of 64kb.
+			title
+		}
+		refundPolicy {
+			id
+			body
+			title
+		}
+		shippingPolicy {
+			id
+			body
+			title
+		}
+		termsOfService {
+			id
+			body
+			title
+		}
+		subscriptionPolicy {
+			id
+			body
+			title
+		}
+	}
+}
+
