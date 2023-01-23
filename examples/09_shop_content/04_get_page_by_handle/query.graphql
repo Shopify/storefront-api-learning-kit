@@ -1,6 +1,6 @@
 # The page object represents a custom page on the online store. Shopify merchants can create pages to hold static HTML content.
 
-# Pages are used to represent static content that does not change regularly, such as an FAQ, or 'About Us' page.
+# Pages are used to represent static content that does not change, such as an 'About Us' page.
 
 # This simple query fetches a page by it's handle and returns the title and description of the page, complete with HTML formatting.
 
