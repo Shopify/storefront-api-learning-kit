@@ -1,0 +1,20 @@
+# Before sending this request, please make sure your app has unauthenticated_read_product_pickup_locations scope.
+# This query will return the availability of the product of a specific location. You can pass a location ID using preferredLocationId argument to quert the location.
+
+query GetPreferredStoreAvailability @inContext(preferredLocationId: "gid://shopify/Location/65607794710") {
+  product(handle: "Orange") {
+    variantBySelectedOptions(selectedOptions: {name: "Weight", value: "1 lb"}) {
+      storeAvailability(first: 1) {
+        edges {
+          node {
+            available
+            pickUpTime
+            location {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

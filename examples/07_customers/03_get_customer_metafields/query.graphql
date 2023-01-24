@@ -4,19 +4,18 @@
 
 # https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
 
-query CustomerMetafields($customerAccessToken: String!){
+# Note that the HasMetafieldsIdentifier variable is an array that has objects with the key and namespace of the metafield.
+
+query CustomerMetafields($customerAccessToken: String!, $identifiers: [HasMetafieldsIdentifier!]!){
   customer(customerAccessToken: $customerAccessToken) {
     id
     email
-    metafields (first:3) {
-      edges {
-        node {
-          id
-          key
-          namespace
-          value
-        }
-      }
+    metafields (identifiers:$identifiers) {
+			id
+			key
+			value
+			namespace
+			type
     }
   }
 }

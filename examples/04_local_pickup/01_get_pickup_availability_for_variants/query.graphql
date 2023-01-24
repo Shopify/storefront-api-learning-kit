@@ -1,21 +1,17 @@
-query GetPickUpAvailability {
-  product(first: 1) {
-    edges {
-      node {
-        variants(first: 1) {
-          edges {
-            node {
-              storeAvailability(first: 1) {
-                edges {
-                  node {
-                    available
-                    pickUpTime
-                    location {
-                      name
-                    }
-                  }
-                }
-              }
+# Before sending this request, please make sure your app has unauthenticated_read_product_pickup_locations scope, and store pick up has been enabled.
+
+# You can also use "id" to replace "handle" as argument to query product. 
+
+query GetStoreAvailability {
+  product(handle: "Orange") {
+    variantBySelectedOptions(selectedOptions: {name: "Weight", value: "2 lb"}) {
+      storeAvailability(first: 1) {
+        edges {
+          node {
+            available
+            pickUpTime
+            location {
+              name
             }
           }
         }
