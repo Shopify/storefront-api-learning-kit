@@ -1,6 +1,6 @@
 # This query will return the first 5 locations to a certain location sorted by distance. The sortKey could also be CITY, ID, or NAME.
 
-query LocationsByDistance($location: GeoCoordinateInput!) {
+query getNearestPickupLocations($location: GeoCoordinateInput!) {
   locations(near:$location, first: 5, sortKey: DISTANCE) {
     edges {
       node {
