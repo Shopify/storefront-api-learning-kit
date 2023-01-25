@@ -2,7 +2,7 @@
 
 # You can also use "id" to replace "handle" as argument to query product. 
 
-query GetStoreAvailability {
+query getStoreAvailability {
   product(handle: "Orange") {
     variantBySelectedOptions(selectedOptions: {name: "Weight", value: "2 lb"}) {
       storeAvailability(first: 1) {
