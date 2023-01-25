@@ -1,10 +1,10 @@
-# Before sending this request, please make sure your app has unauthenticated_read_product_pickup_locations scope, and store pick up has been enabled.
+# Before sending this request, please make sure your app has unauthenticated_read_product_pickup_locations scope, and store pick up has been enabled. For all the requirements please check this dev doc: https://shopify.dev/custom-storefronts/products-collections/local-pickup#requirements
 
 # You can also use "id" to replace "handle" as argument to query product. 
 
-query getStoreAvailability {
-  product(handle: "Orange") {
-    variantBySelectedOptions(selectedOptions: {name: "Weight", value: "2 lb"}) {
+query getStoreAvailability($handle: String! $name: String! $value:String!) {
+  product(handle:$handle) {
+    variantBySelectedOptions(selectedOptions: {name: $name, value: $value}) {
       storeAvailability(first: 1) {
         edges {
           node {

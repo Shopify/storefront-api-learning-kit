@@ -1,0 +1,15 @@
+# This query will return the first 5 shop locations that support in-store pickup. The `near` parameter is used to sort results based on proximity to the provided location. Results could also be sorted by city, location id, or location name by using CITY, ID, or NAME respectively as the sortKey.
+
+query getNearestPickupLocations($location: GeoCoordinateInput!) {
+  locations(near:$location, first: 5, sortKey: DISTANCE) {
+    edges {
+      node {
+        id
+        name
+        address {
+          formatted
+        }
+      }
+    }
+  }
+}
