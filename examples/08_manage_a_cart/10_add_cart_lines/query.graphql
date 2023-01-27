@@ -16,7 +16,27 @@ mutation addCartLines($cartId: ID!, $lines: [CartLineInput!]!) {
                 }
             }
         }
+        cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }   
 }
+
+
     userErrors {
       field
       message

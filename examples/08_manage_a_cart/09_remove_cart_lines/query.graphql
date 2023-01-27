@@ -1,4 +1,4 @@
-# Remove lines from existing cart
+# Remove lines from existing cart. Use the cost, subtotal, etc or userError message to confirm that the correct line has been removed. The userError message will let you know if the line in the request does not exist. 
 mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
   cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
     cart {
@@ -16,7 +16,26 @@ mutation removeCartLines($cartId: ID!, $lineIds: [ID!]!) {
                 }
             }
         }
+        cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }   
     }
+    
     userErrors {
       field
       message
