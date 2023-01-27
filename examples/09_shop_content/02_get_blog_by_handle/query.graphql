@@ -1,0 +1,24 @@
+# The blog object is an blog published to the online store channel.
+
+# Each store can have multiple blogs, and each blog can have many articles (blog posts).
+
+# This query fetches a specific blog by it's handle and returns the blog along with it's associated articles.
+
+# Blogs are meant to be used as a type of magazine or newsletter for the shop, with content that changes over time.
+
+# If your shop needs a static page (such as an "About Us" page), we recommend that you use a Page instead.
+
+query getBlogByHandle($handle: String!) {
+	blog(handle: $handle) {
+		id
+		title
+		articles(first: 5) {
+			edges {
+				node {
+					id
+					title
+				}
+			}
+		}
+	}
+}
