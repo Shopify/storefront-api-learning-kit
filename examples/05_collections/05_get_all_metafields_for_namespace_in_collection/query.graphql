@@ -1,0 +1,23 @@
+# Uses the `collectionByHandle` query to specify a collection by passing the handle.
+
+# Identifiers are used to identify the metafields associated with the resource matching the supplied list of namespaces and keys.
+
+# The `metafields` connection is using the `namespace` argument to return only metafields in a specific namespace.
+
+# Since collections can have a large number of metafields in a given namespace, pagination is required on the `metafields` connection.
+
+# By default, the Storefront API can't read metafields. To make specific metafields visible in the Storefront API, you need to create a MetafieldStorefrontVisibility record.
+
+# For more information please consult #https://shopify.dev/custom-storefronts/products-collections/metafields
+
+query getCollectionMetafieldsByNamespace($handle: String! $namespace: String!) {
+  	collection(handle: $handle) {
+		id
+		metafields(identifiers: [{ namespace: $namespace, key: $key }]) {
+			key
+			namespace
+			value
+			id
+		}
+	}
+}

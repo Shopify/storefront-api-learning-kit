@@ -7,11 +7,10 @@
 # This query includes the `sortKey` argument on the products connection, this returns products in the order specified by the sortKey
 
 # Products can contain multiple images, so the `images` connection requires pagination.
-# In this example we only want to display 1 image per product, so we're only asking for first:1
 
 # Since products can contain multiple variants, we've asked the products connection to return price ranges.
 
-# The 'priceRange' object returns prices in the shop's currency. International Pricing of products in collections will be demonstrated in the next example.
+# In this example we only want to display 1 image per product, so we're only asking for first:1
 
 query getProductsInCollection($handle: String!) {
 	collection(handle: $handle) {
@@ -35,7 +34,7 @@ query getProductsInCollection($handle: String!) {
 							}
 						}
 					}
-					priceRange {
+					priceRange { # Returns range of prices for a product in the shop's currency.
 						minVariantPrice {
 							amount
 							currencyCode

@@ -2,7 +2,7 @@
 
 # Since a shop can contain multiple collections, pagination is required.
 
-{
+query getCollections {
   collections(first: 10) {
     edges {
       cursor
