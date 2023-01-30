@@ -1,0 +1,6 @@
+# Query gets cart by id and returns the cart's checkoutURL. That url directs you to the web checkout flow. More info here: https://shopify.dev/custom-storefronts/checkout/create#shopify-web-checkout
+query checkoutURL($cartId: ID!) {
+  cart(id: $cartId) {
+    checkoutUrl
+  }
+}
