@@ -2,7 +2,7 @@
 [About this repo](#about-this-repo) | [How to use this repo](#how-to-use-this-repo) | [Contribute to this repo](https://github.com/Shopify/storefront-api-learning-kit/blob/main/contributing.md) | [Getting started](#getting-started) | [Example queries](#example-queries)
 
 ## About this repo
-This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the [Storefront API insomnnia collection package](builds/storefront-api-learning-kit-insomnia.json), gives you access to a complete set of sample queries for use in the [Insomnia](https://insomnia.rest/) http client. The Insomnia desktop app comes with rich GraphQL features, including automatic schema fetching and autocomplete, which are extremely valuable in learning a new API.
+This repo provides example queries demonstrating how to use Shopify's GraphQL [Storefront API](https://shopify.dev/docs/storefront-api/getting-started). Downloading the [Storefront API insomnia collection package](builds/storefront-api-learning-kit-insomnia.json), gives you access to a complete set of sample queries for use in the [Insomnia](https://insomnia.rest/) http client. The Insomnia desktop app comes with rich GraphQL features, including automatic schema fetching and autocomplete, which are extremely valuable in learning a new API.
 ## How to use this repo
 To import the Insomnia package, first [download the latest collection](builds/storefront-api-learning-kit-insomnia.json) (you'll need to save the raw JSON file).
 From the Insomnia Dashboard screen, click `Create`, followed by clicking `File`. Select the file you downloaded.
