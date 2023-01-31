@@ -17,6 +17,9 @@ const {
   const TITLE = "# Storefront API Learning Kit";
 
   const capitalize = (word) => {
+    if(!word)
+      throw new Error('Undefined word parameter')
+      
     return word[0].toUpperCase() + word.slice(1);
   };
   
