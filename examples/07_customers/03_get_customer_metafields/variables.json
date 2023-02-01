@@ -1,3 +1,17 @@
 {
-  "customerAccessToken": "d794063da4e26c9b1a8d7b77bdfd6862"
+	"customerAccessToken": "7cd6d36137f41d57bb8e85ae0d178d60",
+	"identifiers": [
+		{
+			"namespace": "Membership",
+			"key": "VIP level"
+		},
+		{
+			"namespace": "Membership",
+			"key": "startDate"
+		},
+    {
+			"namespace": "note",
+			"key": "preference"
+		}
+	]
 }
