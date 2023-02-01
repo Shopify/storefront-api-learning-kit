@@ -1,0 +1,10 @@
+# To start using the Storefront API you'll need to enable access by installing the __Headless__ channel on your store.
+# To install, you can follow the directions outlined here or get it from the [Shopify App Store](https://apps.shopify.com/headless).
+
+# Installing the Headless Channel from Shopify Admin
+# 1. From your Shopify admin, click __Sales channels__.
+# 2. Click __Recommended sales channels__.
+# 3. In the __Picked for you modal__, scroll to the Build custom storefronts section.
+# 4. Within the __Headless: Build your own commerce stack__ card, click __Add__.
+# 5. Click __Add sales channel__.
+# 6. Click __Create storefront__.

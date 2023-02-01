@@ -78,6 +78,7 @@ const {
   const generateReadme = async () => {
     let readmeText = "";
     let navigation = [];
+    let divider = "";
     const directory = "./examples";
     const folders = await readdir(directory);
     for (const folder of folders) {
@@ -98,6 +99,7 @@ const {
       }
       if (sortKey > 1) {
         sectionHeader = `### ${sectionTitle}`;
+        divider = "---\n";
       }
       readmeText += `${sectionHeader}\n`;
       const folderPath = path.join(directory, folder);
@@ -140,10 +142,9 @@ const {
           } catch (error) {
             console.log(error);
           }
-          // }
           readmeText += sortKey === 0 ? `` : `</details>\n`;
         }
-        readmeText += `\n`;
+        readmeText += `\n` + divider;
         if (sortKey === 1) {
           readmeText += "## Example queries\n";
         }
