@@ -1,0 +1,20 @@
+# Updates the attributes of a given cart. Cart attributes are used to store info that isn't included in the existing cart fields. The variables for this mutation provide an example of such a use case i.e.  "attributes": {
+#       "key": "gift_wrap",
+#       "value": "true"
+#     }
+# The key/value can be passed as an object or objects in an array, but in either case the update overwrites the existing attributes.
+mutation updateCartAttributes($attributes: [AttributeInput!]!, $cartId: ID!) {
+  cartAttributesUpdate(attributes: $attributes, cartId: $cartId) {
+    cart {
+        id
+        attributes{
+            key
+            value
+            }
+        }
+    userErrors {
+      field
+      message
+    }
+  }
+}
