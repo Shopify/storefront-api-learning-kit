@@ -1,0 +1,18 @@
+# This mutation will create a customer account with password for the customer to login.
+
+mutation createCustomerAccount($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}

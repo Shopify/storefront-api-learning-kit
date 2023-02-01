@@ -1,0 +1,15 @@
+# This mutation will send a email to customer to reset password of the customer account.
+
+# Note that this mutation is throttled by IP. if you are using authenticated access, you can pass a Shopify-Storefront-Buyer-IP header to enable the IP based throttling that will protect your app from any single user, such as a bot, consuming too much capacity.
+
+mutation recoverCustomerAccount($email: String!) {
+  customerRecover(email: $email) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+

@@ -1,22 +1,23 @@
 # To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
 
-# By default, the Storefront API can't read metafields. To expose specific metafields to the Storefront API, you need to use the GraphQL Admin API to allow them. For each metafield that you want to allow, you need to create a MetafieldStorefrontVisibility record.
+# By default, the Storefront API can't read metafields. To make specific metafields visible in the Storefront API, you need to create a MetafieldStorefrontVisibility record. See metafields/expose_metafield_to_SFAPI query for more details: # https://github.com/Shopify/storefront-api-learning-kit/tree/main/examples/05_collections/05_get_all_metafields_for_namespace_in_collection
 
-# https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
+# If you would like to know more regarding metafields, check out this dev doc #https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
 
-query CustomerMetafields($customerAccessToken: String!){
+# Identifiers are used to identify the metafields associated with the resource matching the supplied list of namespaces and keys.
+
+# To know more about metafields, please navigate to metafields directory of this repo to get more information.
+
+query CustomerMetafields($customerAccessToken: String!, $identifiers: [HasMetafieldsIdentifier!]!){
   customer(customerAccessToken: $customerAccessToken) {
     id
     email
-    metafields (first:3) {
-      edges {
-        node {
-          id
-          key
-          namespace
-          value
-        }
-      }
+    metafields (identifiers:$identifiers) {
+			id
+			key
+			value
+			namespace
+			type
     }
   }
 }
