@@ -1,0 +1,8 @@
+#  Returns product types. This query requires the unauthenticated_read_product_listings scope, more info can be found here: https://shopify.dev/api/usage/access-scopes
+query getProductTypes {
+  productTypes(first: 10) {
+		edges{
+			node
+		}
+  }
+}

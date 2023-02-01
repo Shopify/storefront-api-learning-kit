@@ -4,7 +4,7 @@
 # Since products also have a variants connection, we repeat a similar process to get information on the first 3 variants on each of those products.
 
 
-{
+query getProductsAndVariants {
   products(first: 3) {
     edges {
       cursor
@@ -20,7 +20,7 @@
               id
               title
               quantityAvailable
-              priceV2 {
+              price {
                 amount
                 currencyCode
               }
