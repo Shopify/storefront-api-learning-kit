@@ -8,19 +8,41 @@ on:
     paths:
       - 'examples/**'
 jobs:
-  build:
-
+  generate_readme:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }} and generate README file
+      uses: actions/setup-node@v3
+      with:
+        node-version: '${{ matrix.node-version }}'
+    - run: yarn
+    - run: yarn readme
+    
+    - name: Commit files # copy the new generated README
+      run: |
+        git config --local user.name "generate-readme"
+        git pull
+        git add .
+        git commit -m "Generate README"
+        git push
+
+  build:
+    runs-on: ubuntu-latest
+    needs: generate_readme
+    strategy:
+      matrix:
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }} and build Insomnia package
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
@@ -29,6 +51,7 @@ jobs:
     - name: Commit files # transfer the new html files back into the repository
       run: |
         git config --local user.name "action-build"
+        git pull
         git add .
         git commit -m "Update Insomnia package"
         git push

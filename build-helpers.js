@@ -108,7 +108,7 @@ const insomniaExportTemplate = {
       name: "Base Environment",
       data: {
         base_url: "shop.myshopify.com",
-        api_version: "unstable",
+        api_version: "2023-01",
         storefront_access_token: "12a35b67c890defg123h456i7f89j01k",
       },
       dataPropertyOrder: {
