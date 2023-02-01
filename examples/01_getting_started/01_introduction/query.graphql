@@ -18,10 +18,10 @@
 # Risk can be mitigated by only providing access scopes required.
 # For a complete list of access scopes consult Shopify documentation at https://shopify.dev/api/usage/access-scopes#unauthenticated-access-scopes
 
-# Access to the Storefront API can be granted by a merchant via a public sales channel, or admin custom app.
-# For simplicity of this tutorial, we'll use an admin custom app to grant access to the Storefront API.
-# The process to create an admin custom app is documented in the next section titled "Creating a Custom App".
+# Access to the Storefront API can be granted by a merchant via a public sales channel, or by creating a Headless channel in your Shopify Admin.
+# For simplicity of this tutorial, we'll create a Headless channel in the Shopify Admin.
+# The process to add the Headless channel is documented in the next section titled "Installing the Headless Channel ".
 
-# Documentation for accessing the Storefront API via a custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
+# Documentation for accessing the Storefront API using the Headless channel can be found [here](https://shopify.dev//custom-storefronts/building-with-the-storefront-api/getting-started#step-1-enable-storefront-api-access)
 
 # The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront
