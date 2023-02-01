@@ -2,7 +2,7 @@
 
 # By default, the Storefront API can't read metafields. To make specific metafields visible in the Storefront API, you need to create a MetafieldStorefrontVisibility record. See metafields/expose_metafield_to_SFAPI query for more details: # https://github.com/Shopify/storefront-api-learning-kit/tree/main/examples/05_collections/05_get_all_metafields_for_namespace_in_collection
 
-# If you would like to know more regarding metafields, please check the dev doc #https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
+# If you would like to know more regarding metafields, check out this dev doc #https://shopify.dev/tutorials/retrieve-metafields-with-storefront-api#expose-metafields-to-the-storefront-api
 
 # Identifiers are used to identify the metafields associated with the resource matching the supplied list of namespaces and keys.
 
