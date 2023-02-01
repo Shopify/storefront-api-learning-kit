@@ -2,7 +2,7 @@
 # This query gets a single product connection, available from the QueryRoot, that matches the base64-encoded id of the product.
 # As only one product connection will be returned, we don't need to specify edges, node, or cursor.
 
-{
+query getProductRecommendations {
   productRecommendations(productId: "gid://shopify/Product/123456789") {
     id
     title

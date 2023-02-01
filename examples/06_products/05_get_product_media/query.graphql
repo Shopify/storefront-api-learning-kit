@@ -3,7 +3,7 @@
 # You cannot retrieve media for product variants with the Storefront API, only products. You cannot upload media, add media to a product, or delete media with the Storefront API, use the Admin API for these tasks.
 # https://shopify.dev/tutorials/manage-product-media-with-admin-api#retrieve-product-media-by-using-the-storefront-api
 
-{
+query getProductMedia {
   products(first: 3) {
     edges {
       cursor

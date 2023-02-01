@@ -1,7 +1,7 @@
 # This query gets the first 30 products, the first 5 selling plan groups associated with them, and the first 5 selling plans within the groups.
 # We use fragments to return the price adjustments for each selling plan.
 
-{
+query getProductSellingPlans {
   products(first: 30) {
     pageInfo {
       hasNextPage

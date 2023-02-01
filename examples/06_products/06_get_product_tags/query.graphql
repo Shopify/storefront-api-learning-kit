@@ -1,6 +1,6 @@
 #  Returns product tags. This query requires the unauthenticated_read_product_tags scope, more info can be found here: https://shopify.dev/api/usage/access-scopes
 
-{
+query getProductTags {
   productTags(first:10) {
     edges{
 			node
