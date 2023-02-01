@@ -1212,7 +1212,9 @@ variables
 <details><summary><strong>Create a cart with one line item</strong></summary>
 <p>
 
+
 ```gql
+
 mutation createCart($cartInput: CartInput) {
   cartCreate(input: $cartInput) {
     cart {
@@ -1440,4 +1442,3 @@ variables
 ```
 </p>
 </details>
-

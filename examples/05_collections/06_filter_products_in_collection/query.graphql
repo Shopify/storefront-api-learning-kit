@@ -1,0 +1,25 @@
+# You can use the Storefront API to filter products in a collection using product filters.
+
+# This functionality lets you build a desired customer experience on a storefront, such as the ability to narrow down the search results that you display to customers.
+
+# Products in collections can be filtered by type, vendor, variant options, price, stock and metafield value.
+
+# Please note there are requirements to using product filters in collections here - https://shopify.dev/custom-storefronts/products-collections/filter-products#requirements
+
+# In the following example, products in the collection that have the "shoes" product type are returned.
+
+# Further examples of product filters can be found in the above documentation.
+
+query getProductsOfProductTypeInCollection($handle: String!, $value: String!) {
+	collection(handle: $handle) {
+		handle
+		products(first: 10, filters: { productType: $value }) {
+			edges {
+				node {
+					handle
+					productType
+				}
+			}
+		}
+	}
+}

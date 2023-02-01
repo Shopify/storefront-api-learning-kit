@@ -1,0 +1,24 @@
+# Once a customer account is created, an email will be sent to the customer with the account activation url. This mutation will use the activationToken from the activation url to active the customer account. 
+# You can also use the activation url directly to activate the customer account. See customerActivateByUrl mutation https://shopify.dev/api/storefront/2023-01/mutations/customerActivateByUrl
+
+mutation activateCustomerAccount($id: ID!, $input: CustomerActivateInput!) {
+  customerActivate(id: $id, input: $input) {
+    customer {
+      id
+      email
+      firstName
+      lastName
+      phone
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+

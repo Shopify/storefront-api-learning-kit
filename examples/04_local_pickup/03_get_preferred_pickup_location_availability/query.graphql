@@ -1,0 +1,21 @@
+# Before sending this request, please make sure your app has unauthenticated_read_product_pickup_locations scope.
+
+# This query will return in-store pickup locations that have the product stocked, sorted by proximity to a buyers preferred store pickup location. The buyer's preferred pickup location is passed as the `preferredLocationId` argument.
+
+query getPreferredStoreAvailability ($preferredLocationId: ID, $handle: String!,$selectedOptions: [SelectedOptionInput!]!)@inContext(preferredLocationId: $preferredLocationId) {
+  product(handle: $handle) {
+    variantBySelectedOptions(selectedOptions: $selectedOptions) {
+      storeAvailability(first: 1) {
+        edges {
+          node {
+            available
+            pickUpTime
+            location {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

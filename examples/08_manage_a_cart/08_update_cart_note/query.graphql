@@ -1,0 +1,14 @@
+# Updates cart note, returns cart id and note. Notes are similiar to cart attributes in that they contain additional info about an order. However, notes can be a string whereas attributes require key/value pairs. 
+mutation updateCartNote($cartId: ID!) {
+  cartNoteUpdate(cartId: $cartId) {
+    cart {
+        id
+        note
+
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

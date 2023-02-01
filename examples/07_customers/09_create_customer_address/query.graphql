@@ -1,0 +1,16 @@
+# To query a customer, a customerAccessToken is required. This is obtained via the customerAccessTokenCreate mutation which exchanges a user’s email address and password for an access token.
+
+# This request will create a new address that appends to the current address array of the customer record.
+
+mutation customerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
+  customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    customerAddress {
+      id
+    }
+  }
+}

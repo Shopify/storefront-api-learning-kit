@@ -1,0 +1,12 @@
+{
+	"customerAccessToken": "7cd6d36137f41d57bb8e85ae0d178d60",
+	"address": {
+		"lastName": "Smith",
+		"firstName": "Mary",
+		"address1": "123 Test Street",
+		"province": "ON",
+		"country": "Canada",
+		"zip": "M5T1G4",
+		"city": "Toronto"
+	}
+}
