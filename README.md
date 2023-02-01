@@ -31,36 +31,27 @@ Only use the Storefront API when you're comfortable with that risk and the data 
 Risk can be mitigated by only providing access scopes required.
 For a complete list of access scopes consult Shopify documentation at https://shopify.dev/api/usage/access-scopes#unauthenticated-access-scopes
 
-Access to the Storefront API can be granted by a merchant via a public sales channel, or admin custom app.
-For simplicity of this tutorial, we'll use an admin custom app to grant access to the Storefront API.
-The process to create an admin custom app is documented in the next section titled "Creating a Custom App".
+Access to the Storefront API can be granted by a merchant via a public sales channel, or by creating a Headless channel in your Shopify Admin.
+For simplicity of this tutorial, we'll create a Headless channel in the Shopify Admin.
+The process to add the Headless channel is documented in the next section titled "Installing the Headless Channel ".
 
-Documentation for accessing the Storefront API via a custom app can be found at https://shopify.dev/api/examples/storefront-api#requirements
+Documentation for accessing the Storefront API using the Headless channel can be found [here](https://shopify.dev//custom-storefronts/building-with-the-storefront-api/getting-started#step-1-enable-storefront-api-access)
 
 The home of Storefront API-related developer documents and tutorials can be found at https://shopify.dev/api/storefront</p>
 </details>
-<details><summary><strong>Creating a custom app</strong></summary>
+<details><summary><strong>Installing the headless channel</strong></summary>
 <p>
 
-To start using the Storefront API we'll need to create a custom app. Before we can create the app,
-we'll need to ensure we've enabled custom app development within the Shopify admin.
+To start using the Storefront API you'll need to enable access by installing the __Headless__ channel on your store.
+To install, you can follow the directions outlined here or get it from the [Shopify App Store](https://apps.shopify.com/headless).
 
-Enable custom app development
-1. From your Shopify admin, click "Settings" > "Apps and sales channels".
-2. Click "Develop apps".
-3. Click "Allow custom app development".
-4. Read the warning and information provided, and then click "Allow custom app development".
-
-Create and install a custom app
-1. From your Shopify admin, click "Settings" > "Apps and sales channels".
-2. Click "Develop apps".
-3. Click "Create an app".
-4. Fill out the details in the "Create an app" modal and click "Create app".
-5. Click "Configure Storefront API scopes".
-6. Under Configurations, add the Storefront API access scopes you require.
-7. Click "Save".
-8. Under "API credentials", click "Install app".
-9. In the modal window, click "Install app" to get your access token.</p>
+Installing the Headless Channel from Shopify Admin
+1. From your Shopify admin, click __Sales channels__.
+2. Click __Recommended sales channels__.
+3. In the __Picked for you modal__, scroll to the Build custom storefronts section.
+4. Within the __Headless: Build your own commerce stack__ card, click __Add__.
+5. Click __Add sales channel__.
+6. Click __Create storefront__.</p>
 </details>
 <details><summary><strong>Configure your environment variables</strong></summary>
 <p>
@@ -69,12 +60,12 @@ Environment variables are JSON key-value pairs that allow you to refer to values
 
 For the tutorial, three environment variables will be utilized.
 
-1. “base_url” will be the Shopify store being connected to.
+1. `base_url` will be the Shopify store being connected to.
 - If your store is mydevstore.myshopify.com, enter “mydevstore.myshopify.com” here.
-2. “api_version” is the Storefront API version used for the API requests.
+2. `api_version` is the Storefront API version used for the API requests.
 - This can be changed to an earlier version or unstable depending on your use case.
-3. "storefront_access_token" used to populate the X-Shopify-Storefront-Access-Token request header
-- This is the storefront access token generated from the "Creating a Custom App" section.</p>
+3. `storefront_access_token` is used to populate the X-Shopify-Storefront-Access-Token request header.
+- This is the Public access token associated with the Storefront you created in the "Installing the Headless Channel" section.</p>
 </details>
 <details><summary><strong>Making your first request</strong></summary>
 <p>
@@ -374,6 +365,7 @@ variables
 </p>
 </details>
 
+---
 ### International pricing
 <details><summary><strong>Get available countries and currencies</strong></summary>
 <p>
@@ -606,6 +598,7 @@ variables
 </p>
 </details>
 
+---
 ### Local pickup
 <details><summary><strong>Get pickup availability for variants</strong></summary>
 <p>
@@ -711,6 +704,7 @@ variables
 </p>
 </details>
 
+---
 ### Collections
 <details><summary><strong>Get collections</strong></summary>
 <p>
@@ -917,6 +911,7 @@ variables
 </p>
 </details>
 
+---
 ### Products
 <details><summary><strong>Get 3 products and 3 variants</strong></summary>
 <p>
@@ -1193,6 +1188,7 @@ query getProductTypes {
 </p>
 </details>
 
+---
 ### Customers
 <details><summary><strong>Create an access token</strong></summary>
 <p>
@@ -1512,6 +1508,7 @@ variables
 </p>
 </details>
 
+---
 ### Manage a cart
 <details><summary><strong>Create a cart with one line item</strong></summary>
 <p>
@@ -1983,6 +1980,7 @@ variables
 </p>
 </details>
 
+---
 ### Shop content
 <details><summary><strong>Get shop policies</strong></summary>
 <p>
@@ -2086,3 +2084,4 @@ variables
 </p>
 </details>
 
+---
