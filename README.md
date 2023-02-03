@@ -1513,7 +1513,7 @@ variables
 <details><summary><strong>Create a cart with one line item</strong></summary>
 <p>
 
-This mutation creates a cart and returns information about the cart to ensure it's correct (id, lines, product variant id, etc) as well as some information about the cart you may want (e.g. cost, subtotalAmount, totalTaxAmount, totalDutyAmount)
+This mutation creates a cart and returns information about the cart to ensure it's correct (id, lines, product variant id, etc) as well as some information about the cart you may want (e.g. cost, subtotalAmount, totalTaxAmount, totalDutyAmount). The checkoutUrl object contains the url of the checkout for the created cart
 ```gql
 mutation createCart($cartInput: CartInput) {
   cartCreate(input: $cartInput) {
@@ -1521,6 +1521,7 @@ mutation createCart($cartInput: CartInput) {
       id
       createdAt
       updatedAt
+      checkoutUrl
       lines(first: 10) {
         edges {
           node {
@@ -1587,7 +1588,7 @@ query cartQuery($cartId: ID!) {
     id
     createdAt
     updatedAt
-    
+    checkoutUrl
     lines(first: 10) {
       edges {
         node {
