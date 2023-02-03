@@ -4,7 +4,7 @@ query cartQuery($cartId: ID!) {
     id
     createdAt
     updatedAt
-
+    checkoutUrl
     lines(first: 10) {
       edges {
         node {
