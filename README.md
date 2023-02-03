@@ -1704,27 +1704,53 @@ variables
 <details><summary><strong>Update buyer identity</strong></summary>
 <p>
 
-cartBuyerIdentityUpdate is used to associate customer info with a cart. The below example is updating the buyerIdentity and returning the info (email, phone, countryCode) to ensure that it updated correctly
+cartBuyerIdentityUpdate is used to associate customer info with a cart and is used to determine international pricing. The below example is updating the buyerIdentity and returning the info (email, phone, delivery address preferences) to ensure that it updated correctly
 ```gql
-mutation updateCartBuyerIdentity($cartId: ID!, $buyerIdentityInput: CartBuyerIdentityInput!) {
-  cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentityInput) {
+mutation updateCartBuyerIdentity($buyerIdentity: CartBuyerIdentityInput!, $cartId: ID!) {
+  cartBuyerIdentityUpdate(buyerIdentity: $buyerIdentity, cartId: $cartId) {
     cart {
       id
       buyerIdentity {
         email
         phone
-        countryCode
+        deliveryAddressPreferences {
+          ... on MailingAddress {
+            address1
+            city
+            country
+            firstName
+            lastName
+          }
+        }
       }
+    }
+    userErrors {
+      field
+      message
     }
   }
 }
 
 variables
 {
-  "cartId": "gid://shopify/Cart/50b74bf9dc2bc7a410053b5ffb31ba51",
-  "buyerIdentityInput": {
+  "buyerIdentity": {
+    "countryCode": "CA",
+    "deliveryAddressPreferences": [
+      {
+        "deliveryAddress": {
+          "address1": "123 Fake St.",
+          "city": "Toronto",
+          "company": "Shopify",
+          "country": "Canada",
+          "firstName": "Alice",
+          "lastName": "Bob",
+          "province": "ON"
+        }
+      }
+    ],
     "email": "example-email@shopify.com"
-  }
+  },
+  "cartId": "gid://shopify/Cart/684d5f8c6e463f6057e77c15e34082f0"
 }
 ```
 </p>
