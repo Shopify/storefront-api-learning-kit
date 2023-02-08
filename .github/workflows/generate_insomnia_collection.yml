@@ -23,6 +23,7 @@ jobs:
         run: |
           git clone https://github.com/postmodem/graphql-export.git
           cd graphql-export
+          echo $(pwd)
 
       - name: Run yarn install
         uses: borales/actions-yarn@v4
