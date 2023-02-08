@@ -10,6 +10,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+
       - name: Install Node
         uses: actions/setup-node@v3
         with:
@@ -18,7 +21,7 @@ jobs:
       - name: Get API Version
         id: version
         run: |
-          API_VERSION="$(date +'%Y-%m')"
+          API_VERSION="$(./scripts/api_version.rb)"
           echo "API_VERSION=$API_VERSION" >> $GITHUB_ENV
           BRANCH_NAME="${API_VERSION}-insomnia-collection-auto-generated"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
@@ -30,11 +33,11 @@ jobs:
           yarn install
           yarn build
           echo $(pwd)
-          yarn start -u https://sjp-johns-tackle.myshopify.com/api/unstable/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
+          yarn start -u https://sjp-johns-tackle.myshopify.com/api/${API_VERSION}/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
           git checkout -B $BRANCH_NAME # -B will reset branch if it exists
           echo "Generating collection for $API_VERSION"
           mkdir -p ../insomnia
           mv ./export.json ../insomnia/collection.json
           cd ..
           echo $(pwd)
-          echo $(ls collections)
+          echo $(ls insomnia)
