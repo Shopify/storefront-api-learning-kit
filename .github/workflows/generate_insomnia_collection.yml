@@ -44,7 +44,7 @@ jobs:
 
       - name: Generate insomnia collection
         run: |
-          yarn start https://sjp-johns-tackle.myshopify.com/api/$API_VERSION/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
+          yarn start -u https://sjp-johns-tackle.myshopify.com/api/$API_VERSION/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
 
       - name: Create and push the release branch
         run: |
