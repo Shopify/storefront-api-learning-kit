@@ -34,27 +34,29 @@ jobs:
           git checkout -B $BRANCH_NAME # -B will reset branch if it exists
           git push --set-upstream --force origin $BRANCH_NAME
           echo "Generating collection for $API_VERSION"
-          mkdir -p ../collections/insomnia
-          mv ./export.json ../collections/insomnia/collection.json
+          mkdir -p ../insomnia
+          mv ./export.json ../insomnia/collection.json
           cd ..
-          git add collections/
-          git commit -m "Update Insomnia collection (auto-generated)"
-          git push --set-upstream --force origin $BRANCH_NAME
+          echo $(pwd)
+          echo $(ls collections)
+          # git add collections/
+          # git commit -m "Update Insomnia collection (auto-generated)"
+          # git push --set-upstream --force origin $BRANCH_NAME
 
-      - name: Create pull request
-        uses: actions/github-script@0.9.0
-        with:
-          script: |
-            const api_version = process.env.API_VERSION
-            const branch_name = process.env.BRANCH_NAME
-            github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "Update Schema to `" + api_version + "` Release",
-              head: branch_name,
-              base: 'main',
-              body: "### Release notes" +
-                "\n" +
-                `\nThe [latest schema changes](https://shopify.dev/api/release-notes/${api_version}#graphql-storefront-api-changes).` +
-                "\n" +
-              })
+      # - name: Create pull request
+      #   uses: actions/github-script@0.9.0
+      #   with:
+      #     script: |
+      #       const api_version = process.env.API_VERSION
+      #       const branch_name = process.env.BRANCH_NAME
+      #       github.pulls.create({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         title: "Update Schema to `" + api_version + "` Release",
+      #         head: branch_name,
+      #         base: 'main',
+      #         body: "### Release notes" +
+      #           "\n" +
+      #           `\nThe [latest schema changes](https://shopify.dev/api/release-notes/${api_version}#graphql-storefront-api-changes).` +
+      #           "\n" +
+      #         })
