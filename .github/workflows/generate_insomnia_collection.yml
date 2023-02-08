@@ -51,3 +51,21 @@ jobs:
           git add insomnia/
           git commit -m "Update Insomnia collection (auto-generated)"
           git push --set-upstream --force origin $BRANCH_NAME
+
+      - name: Create pull request
+        uses: actions/github-script@0.9.0
+        with:
+          script: |
+            const api_version = process.env.API_VERSION
+            const branch_name = process.env.BRANCH_NAME
+            github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Update insomnia colelction to `" + api_version + "` Release",
+              head: branch_name,
+              base: 'main',
+              body: "### Release notes" +
+                "\n" +
+                `\nThe [latest schema changes](https://shopify.dev/api/release-notes/${api_version}#graphql-storefront-api-changes).` +
+                "\n" +
+              })
