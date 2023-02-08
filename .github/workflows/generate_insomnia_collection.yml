@@ -19,22 +19,6 @@ jobs:
         run: |
           mkdir -p collections/insomnia
 
-      - name: Checkout GraphQL export repo
-        run: |
-          git clone https://github.com/postmodem/graphql-export.git
-          cd graphql-export
-          echo $(pwd)
-
-      - name: Run yarn install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
-
-      - name: Run yarn build
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build # will run `yarn install` command
-
       - name: Get API Version
         id: version
         run: |
@@ -43,9 +27,14 @@ jobs:
           BRANCH_NAME="${API_VERSION}-insomnia-collection-auto-generated"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Generate insomnia collection
+      - name: Checkout GraphQL export repo
         run: |
-          yarn start -u https://sjp-johns-tackle.myshopify.com/api/$API_VERSION/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
+          git clone https://github.com/postmodem/graphql-export.git
+          cd graphql-export
+          yarn install
+          yarn build
+          echo $(pwd)
+          yarn start -u https://sjp-johns-tackle.myshopify.com/api/${API_VERSION}/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
 
       - name: Create and push the release branch
         run: |
