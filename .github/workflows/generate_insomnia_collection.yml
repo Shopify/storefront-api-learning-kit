@@ -41,5 +41,6 @@ jobs:
           mkdir -p ../insomnia
           mv ./export.json ../insomnia/collection.json
           cd ..
-          echo $(pwd)
-          echo $(ls insomnia)
+          git add insomnia/
+          git commit -m "Update Insomnia collection (auto-generated)"
+          git push --set-upstream --force origin $BRANCH_NAME
