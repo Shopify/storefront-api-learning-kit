@@ -61,11 +61,11 @@ jobs:
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "Update insomnia colelction to `" + api_version + "` Release",
+              title: "Update Insomnia collection to `" + api_version + "` Release",
               head: branch_name,
               base: 'main',
               body: "### Release notes" +
                 "\n" +
                 `\nThe [latest schema changes](https://shopify.dev/api/release-notes/${api_version}#graphql-storefront-api-changes).` +
-                "\n" +
+                "\n"
               })
