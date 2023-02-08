@@ -37,9 +37,9 @@ jobs:
       - name: Get API Version
         id: version
         run: |
-          API_VERSION="$(./Scripts/get_api_version)"
-          BRANCH_NAME="${API_VERSION}-insomnia-collection-auto-generated"
+          API_VERSION="$(date +'%Y-%m')"
           echo "API_VERSION=$API_VERSION" >> $GITHUB_ENV
+          BRANCH_NAME="${API_VERSION}-insomnia-collection-auto-generated"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Generate insomnia collection
