@@ -28,10 +28,15 @@ jobs:
           BRANCH_NAME="${API_VERSION}-insomnia-collection-auto-generated"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Checkout GraphQL export repo
+      - name: Create and push the release branch
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git checkout -B $BRANCH_NAME # -B will reset branch if it exists
+          git push --set-upstream --force origin $BRANCH_NAME
+
+      - name: Checkout GraphQL export repo
+        run: |
           git clone https://github.com/postmodem/graphql-export.git
           cd graphql-export
           yarn install
