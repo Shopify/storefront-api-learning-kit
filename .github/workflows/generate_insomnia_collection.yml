@@ -24,6 +24,11 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: Setup jq
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: jq -n env
+
       - name: Get API Version
         id: version
         run: |
@@ -46,8 +51,16 @@ jobs:
           cd graphman
           echo "Generating collection for $API_VERSION"
           deno run -A --allow-net --unsafely-ignore-certificate-errors src/cli.ts --headers "X-Shopify-Storefront-Access-Token: e23c675d272f988acb3447d448a46f81" https://wholesome-dimsum.myshopify.com/api/${API_VERSION}/graphql.json --out ../insomnia-collections/sf-api-${API_VERSION}-collection.json
+          VERSION_API_QUERIES=$("cat ../insomnia-collections/sf-api-${API_VERSION}-collection.json | jq '.item[0].item[].name'")
+          VERSION_API_MUTATIONS=$("cat ../insomnia-collections/sf-api-${API_VERSION}-collection.json | jq '.item[1].item[].name'")
+          echo "VERSION_API_QUERIES=${VERSION_API_QUERIES}" >> $GITHUB_ENV
+          echo "VERSION_API_MUTATIONS=${VERSION_API_MUTATIONS}" >> $GITHUB_ENV
           echo "Generating collection for unstable"
           deno run -A --allow-net --unsafely-ignore-certificate-errors src/cli.ts --headers "X-Shopify-Storefront-Access-Token: e23c675d272f988acb3447d448a46f81" https://wholesome-dimsum.myshopify.com/api/unstable/graphql.json --out ../insomnia-collections/sf-api-unstable-collection.json
+          UNSTABLE_API_MUTATIONS=$("cat ../insomnia-collections/sf-api-unstable-collection.json | jq '.item[1].item[].name'")
+          UNSTABLE_API_QUERIES=$("cat ../insomnia-collections/sf-api-unstable-collection.json | jq '.item[0].item[].name'")
+          echo "UNSTABLE_API_QUERIES=$(UNSTABLE_API_QUERIES)" >> $GITHUB_ENV
+          echo "UNSTABLE_API_MUTATIONS=$(UNSTABLE_API_MUTATIONS)" >> $GITHUB_ENV
           git checkout -B $BRANCH_NAME # -B will reset branch if it exists
           echo "Generating collection for $API_VERSION"
           cd ..
@@ -62,14 +75,32 @@ jobs:
           script: |
             const api_version = process.env.API_VERSION
             const branch_name = process.env.BRANCH_NAME
+            const version_api_queries = process.env.VERSION_API_QUERIES
+            const version_api_mutations = process.env.VERSION_API_MUTATIONS
+            const unstable_api_queries = process.env.UNSTABLE_API_QUERIES
+            const unstable_api_mutations = process.env.UNSTABLE_API_MUTATIONS
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "Update Insomnia collection to `" + api_version + "` Release",
               head: branch_name,
               base: 'main',
-              body: "### Release notes" +
+              body: "## Release notes" +
                 "\n" +
-                `\nThe [latest schema changes](https://shopify.dev/api/release-notes/${api_version}#graphql-storefront-api-changes).` +
+                "### Collection for ${API_VERSION} version\n\n" +
+                "#### Queries: \n\n" +
+                `version_api_queries` +
+                "\n\n" +
+                "#### Mutations: \n\n" +
+                `version_api_mutations` +
+                "\n\n\n" +
+                "### Collection for unstable version\n\n" +
+                "#### Queries: \n\n" +
+                `unstable_api_queries` +
+                "\n\n" +
+                "#### Mutations: \n\n" +
+                `unstable_api_mutations` +
+                "\n\n" +
+                "\n" +
                 "\n"
               })
