@@ -1,10 +1,10 @@
 name: Generate Insomnia collection for Storefront API
 
-on:
-  schedule:
-    # Run on midnight UTC on the first of jan/apr/jul/oct
-    # API is released 1PM EDT/EST
-    - cron: '59 23 1 1/3 *'
+on: push
+  # schedule:
+  #   # Run on midnight UTC on the first of jan/apr/jul/oct
+  #   # API is released 1PM EDT/EST
+  #   - cron: '59 23 1 1/3 *'
 
 jobs:
   build:
@@ -19,10 +19,10 @@ jobs:
         with:
           ruby-version: '2.6'
 
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version: 16.x
+          deno-version: v1.x
 
       - name: Get API Version
         id: version
@@ -41,19 +41,19 @@ jobs:
 
       - name: Checkout GraphQL export repo
         run: |
-          git clone https://github.com/postmodem/graphql-export.git
-          cd graphql-export
-          yarn install
-          yarn build
-          echo $(pwd)
-          yarn start -u https://sjp-johns-tackle.myshopify.com/api/${API_VERSION}/graphql.json -f insomnia -H  "X-Shopify-Storefront-Access-Token: 1cf96f6483755396c20f88a7ab59ccf8" "Content-Type: application/json" -r "X-Shopify-Storefront-Access-Token:" "Accepts: application/json" -q QueryRoot -m Mutation
+          mkdir -p insomnia-collections/
+          git clone https://github.com/sander-m/graphman.git
+          cd graphman
+          echo "Generating collection for $API_VERSION"
+          deno run -A --allow-net --unsafely-ignore-certificate-errors src/cli.ts --headers "X-Shopify-Storefront-Access-Token: e23c675d272f988acb3447d448a46f81" https://wholesome-dimsum.myshopify.com/api/${API_VERSION}/graphql.json --out ../insomnia-collections/sf-api-${API_VERSION}-collection.json
+          echo "Generating collection for unstable"
+          deno run -A --allow-net --unsafely-ignore-certificate-errors src/cli.ts --headers "X-Shopify-Storefront-Access-Token: e23c675d272f988acb3447d448a46f81" https://wholesome-dimsum.myshopify.com/api/unstable/graphql.json --out ../insomnia-collections/sf-api-unstable-collection.json
           git checkout -B $BRANCH_NAME # -B will reset branch if it exists
           echo "Generating collection for $API_VERSION"
-          mkdir -p ../insomnia
-          mv ./export.json ../insomnia/collection.json
           cd ..
-          git add insomnia/
-          git commit -m "Update Insomnia collection (auto-generated)"
+          git add insomnia-collections/
+          git commit -m "Update Insomnia collection for ${API_VERSION} (auto-generated)"
+          git clean -df
           git push --set-upstream --force origin $BRANCH_NAME
 
       - name: Create pull request
