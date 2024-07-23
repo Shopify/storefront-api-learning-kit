@@ -2112,3 +2112,92 @@ variables
 </details>
 
 ---
+### B2B
+<details><summary><strong>Get contextualized products</strong></summary>
+<p>
+
+Including the buyer argument on the @inContext directive will contextualize any storefront queries for a B2B customer.
+
+With a contextualized query, you can access a quantityRule and quantityPriceBreaks on a product variant, as well as get a price that's contextualized for the B2B customer.
+
+The customerAccessToken and companyLocationId in the BuyerInput are obtained from the Customers API. For details on how to obtain those, see [Headless with B2B](https://shopify.dev/docs/storefronts/headless/bring-your-own-stack/b2b)
+
+```gql
+query getB2BProducts ($buyer: BuyerInput) @inContext(buyer: $buyer) {
+  products(first: 5) {
+    nodes {
+      id
+      variants(first: 5) {
+        nodes {
+          id
+          price
+          quantityRule {
+            maximum
+            minimum
+            increment
+          }
+          quantityPriceBreaks(first: 5) {
+            nodes {
+              minimumQuantity
+              price {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+variables
+{
+  "buyer": {
+    "customerAccessToken": "shpsb_eyJh123456789",
+    "companyLocationId": "gid://shopify/CompanyLocation/10079785100"
+  }
+}
+```
+</p>
+</details>
+<details><summary><strong>Create a cart with buyer identity</strong></summary>
+<p>
+
+Including the buyerIdentity of a B2B customer will create a contexualized cart. Checkouts made with this cart will be B2B checkouts.
+
+The customerAccessToken and companyLocationId in the buyerIdentity are obtained from the Customers API. For details on how to obtain those, see [Headless with B2B](https://shopify.dev/docs/storefronts/headless/bring-your-own-stack/b2b)
+
+```gql
+mutation createCart($cartInput: CartInput) {
+  cartCreate(input: $cartInput) {
+    cart {
+      id
+      createdAt
+      updatedAt
+      buyerIdentity {
+        email
+        phone
+        customer {
+          id
+        }
+        countryCode
+      }
+    }
+  }
+}
+
+variables
+{
+  "cartInput": {
+    "buyerIdentity": {
+      "customerAccessToken": "shpsb_eyJh123456789",
+      "companyLocationId": "gid://shopify/CompanyLocation/10079785100"
+    }
+  }
+}
+```
+</p>
+</details>
+
+---
