@@ -1,0 +1,21 @@
+# Including the buyerIdentity of a B2B customer will create a contexualized cart. Checkouts made with this cart will be B2B checkouts.
+
+# The customerAccessToken and companyLocationId in the buyerIdentity are obtained from the Customers API. For details on how to obtain those, see [Headless with B2B](https://shopify.dev/docs/storefronts/headless/bring-your-own-stack/b2b)
+
+mutation createCart($cartInput: CartInput) {
+  cartCreate(input: $cartInput) {
+    cart {
+      id
+      createdAt
+      updatedAt
+      buyerIdentity {
+        email
+        phone
+        customer {
+          id
+        }
+        countryCode
+      }
+    }
+  }
+}

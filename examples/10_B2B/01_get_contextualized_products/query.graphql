@@ -1,0 +1,33 @@
+# Including the buyer argument on the @inContext directive will contextualize any storefront queries for a B2B customer.
+
+# With a contextualized query, you can access a quantityRule and quantityPriceBreaks on a product variant, as well as get a price that's contextualized for the B2B customer.
+
+# The customerAccessToken and companyLocationId in the BuyerInput are obtained from the Customers API. For details on how to obtain those, see [Headless with B2B](https://shopify.dev/docs/storefronts/headless/bring-your-own-stack/b2b)
+
+query getProductsQuantityRules ($buyer: BuyerInput) @inContext(buyer: $buyer) {
+  products(first: 5) {
+    nodes {
+      id
+      variants(first: 5) {
+        nodes {
+          id
+          price
+          quantityRule {
+            maximum
+            minimum
+            increment
+          }
+          quantityPriceBreaks(first: 5) {
+            nodes {
+              minimumQuantity
+              price {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
