@@ -2123,7 +2123,7 @@ With a contextualized query, you can access a quantityRule and quantityPriceBrea
 The customerAccessToken and companyLocationId in the BuyerInput are obtained from the Customers API. For details on how to obtain those, see [Headless with B2B](https://shopify.dev/docs/storefronts/headless/bring-your-own-stack/b2b)
 
 ```gql
-query getB2BProducts ($buyer: BuyerInput) @inContext(buyer: $buyer) {
+query getProductsQuantityRules ($buyer: BuyerInput) @inContext(buyer: $buyer) {
   products(first: 5) {
     nodes {
       id
