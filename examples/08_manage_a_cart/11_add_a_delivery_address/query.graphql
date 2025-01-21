@@ -1,0 +1,38 @@
+# This mutation adds up to 20 delivery addresses to a cart.
+mutation cartDeliveryAddressesAdd($cartId: ID!, $delivery: CartDeliveryInput!)  {
+  cartDeliveryAddressesAdd(cartId: $cartId, delivery: $delivery) {
+    cart {
+      id
+      delivery {
+        addresses {
+          address {
+            id
+            ... on CartDeliveryAddress {
+              firstName
+              lastName
+              address1
+              address2
+              company
+              city
+              provinceCode
+              countryCode
+              zip
+            }
+          }
+          selected
+          oneTimeUse
+        }
+      }
+    }
+    warnings {
+      target
+      code
+      message
+    }
+    userErrors {
+      code
+      field
+      message
+    }
+  }
+}

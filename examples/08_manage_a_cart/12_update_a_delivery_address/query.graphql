@@ -1,0 +1,35 @@
+mutation cartDeliveryAddressUpdate($cartId: ID!, $delivery: CartDeliveryUpdateInput!)  {
+  cartDeliveryAddressUpdate(cartId: $cartId, delivery: $delivery) {
+    cart {
+      id
+      delivery {
+        addresses {
+          address {
+            id
+            ... on CartDeliveryAddress {
+              address1
+              city
+              provinceCode
+              countryCode
+              zip
+              firstName
+              lastName
+            }
+          }
+          selected
+          oneTimeUse
+        }
+      }
+    }
+    warnings {
+      target
+      code
+      message
+    }
+    userErrors {
+      code
+      field
+      message
+    }
+  }
+}

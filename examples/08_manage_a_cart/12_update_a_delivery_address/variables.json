@@ -1,0 +1,16 @@
+{
+    "cartId": "gid://shopify/Cart/insert-cart-id-here",
+    "addresses": [
+        {
+            "id": "gid://shopify/CartSelectableAddress/insert-address-id-here",
+            "address": {
+            "deliveryAddress": {
+                "address1": "1 Commerce Street",
+                "city": "Westborough",
+                "zip": "01581"
+                }
+            }
+        }
+    ]
+}
+
