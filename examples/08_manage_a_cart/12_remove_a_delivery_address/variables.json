@@ -1,0 +1,8 @@
+{
+ "cartId": "gid://shopify/Cart/insert-cart-id-here",
+ "addressIds": [
+  "gid://shopify/CartSelectableAddress/insert-address-id-here",
+  "gid://shopify/CartSelectableAddress/insert-address-id-here",
+  "gid://shopify/CartSelectableAddress/insert-address-id-here"
+ ]
+}

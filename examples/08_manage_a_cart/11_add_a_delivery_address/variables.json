@@ -1,0 +1,20 @@
+{
+    "cartId": "gid://shopify/Cart/insert-cart-id-here",
+    "addresses": [
+        {
+            "address": {
+                "deliveryAddress": {
+                    "firstName": "Jane",
+                    "lastName": "Doe",
+                    "address1": "1 South Street",
+                    "city": "Shrewsbury",
+                    "provinceCode": "MA",
+                    "countryCode": "US",
+                    "zip": "01545"
+                }
+            },
+            "selected": false,
+            "oneTimeUse": false
+        }
+    ]
+}

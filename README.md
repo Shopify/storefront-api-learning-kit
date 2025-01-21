@@ -2006,6 +2006,184 @@ variables
 ```
 </p>
 </details>
+<details><summary><strong>Add a delivery address</strong></summary>
+<p>
+
+This mutation adds up to 20 delivery addresses to a cart.
+```gql
+mutation cartDeliveryAddressesAdd($cartId: ID!, $delivery: CartDeliveryInput!)  {
+  cartDeliveryAddressesAdd(cartId: $cartId, delivery: $delivery) {
+    cart {
+      id
+      delivery {
+        addresses {
+          address {
+            id
+            ... on CartDeliveryAddress {
+              firstName
+              lastName
+              address1
+              address2
+              company
+              city
+              provinceCode
+              countryCode
+              zip
+            }
+          }
+          selected
+          oneTimeUse
+        }
+      }
+    }
+    warnings {
+      target
+      code
+      message
+    }
+    userErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/insert-cart-id-here",
+  "addresses": [
+    {
+      "address": {
+        "deliveryAddress": {
+          "firstName": "Jane",
+          "lastName": "Doe",
+          "address1": "1 South Street",
+          "city": "Shrewsbury",
+          "provinceCode": "MA",
+          "countryCode": "US",
+          "zip": "01545"
+        }
+      },
+      "selected": false,
+      "oneTimeUse": false
+    }
+  ]
+}
+```
+</p>
+</details>
+<details><summary><strong>Remove a delivery address</strong></summary>
+<p>
+
+```gql
+mutation cartDeliveryAddressesRemove($cartId: ID!, $addressIds: [ID!]!)  {
+  cartDeliveryAddressesRemove(cartId: $cartId, addressIds: $addressIds) {
+    cart {
+      id
+      delivery {
+        addresses {
+          address {
+            id
+            ... on CartDeliveryAddress {
+              address1
+              city
+              provinceCode
+              countryCode
+              zip
+              firstName
+              lastName
+            }
+          }
+          selected
+          oneTimeUse
+        }
+      }
+    }
+    warnings {
+      target
+      code
+      message
+    }
+    userErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/insert-cart-id-here",
+  "addressIds": [
+    "gid://shopify/CartSelectableAddress/insert-address-id-here",
+    "gid://shopify/CartSelectableAddress/insert-address-id-here",
+    "gid://shopify/CartSelectableAddress/insert-address-id-here"
+  ]
+}
+```
+</p>
+</details>
+<details><summary><strong>Update a delivery address</strong></summary>
+<p>
+
+```gql
+mutation cartDeliveryAddressUpdate($cartId: ID!, $delivery: CartDeliveryUpdateInput!)  {
+  cartDeliveryAddressUpdate(cartId: $cartId, delivery: $delivery) {
+    cart {
+      id
+      delivery {
+        addresses {
+          address {
+            id
+            ... on CartDeliveryAddress {
+              address1
+              city
+              provinceCode
+              countryCode
+              zip
+              firstName
+              lastName
+            }
+          }
+          selected
+          oneTimeUse
+        }
+      }
+    }
+    warnings {
+      target
+      code
+      message
+    }
+    userErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+variables
+{
+  "cartId": "gid://shopify/Cart/insert-cart-id-here",
+  "addresses": [
+    {
+      "id": "gid://shopify/CartSelectableAddress/insert-address-id-here",
+      "address": {
+        "deliveryAddress": {
+          "address1": "1 Commerce Street",
+          "city": "Westborough",
+          "zip": "01581"
+        }
+      }
+    }
+  ]
+}
+```
+</p>
+</details>
 
 ---
 ### Shop content
